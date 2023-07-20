@@ -15,7 +15,7 @@ app.use('/therapist', express.static('therapist'));
 app.use(express.json());
 
 // API routes
-app.use(`/v1`, appRoutes);
+app.use(`/api`, appRoutes);
 
 // Start the server
 app.listen(process.env.PORT, () => console.log(`Server running on port http://localhost:${process.env.PORT}`));
