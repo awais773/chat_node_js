@@ -37,8 +37,15 @@ module.exports = {
         allowNull: true,
       },
       image: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT, // Using TEXT to store JSON data
         allowNull: true,
+        get() {
+          const rawValue = this.getDataValue('image');
+          return rawValue ? JSON.parse(rawValue) : [];
+        },
+        set(value) {
+          this.setDataValue('image', JSON.stringify(value));
+        },
       },
     
       facbook_url: {
