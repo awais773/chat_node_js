@@ -23,60 +23,63 @@ const PackingList = sequelize.define('packing_lists', {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   },
-  name: {
+  item_name: {
     type: DataTypes.STRING,
     allowNull: true
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    unique: true
-  },
-  title: {
+  item_qty_per_carton: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  details: {
+  qty_of_carton: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  description: {
+  net_weight_carton: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  contact_number: {
+  net_total_weight_carton: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  price: {
+  gross_weight_carton: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  gender: {
+  gross_total_weight_carton: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  image: {
+  height: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  facbook_url: {
+  width: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  website_url: {
+  length: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  youtube_url: {
+  per_carton_cbm: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  other_url: {
+  total_carton_cbm: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  net_weight: {
     type: DataTypes.STRING,
     allowNull: true,
   },
   
+  gross_weight: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 
 });
 

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("packing_lits", {
+    await queryInterface.createTable("packing_lists", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -47,27 +47,22 @@ module.exports = {
       },
       length: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: true,
       },
       per_carton_cbm: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: true,
       },
       total_carton_cbm: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: true,
       },
       net_weight: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: true,
       },
       gross_weight: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: true,
       },
       user_id: {
@@ -94,6 +89,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("packing_lits");
+    await queryInterface.dropTable("packing_lists");
   },
 };
