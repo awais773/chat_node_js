@@ -54,9 +54,17 @@ const Community = sequelize.define('communities', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+
   image: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT, // Storing JSON array
     allowNull: true,
+    get() {
+      const rawValue = this.getDataValue('image');
+      return rawValue ? JSON.parse(rawValue) : [];
+    },
+    set(value) {
+      this.setDataValue('image', JSON.stringify(value));
+    },
   },
   facbook_url: {
     type: DataTypes.STRING,
