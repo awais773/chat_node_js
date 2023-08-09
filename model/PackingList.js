@@ -4,13 +4,15 @@ const sequelize = require('../config/database');
 const User = require('./User'); // Adjust the path based on your project structure
 const { UUIDV4 } = require("sequelize");
 
-const CompanyProfile = sequelize.define('company_profiles', {
+const PackingList = sequelize.define('packing_lists', {
+ 
   id: {
     allowNull: false,
     primaryKey: true,
     type: DataTypes.UUID,
     defaultValue: UUIDV4,
   },
+  
   user_id: {
     type: DataTypes.UUID,
     allowNull: true,
@@ -30,11 +32,23 @@ const CompanyProfile = sequelize.define('company_profiles', {
     allowNull: true,
     unique: true
   },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  details: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   description: {
     type: DataTypes.STRING,
     allowNull: true,
   },
   contact_number: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  price: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -46,7 +60,7 @@ const CompanyProfile = sequelize.define('company_profiles', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  facebook_url: {
+  facbook_url: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -66,9 +80,9 @@ const CompanyProfile = sequelize.define('company_profiles', {
 
 });
 
-CompanyProfile.belongsTo(User, {
+PackingList.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
 
-module.exports = CompanyProfile;
+module.exports = PackingList;

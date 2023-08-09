@@ -5,7 +5,7 @@ const { authentications } = require('../middleware/authentication');
 
 const router = express.Router();
 
-router.post('/create', CompanyProfileController.create);
+router.post('/create', authentications ,CompanyProfileController.create);
  router.get('/get', CompanyProfileController.get);
  router.get('/get/:Id', CompanyProfileController.find);
 router.put('/update/:Id', CompanyProfileController.update);
