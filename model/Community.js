@@ -6,7 +6,7 @@ const User = require('./User'); // Adjust the path based on your project structu
 const Community = sequelize.define('communities', {
  
   user_id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
     allowNull: true,
     references: {
       model: User, // Reference the User model

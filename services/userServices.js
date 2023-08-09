@@ -14,21 +14,22 @@ exports.createUser = async (body) => {
 
 exports.login = async (body) => {
   try {
-    const { email, password } = body;
+    const { phone, fireBaseId } = body;
     const user = await User.findOne({
-      where: { email: email },
+      where: { phone: phone , fireBaseId : fireBaseId },
     });
     if (!user) {
       throw new Error("User not found");
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      throw new Error("Invalid password");
-    }
-     const userWithoutPassword = { ...user.toJSON() };
-     delete userWithoutPassword.password;
+    // const isPasswordValid = await bcrypt.compare(password, user.password);
+    
+    // if (!isPasswordValid) {
+    //   throw new Error("Invalid password");
+    // }
+    //  const userWithoutPassword = { ...user.toJSON() };
+    //  delete userWithoutPassword.password;
  
-     return userWithoutPassword;
+     return user;
   } catch (error) {
    return error.message
   }

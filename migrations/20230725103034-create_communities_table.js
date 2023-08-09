@@ -63,7 +63,7 @@ module.exports = {
         allowNull: true,
       },
       user_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: "users", // The name of the referenced table (users)

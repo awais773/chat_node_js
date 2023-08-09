@@ -6,8 +6,9 @@ async function signup(req, res, next) {
   try {
     const { body } = req;
     // Hash the password before creating the user
-    const hashedPassword = await bcrypt.hash(body.password, 10);
-    const user = await userService.createUser({ ...body, password: hashedPassword });
+    // const hashedPassword = await bcrypt.hash(body.password, 10);
+
+    const user = await userService.createUser({ ...body });
     const tokken = generateToken(user.id)
     // const check = verifyToken(tokken)
     res.status(200).json({
@@ -28,7 +29,7 @@ async function login(req, res, next) {
   try {
     const { body } = req;
     const user = await userService.login(body);
-    const tokken = generateToken(user.id)
+    const tokken = user.id && generateToken(user.id)
 
     res.json({
       success: true,
