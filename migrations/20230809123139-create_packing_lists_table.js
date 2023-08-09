@@ -2,71 +2,67 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("communities", {
+    await queryInterface.createTable("packing_lists", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      name: {
+      item_name: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      title: {
+      item_qty_per_carton: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      details: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },description: {
+      qty_of_carton: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      contact_number: {
+      net_weight_carton: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      category: {
+      gross_weight_carton: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      gender: {
+      net_total_weight_carton: { // Corrected column name
         type: Sequelize.STRING,
         allowNull: true,
       },
-      image: {
-        type: Sequelize.TEXT, // Using TEXT to store JSON data
-        allowNull: true,
-        get() {
-          const rawValue = this.getDataValue('image');
-          return rawValue ? JSON.parse(rawValue) : [];
-        },
-        set(value) {
-          this.setDataValue('image', JSON.stringify(value));
-        },
-      },
-    
-      facbook_url: {
+      gross_total_weight_carton: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      website_url: {
+      height: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      youtube_url: {
+      width: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      other_url: {
+      length: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      email: {
+      per_carton_cbm: {
         type: Sequelize.STRING,
-        unique: true,
+        allowNull: true,
+      },
+      total_carton_cbm: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      net_weight: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      gross_weight: {
+        type: Sequelize.STRING,
         allowNull: true,
       },
       user_id: {
@@ -93,6 +89,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("communities");
+    await queryInterface.dropTable("packing_lists");
   },
 };

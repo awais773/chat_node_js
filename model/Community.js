@@ -2,9 +2,15 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const User = require('./User'); // Adjust the path based on your project structure
+const { UUIDV4 } = require("sequelize");
 
 const Community = sequelize.define('communities', {
- 
+  id: {
+    allowNull: false,
+    primaryKey: true,
+    type: DataTypes.UUID,
+    defaultValue: UUIDV4,
+  },
   user_id: {
     type: DataTypes.UUID,
     allowNull: true,
