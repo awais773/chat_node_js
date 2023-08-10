@@ -16,12 +16,12 @@ const User = sequelize.define('users', {
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
     unique: false
   },
   DOB: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   gender: {
     type: DataTypes.STRING,
@@ -29,19 +29,19 @@ const User = sequelize.define('users', {
   },
   type: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   image: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   phone: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   fireBaseId: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   }
 }, {
   // Enable timestamps

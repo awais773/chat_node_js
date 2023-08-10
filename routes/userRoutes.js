@@ -13,5 +13,4 @@ router.put('/update/:userId', userController.update);
 router.delete('/delete/:id', userController.Delete);
 
 
-
 module.exports = router;

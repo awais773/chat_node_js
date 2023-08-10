@@ -11,7 +11,7 @@ async function signup(req, res, next) {
     const user = await userService.createUser({ ...body });
     const tokken = generateToken(user.id)
     // const check = verifyToken(tokken)
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       data: user,
       jwt: tokken
@@ -90,7 +90,8 @@ async function userlists(req, res, next) {
 
 
 async function Delete(req, res, next) {
-  const { id } = req.params;
+  const { id  } = req.params;
+
   try {
     const result = await userService.Delete(id);
     if (result) {
@@ -107,7 +108,6 @@ async function Delete(req, res, next) {
     next(error);
   }
 }
-
 
 module.exports = {
   signup,

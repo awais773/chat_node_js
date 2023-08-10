@@ -5,7 +5,7 @@ function authentications(req, res, next) {
     const token = req.header('Authorization')
     if (!token) {
         // If no token is found, return an error response
-        return res.status(401).json({ error: 'No token found. Please log in or sign up.' });
+        return res.status(401).json({ error: 'Invlaid token Please log in or sign up.' });
     }
 
     try {
