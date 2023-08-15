@@ -1,15 +1,15 @@
 const express = require('express');
-const PackingListController = require("../controller/PackingListController")
+const InvoiceController = require("../controller/InvoiceController")
 const { authentications } = require('../middleware/authentication');
 
 
 const router = express.Router();
 
-router.post('/create', authentications ,PackingListController.create);
- router.get('/get', PackingListController.get);
- router.get('/get/:Id', PackingListController.find);
-router.put('/update/:Id', PackingListController.update);
-router.delete('/delete/:id', PackingListController.PackingListDelete);
+router.post('/create', authentications ,InvoiceController.create);
+ router.get('/get', InvoiceController.get);
+ router.get('/get/:Id', InvoiceController.find);
+router.put('/update/:Id', InvoiceController.update);
+router.delete('/delete/:id', InvoiceController.PackingListDelete);
 
 
 module.exports = router;
