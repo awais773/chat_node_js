@@ -4,6 +4,7 @@ const PortfolioRoutes = require("./PortfolioRoutes")
 const CommunityRoutes = require("./CommunityRoutes")
 const CompanyProfile = require("./CompanyProfileRoutes")
 const PackingList = require("./PackingListRoutes")
+const DefineItem = require("./DefineItemRoutes")
 
 
 const router = express.Router();
@@ -13,6 +14,7 @@ router.use(`/portfolio`, PortfolioRoutes);
 router.use(`/community`, CommunityRoutes);
 router.use(`/CompanyProfile`, CompanyProfile);
 router.use(`/PackingList`, PackingList);
+router.use(`/DefineItem`, DefineItem);
 
 
 
