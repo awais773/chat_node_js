@@ -13,6 +13,9 @@ const CommunityRoutes = require("./CommunityRoutes")
 
 // import CompanyProfile
 const CompanyProfile = require("./CompanyProfileRoutes")
+const PackingList = require("./PackingListRoutes")
+const DefineItem = require("./DefineItemRoutes")
+
 
 // import PackingList
 const PackingList = require("./PackingListRoutes")
@@ -50,6 +53,8 @@ router.use(`/portfolio`, PortfolioRoutes);
 router.use(`/community`, CommunityRoutes);
 router.use(`/CompanyProfile`, CompanyProfile);
 router.use(`/PackingList`, PackingList);
+router.use(`/DefineItem`, DefineItem);
+
 router.use(`/invoice`, invoiceRoutes);
 router.post('/upload', upload.array('file'), documentController.Upload);
 router.post('/file/delete', documentController.deleteFile);
