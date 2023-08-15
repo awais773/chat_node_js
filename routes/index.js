@@ -1,25 +1,34 @@
 
 // import express
 const express = require('express');
+
 // import userRoutes
 const userRoutes = require("./userRoutes")
+
 // import PortfolioRoutes
 const PortfolioRoutes = require("./PortfolioRoutes")
+
 // import CommunityRoutes
 const CommunityRoutes = require("./CommunityRoutes")
+
 // import CompanyProfile
 const CompanyProfile = require("./CompanyProfileRoutes")
+
 // import PackingList
 const PackingList = require("./PackingListRoutes")
+
+const invoiceRoutes = require("./invoiceRoutes")
 // import router
 const router = express.Router();
 
 // import multer
 const multer = require('multer');
+
 // import uuid
-const { v4 } = require('uuid'); 
+const { v4 } = require('uuid');
+
 // import documentController
-const documentController = require("../controller/documentController")  
+const documentController = require("../controller/documentController")
 
 // define storage
 const storage = multer.diskStorage({
@@ -41,7 +50,9 @@ router.use(`/portfolio`, PortfolioRoutes);
 router.use(`/community`, CommunityRoutes);
 router.use(`/CompanyProfile`, CompanyProfile);
 router.use(`/PackingList`, PackingList);
-router.post('/upload', upload.array('file') , documentController.Upload );
+router.use(`/invoice`, invoiceRoutes);
+router.post('/upload', upload.array('file'), documentController.Upload);
+router.post('/file/delete', documentController.deleteFile);
 
 // export router
 module.exports = router;
