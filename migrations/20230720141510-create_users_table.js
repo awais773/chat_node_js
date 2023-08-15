@@ -15,12 +15,22 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
+        unique: false
+      },
+      businessName: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false
+      },
+      designation: {
+        type: Sequelize.STRING,
+        allowNull: true,
         unique: false
       },
       DOB: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       gender: {
         type: Sequelize.STRING,
@@ -28,11 +38,11 @@ module.exports = {
       },
       type: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       image: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       phone: {
         type: Sequelize.STRING,
