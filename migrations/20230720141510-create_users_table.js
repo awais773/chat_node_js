@@ -18,6 +18,16 @@ module.exports = {
         allowNull: true,
         unique: false
       },
+      businessName: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false
+      },
+      designation: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false
+      },
       DOB: {
         type: Sequelize.STRING,
         allowNull: true

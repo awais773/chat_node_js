@@ -14,6 +14,17 @@ const User = sequelize.define('users', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  businessName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  },
+  designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: false,
+  },
+
   email: {
     type: DataTypes.STRING,
     allowNull: true,
