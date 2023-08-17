@@ -82,6 +82,11 @@ const Community = sequelize.define('communities', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  report: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  
   
 
 });
