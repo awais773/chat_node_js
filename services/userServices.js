@@ -79,6 +79,42 @@ exports.Delete = async (id,) => {
     },
   });
   return result;
-}
+};
+
+exports.activeUserCount = async () => {
+  const activeUsers = await User.findAll({
+    where: {
+      status: 'active'
+    }
+  });
+
+  const deactiveUsers = await User.findAll({
+    where: {
+      status: 'deactive'
+    }
+  });
+
+  const reportUsers = await User.findAll({
+    where: {
+      status: 'report'
+    }
+  });
+
+  const Users = await User.findAll({
+  });
+
+  const active= activeUsers.length;
+  const deactive = deactiveUsers.length;
+  const report= reportUsers.length;
+  const totalUsers= Users.length;
+
+  return {
+    active,
+    deactive,
+    report,
+    totalUsers
+  };
+};
+
 
   

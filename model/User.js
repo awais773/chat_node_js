@@ -53,6 +53,10 @@ const User = sequelize.define('users', {
   fireBaseId: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
   // Enable timestamps
