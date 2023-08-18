@@ -56,6 +56,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
+      device_token: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

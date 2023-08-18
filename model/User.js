@@ -57,6 +57,10 @@ const User = sequelize.define('users', {
   status: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  device_token: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 }, {
   // Enable timestamps
