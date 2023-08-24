@@ -1,14 +1,14 @@
 {
   "development": {
-    "username": "root",
-    "password": "",
+    "username": "chand",
+    "password": "Chand0800",
     "database": "abChat",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "",
+    "username": "chand",
+    "password": "Chand0800",
     "database": "abChat",
     "host": "localhost",
     "dialect": "mysql"
