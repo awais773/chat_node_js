@@ -54,7 +54,10 @@ const Portfolio = sequelize.define('portfolios', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-
+  delivery: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   image: {
     type: DataTypes.TEXT, // Storing JSON array
     allowNull: true,
