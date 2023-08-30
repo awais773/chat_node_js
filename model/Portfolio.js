@@ -28,7 +28,6 @@ const Portfolio = sequelize.define('portfolios', {
   email: {
     type: DataTypes.STRING,
     allowNull: true,
-    unique: true
   },
   title: {
     type: DataTypes.STRING,

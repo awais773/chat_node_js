@@ -1,9 +1,11 @@
+const { use } = require("chai");
 const PortfolioServices = require("../services/PortfolioServices");
 
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const Portfolio = await PortfolioServices.create({ ...body });
+    const { userId } = req;
+    const Portfolio = await PortfolioServices.create({ ...body , user_id: userId });
     res.status(200).json({
       success: true,
       data: Portfolio
@@ -45,7 +47,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const portfolio = await PortfolioServices.get();
+    const {userId} = req;
+    const portfolio = await PortfolioServices.get(userId);
     res.status(200).json({
       success: true,
       data: portfolio

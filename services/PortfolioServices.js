@@ -3,17 +3,23 @@ const Portfolio = require("../model/Portfolio");
 
 exports.create = async (body) => {
   try {
+    debugger
     const data = await Portfolio.create({ ...body });
     return data;
   } catch (error) {
+    debugger
     // const errors = error.errors.map((item) => ({ message: item.message }));
     return error.message
   }
 };
 
 
-exports.get = async () => {
-  const portfolio = await Portfolio.findAll();
+exports.get = async (userId) => {
+  const portfolio = await Portfolio.findAll({
+    where: {
+      user_id: userId,
+    },
+  });
   return portfolio;
 };
 
