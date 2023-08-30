@@ -54,6 +54,10 @@ const Portfolio = sequelize.define('portfolios', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  gender: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   delivery: {
     type: DataTypes.STRING,
     allowNull: true,
