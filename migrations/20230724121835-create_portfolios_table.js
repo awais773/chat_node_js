@@ -36,10 +36,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      gender: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
+  
       delivery: {
         type: Sequelize.STRING,
         allowNull: true,
