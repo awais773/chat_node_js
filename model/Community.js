@@ -28,7 +28,6 @@ const Community = sequelize.define('communities', {
   email: {
     type: DataTypes.STRING,
     allowNull: true,
-    unique: true
   },
   title: {
     type: DataTypes.STRING,

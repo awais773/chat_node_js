@@ -28,7 +28,7 @@ const CompanyProfile = sequelize.define('company_profiles', {
   email: {
     type: DataTypes.STRING,
     allowNull: true,
-    unique: true
+    
   },
   description: {
     type: DataTypes.STRING,
