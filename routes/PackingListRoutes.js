@@ -6,10 +6,10 @@ const { authentications } = require('../middleware/authentication');
 const router = express.Router();
 
 router.post('/create', authentications ,PackingListController.create);
- router.get('/get', PackingListController.get);
- router.get('/get/:Id', PackingListController.find);
-router.put('/update/:Id', PackingListController.update);
-router.delete('/delete/:id', PackingListController.PackingListDelete);
+ router.get('/get',authentications,  PackingListController.get);
+ router.get('/get/:Id',authentications,  PackingListController.find);
+router.put('/update/:Id',authentications,  PackingListController.update);
+router.delete('/delete/:id',authentications,  PackingListController.PackingListDelete);
 
 
 module.exports = router;

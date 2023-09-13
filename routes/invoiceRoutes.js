@@ -5,11 +5,11 @@ const { authentications } = require('../middleware/authentication');
 
 const router = express.Router();
 
-router.post('/create', authentications ,InvoiceController.create);
- router.get('/get', InvoiceController.get);
- router.get('/get/:Id', InvoiceController.find);
-router.put('/update/:Id', InvoiceController.update);
-router.delete('/delete/:id', InvoiceController.PackingListDelete);
+router.post('/create', authentications, InvoiceController.create);
+router.get('/get', authentications, InvoiceController.get);
+router.get('/get/:Id', authentications, InvoiceController.find);
+router.put('/update/:Id', authentications, InvoiceController.update);
+router.delete('/delete/:id', authentications, InvoiceController.PackingListDelete);
 
 
 module.exports = router;

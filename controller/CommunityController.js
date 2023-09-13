@@ -4,8 +4,8 @@ async function create(req, res, next) {
   try {
     const { body } = req;
     const { userId } = req;
-
     const community = await CommunityServices.create({ ...body, user_id: userId });
+    
     res.status(200).json({
       success: true,
       data: community
