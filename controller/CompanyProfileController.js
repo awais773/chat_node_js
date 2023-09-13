@@ -3,7 +3,9 @@ const CompanyProfileServices = require("../services/CompanyProfileServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const CompanyProfile = await CompanyProfileServices.create({ ...body });
+    const { userId } = req;
+
+    const CompanyProfile = await CompanyProfileServices.create({  ...body, user_id: userId });
     res.status(200).json({
       success: true,
       data: CompanyProfile

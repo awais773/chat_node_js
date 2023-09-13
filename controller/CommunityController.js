@@ -3,7 +3,9 @@ const CommunityServices = require("../services/CommunityServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const community = await CommunityServices.create({ ...body });
+    const { userId } = req;
+
+    const community = await CommunityServices.create({ ...body, user_id: userId });
     res.status(200).json({
       success: true,
       data: community
@@ -17,7 +19,7 @@ async function create(req, res, next) {
 
 
 
-async function update (req, res)  {
+async function update(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
   const updates = req.body; // The updates will be sent in the request body as JSON
   try {
@@ -29,7 +31,7 @@ async function update (req, res)  {
 }
 
 
-async function find (req, res)  {
+async function find(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
   try {
     const community = await CommunityServices.find(Id);
@@ -38,7 +40,8 @@ async function find (req, res)  {
     res.json({
       success: false,
       error: error.message,
-  });  }
+    });
+  }
 }
 
 
@@ -80,9 +83,9 @@ async function communityDelete(req, res, next) {
 
 
 module.exports = {
-   create,
-    get,
-    update,
-    find,
-    communityDelete,
+  create,
+  get,
+  update,
+  find,
+  communityDelete,
 }

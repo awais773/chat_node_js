@@ -3,7 +3,9 @@ const DefineItemServices = require("../services/DefineItemServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const DefineItem = await DefineItemServices.create({ ...body });
+    const { userId } = req;
+
+    const DefineItem = await DefineItemServices.create({ ...body, user_id: userId });
     res.status(200).json({
       success: true,
       data: DefineItem

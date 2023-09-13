@@ -85,9 +85,19 @@ const Community = sequelize.define('communities', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  public: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  subCategory: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   
-  
-
 });
 
 Community.belongsTo(User, {

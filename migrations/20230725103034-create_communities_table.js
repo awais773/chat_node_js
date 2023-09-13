@@ -82,6 +82,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      public: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      subCategory: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

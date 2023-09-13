@@ -3,7 +3,9 @@ const PackingListServices = require("../services/PackingListServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const Portfolio = await PackingListServices.create({ ...body });
+    const { userId } = req;
+
+    const Portfolio = await PackingListServices.create({...body, user_id: userId });
     res.status(200).json({
       success: true,
       data: Portfolio
