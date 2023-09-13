@@ -4,6 +4,7 @@ const express = require('express');
 
 // import userRoutes
 const userRoutes = require("./userRoutes")
+const adminRoutes = require("./adminRoutes")
 
 // import PortfolioRoutes
 const PortfolioRoutes = require("./PortfolioRoutes")
@@ -50,6 +51,7 @@ const upload = multer({ storage: storage });
 
 // define router
 router.use(`/user`, userRoutes);
+router.use(`/admin`, adminRoutes);
 router.use(`/portfolio`, PortfolioRoutes);
 router.use(`/community`, CommunityRoutes);
 router.use(`/CompanyProfile`, CompanyProfile);
