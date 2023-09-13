@@ -14,7 +14,7 @@ async function signup(req, res, next) {
     res.status(201).json({
       success: true,
       data: user,
-      jwt: tokken
+      jwt: user.id && tokken
     });
 
   } catch (error) {
@@ -34,7 +34,7 @@ async function login(req, res, next) {
     res.json({
       success: true,
       user,
-      jwt: tokken
+      jwt: user.id && tokken
     });
   } catch (error) {
     res.json({
