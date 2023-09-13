@@ -6,15 +6,15 @@ async function signup(req, res, next) {
   try {
     const { body } = req;
     // Hash the password before creating the user
-    // const hashedPassword = await bcrypt.hash(body.password, 10);
+    const hashedPassword = await bcrypt.hash(body.password, 10);
 
-    const user = await userService.createUser({ ...body });
+    const user = await userService.createUser({ ...body, password: hashedPassword });
     const tokken = generateToken(user.id)
     // const check = verifyToken(tokken)
     res.status(201).json({
       success: true,
       data: user,
-      jwt: tokken
+      jwt: user.id && tokken
     });
 
   } catch (error) {
@@ -34,7 +34,7 @@ async function login(req, res, next) {
     res.json({
       success: true,
       user,
-      jwt: tokken
+      jwt: user.id && tokken
     });
   } catch (error) {
     res.json({
@@ -90,7 +90,7 @@ async function userlists(req, res, next) {
 
 
 async function Delete(req, res, next) {
-  const { id  } = req.params;
+  const { id } = req.params;
 
   try {
     const result = await userService.Delete(id);

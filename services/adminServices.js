@@ -14,24 +14,23 @@ exports.createUser = async (body) => {
 
 exports.login = async (body) => {
   try {
-    const { phone, fireBaseId } = body;
+    const { email, password } = body;
     const user = await Admin.findOne({
-      where: { phone: phone , fireBaseId : fireBaseId },
+      where: { email: email },
     });
     if (!user) {
       throw new Error("Admin not found");
     }
-    // const isPasswordValid = await bcrypt.compare(password, user.password);
-    
-    // if (!isPasswordValid) {
-    //   throw new Error("Invalid password");
-    // }
-    //  const userWithoutPassword = { ...user.toJSON() };
-    //  delete userWithoutPassword.password;
- 
-     return user;
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error("Invalid password");
+    }
+    const userWithoutPassword = { ...user.toJSON() };
+    delete userWithoutPassword.password;
+
+    return user;
   } catch (error) {
-   return error.message
+    return error.message
   }
 };
 
@@ -44,9 +43,9 @@ exports.update = async (userId, updates) => {
     }
     Object.assign(user, updates);
     const userWithoutPassword = { ...user.toJSON() };
-     delete userWithoutPassword.password;
+    delete userWithoutPassword.password;
     await user.save();
-    return userWithoutPassword;    
+    return userWithoutPassword;
   } catch (error) {
     return error.message
   }
@@ -60,7 +59,7 @@ exports.userFind = async (Id,) => {
     if (!user) {
       throw new Error('Admin not found');
     }
-    return user;    
+    return user;
   } catch (error) {
     return error.message
   }
@@ -103,10 +102,10 @@ exports.activeUserCount = async () => {
   const Users = await Admin.findAll({
   });
 
-  const active= activeUsers.length;
+  const active = activeUsers.length;
   const deactive = deactiveUsers.length;
-  const report= reportUsers.length;
-  const totalUsers= Users.length;
+  const report = reportUsers.length;
+  const totalUsers = Users.length;
 
   return {
     active,
@@ -117,4 +116,3 @@ exports.activeUserCount = async () => {
 };
 
 
-  
