@@ -16,22 +16,22 @@ exports.login = async (body) => {
   try {
     const { phone, fireBaseId } = body;
     const user = await User.findOne({
-      where: { phone: phone , fireBaseId : fireBaseId },
+      where: { phone: phone, fireBaseId: fireBaseId },
     });
     if (!user) {
       throw new Error("User not found");
     }
     // const isPasswordValid = await bcrypt.compare(password, user.password);
-    
+
     // if (!isPasswordValid) {
     //   throw new Error("Invalid password");
     // }
     //  const userWithoutPassword = { ...user.toJSON() };
     //  delete userWithoutPassword.password;
- 
-     return user;
+
+    return user;
   } catch (error) {
-   return error.message
+    return error.message
   }
 };
 
@@ -44,9 +44,9 @@ exports.update = async (userId, updates) => {
     }
     Object.assign(user, updates);
     const userWithoutPassword = { ...user.toJSON() };
-     delete userWithoutPassword.password;
+    delete userWithoutPassword.password;
     await user.save();
-    return userWithoutPassword;    
+    return userWithoutPassword;
   } catch (error) {
     return error.message
   }
@@ -60,15 +60,23 @@ exports.userFind = async (Id,) => {
     if (!user) {
       throw new Error('User not found');
     }
-    return user;    
+    return user;
   } catch (error) {
     return error.message
   }
 };;
 
-exports.userlists = async () => {
-  const user = await User.findAll();
-  return user;
+exports.userlists = async (page, limit) => {
+  try {
+    const offset = (page - 1) * limit;
+    const users = await User.findAll({
+      offset,
+      limit,
+    });
+    return users;
+  } catch (error) {
+    throw new Error('Error fetching users: ' + error.message);
+  }
 };
 
 
@@ -103,10 +111,10 @@ exports.activeUserCount = async () => {
   const Users = await User.findAll({
   });
 
-  const active= activeUsers.length;
+  const active = activeUsers.length;
   const deactive = deactiveUsers.length;
-  const report= reportUsers.length;
-  const totalUsers= Users.length;
+  const report = reportUsers.length;
+  const totalUsers = Users.length;
 
   return {
     active,
@@ -117,4 +125,3 @@ exports.activeUserCount = async () => {
 };
 
 
-  
