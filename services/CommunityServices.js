@@ -1,5 +1,6 @@
 const { where } = require("sequelize");
 const Community = require("../model/Community");
+const User = require("../model/User");
 
 exports.create = async (body) => {
   try {
@@ -13,7 +14,15 @@ exports.create = async (body) => {
 
 
 exports.get = async () => {
-  const data = await Community.findAll();
+  const data = await Community.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ["name", "image"]
+
+      }
+    ]
+  });
   return data;
 };
 
@@ -24,7 +33,7 @@ exports.find = async (Id,) => {
     if (!data) {
       throw new Error('portfolio not found');
     }
-    return data;    
+    return data;
   } catch (error) {
     return error.message
   }
@@ -39,7 +48,7 @@ exports.update = async (Id, updates) => {
     }
     Object.assign(data, updates);
     await data.save();
-    return data;    
+    return data;
   } catch (error) {
     return error.message
   }
@@ -57,4 +66,3 @@ exports.communityDelete = async (id,) => {
   return result;
 }
 
- 

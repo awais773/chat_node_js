@@ -32,10 +32,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      gender: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
+  
       image: {
         type: Sequelize.TEXT, // Using TEXT to store JSON data
         allowNull: true,
@@ -78,19 +75,21 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-      report: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
+   
       status: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       public: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+        defaultValue: false,
+      },
+      subCategory: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      subCategory: {
+      tags: {
         type: Sequelize.STRING,
         allowNull: true,
       },

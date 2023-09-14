@@ -49,10 +49,7 @@ const Community = sequelize.define('communities', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  gender: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
+
 
   image: {
     type: DataTypes.TEXT, // Storing JSON array
@@ -81,7 +78,7 @@ const Community = sequelize.define('communities', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  report: {
+  tags: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -90,14 +87,14 @@ const Community = sequelize.define('communities', {
     allowNull: true,
   },
   public: {
-    type: DataTypes.STRING,
+    type: DataTypes.BOOLEAN,
     allowNull: true,
   },
   subCategory: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  
+
 });
 
 Community.belongsTo(User, {
