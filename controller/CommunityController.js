@@ -48,7 +48,9 @@ async function find(req, res) {
 
 async function get(req, res, next) {
   try {
-    const community = await CommunityServices.get();
+    const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+
+    const community = await CommunityServices.get(page,limit);
     res.status(200).json({
       success: true,
       data: community

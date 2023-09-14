@@ -13,8 +13,12 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
+exports.get = async (page, limit) => {
+  const offset = (page - 1) * limit;
+
   const data = await Community.findAll({
+    offset,
+    limit,
     include: [
       {
         model: User,
@@ -65,4 +69,5 @@ exports.communityDelete = async (id,) => {
   });
   return result;
 }
+
 
