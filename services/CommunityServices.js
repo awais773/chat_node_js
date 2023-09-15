@@ -1,10 +1,21 @@
 const { where } = require("sequelize");
 const Community = require("../model/Community");
 const User = require("../model/User");
+const ReportPosts = require("../model/ReportPosts");
 
 exports.create = async (body) => {
   try {
     const data = await Community.create({ ...body });
+    return data;
+  } catch (error) {
+    // const errors = error.errors.map((item) => ({ message: item.message }));
+    return error.message
+  }
+};
+
+exports.report = async (body) => {
+  try {
+    const data = await ReportPosts.create({ ...body });
     return data;
   } catch (error) {
     // const errors = error.errors.map((item) => ({ message: item.message }));

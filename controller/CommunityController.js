@@ -17,6 +17,22 @@ async function create(req, res, next) {
   }
 }
 
+async function report(req, res, next) {
+  try {
+    const { body } = req;
+    const { userId } = req;
+    const community = await CommunityServices.report({ ...body, reportedBy: userId });
+    
+    res.status(200).json({
+      success: true,
+      data: community
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+}
 
 
 async function update(req, res) {
@@ -90,4 +106,5 @@ module.exports = {
   update,
   find,
   communityDelete,
+  report
 }
