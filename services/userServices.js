@@ -7,8 +7,7 @@ exports.createUser = async (body) => {
     const data = await User.create({ ...body });
     return data;
   } catch (error) {
-    const errors = error.errors.map((item) => ({ message: item.message }));
-    return errors;
+    throw new Error('Error creating user: ' + error.message);
   }
 };
 
@@ -31,10 +30,9 @@ exports.login = async (body) => {
 
     return user;
   } catch (error) {
-    return error.message
+    throw new Error('Login failed: ' + error.message);
   }
 };
-
 
 exports.update = async (userId, updates) => {
   try {
@@ -48,13 +46,11 @@ exports.update = async (userId, updates) => {
     await user.save();
     return userWithoutPassword;
   } catch (error) {
-    return error.message
+    throw new Error('Error updating user: ' + error.message);
   }
-};;
+};
 
-
-
-exports.userFind = async (Id,) => {
+exports.userFind = async (Id) => {
   try {
     const user = await User.findByPk(Id);
     if (!user) {
@@ -62,9 +58,9 @@ exports.userFind = async (Id,) => {
     }
     return user;
   } catch (error) {
-    return error.message
+    throw new Error('Error finding user: ' + error.message);
   }
-};;
+};
 
 exports.userlists = async (page, limit) => {
   try {
@@ -79,49 +75,53 @@ exports.userlists = async (page, limit) => {
   }
 };
 
-
-exports.Delete = async (id,) => {
-  const result = await User.destroy({
-    where: {
-      id,
-    },
-  });
-  return result;
+exports.Delete = async (id) => {
+  try {
+    const result = await User.destroy({
+      where: {
+        id,
+      },
+    });
+    return result;
+  } catch (error) {
+    throw new Error('Error deleting user: ' + error.message);
+  }
 };
 
 exports.activeUserCount = async () => {
-  const activeUsers = await User.findAll({
-    where: {
-      status: 'active'
-    }
-  });
+  try {
+    const activeUsers = await User.findAll({
+      where: {
+        status: 'active'
+      }
+    });
 
-  const deactiveUsers = await User.findAll({
-    where: {
-      status: 'deactive'
-    }
-  });
+    const deactiveUsers = await User.findAll({
+      where: {
+        status: 'deactive'
+      }
+    });
 
-  const reportUsers = await User.findAll({
-    where: {
-      status: 'report'
-    }
-  });
+    const reportUsers = await User.findAll({
+      where: {
+        status: 'report'
+      }
+    });
 
-  const Users = await User.findAll({
-  });
+    const Users = await User.findAll();
 
-  const active = activeUsers.length;
-  const deactive = deactiveUsers.length;
-  const report = reportUsers.length;
-  const totalUsers = Users.length;
+    const active = activeUsers.length;
+    const deactive = deactiveUsers.length;
+    const report = reportUsers.length;
+    const totalUsers = Users.length;
 
-  return {
-    active,
-    deactive,
-    report,
-    totalUsers
-  };
+    return {
+      active,
+      deactive,
+      report,
+      totalUsers
+    };
+  } catch (error) {
+    throw new Error('Error counting active users: ' + error.message);
+  }
 };
-
-

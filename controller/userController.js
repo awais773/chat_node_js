@@ -9,118 +9,125 @@ async function signup(req, res, next) {
     // const hashedPassword = await bcrypt.hash(body.password, 10);
 
     const user = await userService.createUser({ ...body });
-    const tokken = generateToken(user.id)
-    // const check = verifyToken(tokken)
+    const token = generateToken(user.id);
     res.status(201).json({
       success: true,
       data: user,
-      jwt: user.id && tokken
+      jwt: user.id && token,
     });
 
   } catch (error) {
-    res.json({
-      message: error.message,
+    res.status(400).json({
+      success: false,
+      error: error.message,
     });
   }
 }
-
 
 async function login(req, res, next) {
   try {
     const { body } = req;
     const user = await userService.login(body);
-    const tokken = user.id && generateToken(user.id)
+    const token = user.id && generateToken(user.id);
 
-    res.json({
+    res.status(200).json({
       success: true,
       user,
-      jwt: user.id && tokken
+      jwt: user.id && token,
     });
   } catch (error) {
-    res.json({
-      message: error.message,
+    res.status(401).json({
       success: false,
-      error: "Invalid request body",
+      error: error.message,
+      message: "Authentication failed",
     });
   }
 }
-
 
 async function update(req, res) {
   const userId = req.params.userId; // Get the user ID from the route parameter
   const updates = req.body; // The updates will be sent in the request body as JSON
   try {
     const updatedUser = await userService.update(userId, updates);
-    res.json({ success: true, user: updatedUser });
+    if (!updatedUser) {
+      res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    } else {
+      res.status(200).json({ success: true, user: updatedUser });
+    }
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 }
 
-
 async function userFind(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
   try {
     const user = await userService.userFind(Id);
-    res.json({ success: true, data: user });
+    if (!user) {
+      res.status(404).json({
+        success: false,
+        error: "User not found",
+      });
+    } else {
+      res.status(200).json({ success: true, data: user });
+    }
   } catch (error) {
-    res.json({
+    res.status(500).json({
       success: false,
       error: error.message,
     });
   }
 }
-
-
 
 async function userlists(req, res, next) {
   try {
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const user = await userService.userlists(page, limit);
+    const users = await userService.userlists(page, limit);
     res.status(200).json({
       success: true,
-      user,
+      users,
     });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       success: false,
       error: error.message,
     });
   }
 }
 
-
 async function Delete(req, res, next) {
-  const { id  } = req.params;
+  const { id } = req.params;
 
   try {
     const result = await userService.Delete(id);
     if (result) {
       res.status(200).json({
         success: true,
-        message: 'delete Sucessfully'
+        message: 'User deleted successfully'
       });
     } else {
-      res.json({
-        message: "user not found",
+      res.status(404).json({
+        success: false,
+        error: "User not found",
       });
     }
   } catch (error) {
-    next(error);
+    res.status(500).json({ success: false, error: error.message });
   }
 }
 
-
-
 async function activeUserCount(req, res, next) {
   try {
-    const data = await userService.activeUserCount();
+    const count = await userService.activeUserCount();
     res.status(200).json({
       success: true,
-      data,
+      count,
     });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       success: false,
       error: error.message,
     });
@@ -135,4 +142,4 @@ module.exports = {
   userFind,
   Delete,
   activeUserCount,
-}
+};
