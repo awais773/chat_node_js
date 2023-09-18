@@ -1,6 +1,6 @@
 const userService = require("../services/userServices");
 const bcrypt = require('bcrypt');
-const { generateToken, verifyToken } = require("../utils/helper");
+const { generateToken, revokeToken } = require("../utils/helper");
 
 async function signup(req, res, next) {
   try {
@@ -99,11 +99,12 @@ async function userlists(req, res, next) {
 }
 
 async function Delete(req, res, next) {
-  const { id } = req.params;
-
   try {
-    const result = await userService.Delete(id);
+    const { userId } = req;
+    const result = await userService.Delete(userId);
     if (result) {
+      revokeToken(req.headers.authorization)
+      debugger
       res.status(200).json({
         success: true,
         message: 'User deleted successfully'

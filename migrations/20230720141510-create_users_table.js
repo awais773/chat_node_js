@@ -46,7 +46,9 @@ module.exports = {
       },
       phone: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false,
+        unique: true
+
       },
       fireBaseId: {
         type: Sequelize.STRING,

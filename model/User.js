@@ -48,7 +48,9 @@ const User = sequelize.define('users', {
   },
   phone: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false,
+    unique: true
+
   },
   fireBaseId: {
     type: DataTypes.STRING,

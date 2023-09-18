@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 
 const secret = 'mysecretkey';
 
+// Store revoked tokens
+const revokedTokens = new Set();
+
 function generateToken(userId) {
     const payload = { userId };
     const options = { expiresIn: '30d' };
@@ -11,6 +14,11 @@ function generateToken(userId) {
 
 function verifyToken(token) {
     try {
+        // Check if the token is revoked
+        if (revokedTokens.has(token)) {
+            throw new Error('Token has been revoked');
+        }
+
         const decoded = jwt.verify(token, secret);
         // The token is valid, and the payload is stored in the 'decoded' variable
         return decoded;
@@ -20,4 +28,10 @@ function verifyToken(token) {
         return null;
     }
 }
-module.exports = { generateToken, verifyToken };
+
+function revokeToken(token) {
+    // Add the token to the list of revoked tokens
+    revokedTokens.add(token);
+}
+
+module.exports = { generateToken, verifyToken, revokeToken };
