@@ -36,7 +36,7 @@ async function login(req, res, next) {
       jwt: user.id && token,
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(404).json({
       success: false,
       error: error.message,
       message: "Authentication failed",
