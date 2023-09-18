@@ -7,7 +7,8 @@ exports.createUser = async (body) => {
     const data = await User.create({ ...body });
     return data;
   } catch (error) {
-    throw new Error('Error creating user: ' + error.message);
+    const errors = error.errors[0].message;
+     throw new Error(errors);
   }
 };
 
