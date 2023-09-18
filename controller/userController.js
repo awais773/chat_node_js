@@ -32,7 +32,7 @@ async function login(req, res, next) {
 
     res.status(200).json({
       success: true,
-      user,
+      data: user,
       jwt: user.id && token,
     });
   } catch (error) {
