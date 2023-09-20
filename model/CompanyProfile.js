@@ -38,7 +38,7 @@ const CompanyProfile = sequelize.define('company_profiles', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  gender: {
+  status: {
     type: DataTypes.STRING,
     allowNull: true,
   },

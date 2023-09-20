@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      gender: {
+      status: {
         type: Sequelize.STRING,
         allowNull: true,
       },

@@ -80,6 +80,10 @@ const PackingList = sequelize.define('packing_lists', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  totalItemsQty: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 
 });
 
