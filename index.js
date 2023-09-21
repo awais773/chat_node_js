@@ -1,12 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-const appRoutes = require('./routes/index');
-const app = express();
-const db = require('./config/database');
 const http = require("http");
 const WebSocket = require("ws");
-const server = http.createServer(app);
+const appRoutes = require('./routes/index');
+const db = require('./config/database');
+const app = express();
+const server = http.createServer(app); 
+
+
+
 const wss = new WebSocket.Server({ server });
+
+
+
 const users = new Map();
 var webSockets = {}
 const admin = require('firebase-admin');
@@ -89,4 +95,7 @@ app.use(express.json());
 app.use(`/api`, appRoutes);
 
 // Start the server
-app.listen(process.env.PORT, () => console.log(`Server running on port http://localhost:${process.env.PORT}`));
+const port = process.env.PORT || 8004; // Use process.env.PORT if available, otherwise use port 8004
+server.listen(port, () => {
+    console.log(`Server running on port http://localhost:${port}`);
+});
