@@ -62,7 +62,7 @@ wss.on("connection", (ws, req) => {
                 //         console.log('Error sending message:', error);
                 //     });
                 console.log("No reciever user found.");
-                ws.send(data.cmd +  " No reciever user found:error");
+                ws.send(data.remoteId +  " No reciever user found:error");
             }
             // } else {
             //   console.log("No send command");
