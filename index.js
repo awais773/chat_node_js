@@ -28,7 +28,7 @@ admin.initializeApp({
 
 wss.on("connection", (ws, req) => {
     console.log("User connected");
-    ws.send( " User connected"+ req.headers.user_id);
+    ws.send( " User connected"+ req.headers);
 
     console.log(req.headers.user_id);
     var userID = req.headers.user_id //get userid from URL ip:6060/userid
