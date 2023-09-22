@@ -27,64 +27,61 @@ admin.initializeApp({
 
 
 wss.on("connection", (ws, req) => {
-    console.log("User connected")
-
-    ws.send("User connected"+ req.headers.user);
-    var userID = req.headers.user_id //get userid from URL ip:6060/userid
+    console.log("User connected");
+    console.log(req.headers.user);
+    var userID = req.headers.user //get userid from URL ip:6060/userid
     webSockets[userID] = ws //add new user to the connection list
     ws.on('message', message => { //if there is any message
-        var datastring = message.toString();
-        console.log(datastring);
-
-        if (datastring.charAt(0) == "{") {
-            datastring = datastring.replace(/\'/g, '"');
-            var data = JSON.parse(datastring)
-            // if (data.auth == "chatapphdfgjd34534hjdfk") {
-            // if (data.cmd == 'send') {
+      var datastring = message.toString();
+      console.log(datastring);
+  
+      if (datastring.charAt(0) == "{") {
+        datastring = datastring.replace(/\'/g, '"');
+        var data = JSON.parse(datastring)
+        // if (data.auth == "chatapphdfgjd34534hjdfk") {
+          // if (data.cmd == 'send') {
             console.log("data.remoteId", data.remoteId);
             var boardws = webSockets[data.remoteId] //check if there is reciever connection
             if (boardws) {
-                boardws.send(datastring); //send message to reciever
-                ws.send("success");
+              boardws.send(datastring); //send message to reciever
+              ws.send("success");
             } else {
-                // const message = {
-                //     notification: {
-                //         title: 'Test notification',
-                //         body: datastring
-                //     },
-                //     token: 'dCbH4pNNTiOFcH10G0_emA:APA91bEETF9Kq7nKX--2ClYuSRynjr9cAUr0fUeu5oEgQ10BTITL7qaKaAIrQa8E4h9IweureTsfobIla8QxAUgg7JWsinq_Okc-5DdGsCvfALtoDCLMqaxWzGb9jAh0o0QotfMU3-LI'
-                // };
-                // // Send the message to the device with the given registration token
-                // messaging.send(message)
-                //     .then((response) => {
-                //         console.log('Successfully sent message:', response);
-                //     })
-                //     .catch((error) => {
-                //         console.log('Error sending message:', error);
-                //     });
-                console.log("No reciever user found.");
-                ws.send(data.remoteId +  " No reciever user found:error");
+            //   const message = {
+            //     notification: {
+            //       title: 'Test notification',
+            //       body: datastring
+            //     },
+            //     token: 'dCbH4pNNTiOFcH10G0_emA:APA91bEETF9Kq7nKX--2ClYuSRynjr9cAUr0fUeu5oEgQ10BTITL7qaKaAIrQa8E4h9IweureTsfobIla8QxAUgg7JWsinq_Okc-5DdGsCvfALtoDCLMqaxWzGb9jAh0o0QotfMU3-LI'
+            //   };
+            //   // Send the message to the device with the given registration token
+            //   messaging.send(message)
+            //     .then((response) => {
+            //       console.log('Successfully sent message:', response);
+            //     })
+            //     .catch((error) => {
+            //       console.log('Error sending message:', error);
+            //     });
+              console.log("No reciever user found.");
+              ws.send(data.cmd + ":No reciever user found");
             }
-            // } else {
-            //   console.log("No send command");
-            //   ws.send(data.cmd + ":error");
-            // }
-            // } else {
-            //   console.log("App Authincation error");
-            //   ws.send(data.cmd + ":error");
-            // }
-        } else {
-            console.log("Non JSON type data");
-            ws.send(data.cmd + ":error");
-        }
+          // } else {
+          //   console.log("No send command");
+          //   ws.send(data.cmd + ":error");
+          // }
+        // } else {
+        //   console.log("App Authincation error");
+        //   ws.send(data.cmd + ":error");
+        // }
+      } else {
+        console.log("Non JSON type data");
+        ws.send(data.cmd + ":error");
+      }
     })
     ws.on("close", () => {
-        console.log("User disconnected");
-        ws.send( " User connected"+ req.headers.user_id);
-
-        // users.delete(userId);
+      console.log("User disconnected");
+      // users.delete(userId);
     });
-});
+  });
 
 // Add CORS middleware
 app.use(cors());
