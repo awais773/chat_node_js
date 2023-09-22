@@ -78,7 +78,7 @@ wss.on("connection", (ws, req) => {
       }
     })
     ws.on("close", () => {
-      console.log("User disconnected");
+      ws.send("User disconnected"+ userID);
       users.delete(userID);
     });
   });
