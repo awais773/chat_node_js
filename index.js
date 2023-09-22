@@ -41,7 +41,7 @@ wss.on("connection", (ws, req) => {
             // if (data.auth == "chatapphdfgjd34534hjdfk") {
             // if (data.cmd == 'send') {
             console.log("data.remoteId", data.remoteId);
-            var boardws = webSockets[data.remoteId] //check if there is reciever connection
+                        var boardws = webSockets[data.remoteId] //check if there is reciever connection
             if (boardws) {
                 boardws.send(datastring); //send message to reciever
                 ws.send("success");
@@ -61,8 +61,8 @@ wss.on("connection", (ws, req) => {
                 //     .catch((error) => {
                 //         console.log('Error sending message:', error);
                 //     });
-                // console.log("No reciever user found.");
-                // ws.send(data.cmd + ":error");
+                console.log("No reciever user found.");
+                ws.send(data.cmd + ":error");
             }
             // } else {
             //   console.log("No send command");
