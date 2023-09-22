@@ -46,23 +46,23 @@ wss.on("connection", (ws, req) => {
                 boardws.send(datastring); //send message to reciever
                 ws.send("success");
             } else {
-                const message = {
-                    notification: {
-                        title: 'Test notification',
-                        body: datastring
-                    },
-                    token: 'dCbH4pNNTiOFcH10G0_emA:APA91bEETF9Kq7nKX--2ClYuSRynjr9cAUr0fUeu5oEgQ10BTITL7qaKaAIrQa8E4h9IweureTsfobIla8QxAUgg7JWsinq_Okc-5DdGsCvfALtoDCLMqaxWzGb9jAh0o0QotfMU3-LI'
-                };
-                // Send the message to the device with the given registration token
-                messaging.send(message)
-                    .then((response) => {
-                        console.log('Successfully sent message:', response);
-                    })
-                    .catch((error) => {
-                        console.log('Error sending message:', error);
-                    });
-                console.log("No reciever user found.");
-                ws.send(data.cmd + ":error");
+                // const message = {
+                //     notification: {
+                //         title: 'Test notification',
+                //         body: datastring
+                //     },
+                //     token: 'dCbH4pNNTiOFcH10G0_emA:APA91bEETF9Kq7nKX--2ClYuSRynjr9cAUr0fUeu5oEgQ10BTITL7qaKaAIrQa8E4h9IweureTsfobIla8QxAUgg7JWsinq_Okc-5DdGsCvfALtoDCLMqaxWzGb9jAh0o0QotfMU3-LI'
+                // };
+                // // Send the message to the device with the given registration token
+                // messaging.send(message)
+                //     .then((response) => {
+                //         console.log('Successfully sent message:', response);
+                //     })
+                //     .catch((error) => {
+                //         console.log('Error sending message:', error);
+                //     });
+                // console.log("No reciever user found.");
+                // ws.send(data.cmd + ":error");
             }
             // } else {
             //   console.log("No send command");
