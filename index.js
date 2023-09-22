@@ -28,6 +28,8 @@ admin.initializeApp({
 
 wss.on("connection", (ws, req) => {
     console.log("User connected");
+    ws.send( " User connected");
+
     console.log(req.headers.user_id);
     var userID = req.headers.user_id //get userid from URL ip:6060/userid
     webSockets[userID] = ws //add new user to the connection list
