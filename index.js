@@ -5,7 +5,7 @@ const WebSocket = require("ws");
 const appRoutes = require('./routes/index');
 const db = require('./config/database');
 const app = express();
-const server = http.createServer(app); 
+const server = http.createServer(app);
 
 
 
@@ -41,7 +41,7 @@ wss.on("connection", (ws, req) => {
             // if (data.auth == "chatapphdfgjd34534hjdfk") {
             // if (data.cmd == 'send') {
             console.log("data.remoteId", data.remoteId);
-                        var boardws = webSockets[data.remoteId] //check if there is reciever connection
+            var boardws = webSockets[data.remoteId] //check if there is reciever connection
             if (boardws) {
                 boardws.send(datastring); //send message to reciever
                 ws.send("success");
@@ -62,7 +62,7 @@ wss.on("connection", (ws, req) => {
                 //         console.log('Error sending message:', error);
                 //     });
                 console.log("No reciever user found.");
-                ws.send(data.cmd + ":error");
+                ws.send(data.cmd +  " No reciever user found:error");
             }
             // } else {
             //   console.log("No send command");
