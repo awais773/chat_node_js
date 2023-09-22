@@ -27,13 +27,10 @@ admin.initializeApp({
 
 
 wss.on("connection", (ws, req) => {
-    console.log("User connected");
+    console.log("User connected")
 
-    
-    ws.send( " User connected"+ req.params.user_id);
-
-    console.log(req.params.user_id);
-    var userID = req.params.user_id //get userid from URL ip:6060/userid
+    console.log(req.headers.user_id);
+    var userID = req.headers.user_id //get userid from URL ip:6060/userid
     webSockets[userID] = ws //add new user to the connection list
     ws.on('message', message => { //if there is any message
         var datastring = message.toString();
@@ -83,7 +80,7 @@ wss.on("connection", (ws, req) => {
     })
     ws.on("close", () => {
         console.log("User disconnected");
-        ws.send( " User connected"+ req.params.user_id);
+        ws.send( " User connected"+ req.headers.user_id);
 
         // users.delete(userId);
     });
