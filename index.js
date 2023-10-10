@@ -25,6 +25,7 @@ admin.initializeApp({
     databaseURL: 'https://ab-chat-ca7a7.firebaseio.com'
 });
 
+const messaging = admin.messaging();    
 
 wss.on("connection", (ws, req) => {
     console.log("User connected");
@@ -46,21 +47,21 @@ wss.on("connection", (ws, req) => {
                 boardws.send(datastring); //send message to reciever
                 ws.send("success");
             } else {
-                //   const message = {
-                //     notification: {
-                //       title: 'Test notification',
-                //       body: datastring
-                //     },
-                //     token: 'dCbH4pNNTiOFcH10G0_emA:APA91bEETF9Kq7nKX--2ClYuSRynjr9cAUr0fUeu5oEgQ10BTITL7qaKaAIrQa8E4h9IweureTsfobIla8QxAUgg7JWsinq_Okc-5DdGsCvfALtoDCLMqaxWzGb9jAh0o0QotfMU3-LI'
-                //   };
-                //   // Send the message to the device with the given registration token
-                //   messaging.send(message)
-                //     .then((response) => {
-                //       console.log('Successfully sent message:', response);
-                //     })
-                //     .catch((error) => {
-                //       console.log('Error sending message:', error);
-                //     });
+                const message = {
+                    notification: {
+                        title: 'Test notification',
+                        body: datastring
+                    },
+                    token: 'efI3fU_VQUO7R9lQ6-8hsV:APA91bFQtjWuBUqHU07aY_7v8RkneeQvmF6XA6hOXD2war0z9V025vkgevAfm-bo85488kKQ3zxQECmPyMjZaP3oyBBspQsXfDvV5YaXHEhFRWckh6vKpYnboAhWl0R64io4hJ9M8t2-'
+                };
+                // Send the message to the device with the given registration token
+                messaging.send(message)
+                    .then((response) => {
+                        console.log('Successfully sent message:', response);
+                    })
+                    .catch((error) => {
+                        console.log('Error sending message:', error);
+                    });
                 console.log("No reciever user found.");
                 ws.send(data.cmd + ":No reciever user found");
             }
