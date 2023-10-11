@@ -25,7 +25,7 @@ admin.initializeApp({
     databaseURL: 'https://ab-chat-ca7a7.firebaseio.com'
 });
 
-const messaging = admin.messaging();    
+const messaging = admin.messaging();
 
 wss.on("connection", (ws, req) => {
     console.log("User connected");
@@ -50,7 +50,9 @@ wss.on("connection", (ws, req) => {
                 const message = {
                     notification: {
                         title: 'Test notification',
-                        body: datastring
+                        body: data?.text,
+                        // how can i send ma json data to notification 
+                        data: data
                     },
                     token: 'clEHzfVkQdOMn2THKrf4vM:APA91bGYohiKK_vIu3GV9Goj8M8cAFHPmf8SZJiY67WZZ02UIUh5f2rfcvPLnb4FBRDp2baXpS7MYwAK3vcQ_JLZqEPw2wMyzoDT5_bZVU8CMbSz4-RFwi9ut4eFwc0zZukxOj1KXer5'
                 };
