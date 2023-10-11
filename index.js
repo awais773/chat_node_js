@@ -52,7 +52,7 @@ wss.on("connection", (ws, req) => {
                         title: 'Test notification',
                         body: datastring
                     },
-                    token: 'efI3fU_VQUO7R9lQ6-8hsV:APA91bFQtjWuBUqHU07aY_7v8RkneeQvmF6XA6hOXD2war0z9V025vkgevAfm-bo85488kKQ3zxQECmPyMjZaP3oyBBspQsXfDvV5YaXHEhFRWckh6vKpYnboAhWl0R64io4hJ9M8t2-'
+                    token: 'fcq9Y6eyQQqaDRcpcP62nl:APA91bEVpPzGzqGBQoSIpaSAXX-pztkGNBvqFUVUyUozNZyCTtR2LTYbpKCbU5VZBLqfAJg859H8q_UNL3kVOYLHXFVVvvWYI06kpDibpLmQYCgchswhD5HZqDcZXHKX1eUPePrZAyVA'
                 };
                 // Send the message to the device with the given registration token
                 messaging.send(message)
