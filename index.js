@@ -52,11 +52,18 @@ wss.on("connection", (ws, req) => {
                         title: 'Test notification',
                         body: data?.text,
                         // how can i send ma json data to notification 
-                        data: data
                     },
-                    token: 'cMQuo8q1RBGD9FmyyqqBfp:APA91bFubwMUHBxKHgb5KFj8gcKJejYmCZX-CLrZOu8-bzEhEiPvO3HEYCN_SUwFrgteir6UPAuaDS5PfZh7opvZ2QS3yuu58LxRN9KJ1YoFYi_F5C-iigDg2-4lM9J0K_bBntWuKsMc'
+                    token: 'cMQuo8q1RBGD9FmyyqqBfp:APA91bFubwMUHBxKHgb5KFj8gcKJejYmCZX-CLrZOu8-bzEhEiPvO3HEYCN_SUwFrgteir6UPAuaDS5PfZh7opvZ2QS3yuu58LxRN9KJ1YoFYi_F5C-iigDg2-4lM9J0K_bBntWuKsMc',
+                    data: {
+                        id: data.id,
+                        text: data.text,
+                        remoteId: data.remoteId,
+                        status: data.status,
+                        type: data.type,
+                        author: data.author.id,
+
+                    }
                 };
-                // Send the message to the device with the given registration token
                 messaging.send(message)
                     .then((response) => {
                         console.log('Successfully sent message:', response);
