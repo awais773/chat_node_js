@@ -61,6 +61,8 @@ wss.on("connection", (ws, req) => {
                         status: data.status,
                         type: data.type,
                         author: data.author.id,
+                        channel_id : "my_channel_id"
+
 
                     }
                 };
