@@ -54,7 +54,7 @@ wss.on("connection", (ws, req) => {
                         // how can i send ma json data to notification 
                         data: data
                     },
-                    token: 'clEHzfVkQdOMn2THKrf4vM:APA91bGYohiKK_vIu3GV9Goj8M8cAFHPmf8SZJiY67WZZ02UIUh5f2rfcvPLnb4FBRDp2baXpS7MYwAK3vcQ_JLZqEPw2wMyzoDT5_bZVU8CMbSz4-RFwi9ut4eFwc0zZukxOj1KXer5'
+                    token: 'cMQuo8q1RBGD9FmyyqqBfp:APA91bFubwMUHBxKHgb5KFj8gcKJejYmCZX-CLrZOu8-bzEhEiPvO3HEYCN_SUwFrgteir6UPAuaDS5PfZh7opvZ2QS3yuu58LxRN9KJ1YoFYi_F5C-iigDg2-4lM9J0K_bBntWuKsMc'
                 };
                 // Send the message to the device with the given registration token
                 messaging.send(message)
