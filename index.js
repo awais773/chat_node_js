@@ -59,7 +59,7 @@ wss.on("connection", (ws, req) => {
                             channel_id: "my_channel_id",
                         }
                     },
-                    token: 'cUOl9Ru_TRy-QyxCWwvied:APA91bF-S8xQUhdUtHU3nrlMeje69Ug2e2pHjy3rO2yfNRJB7K9KCmceleZoqwmWml2F6bA_Wk9xAyIQbpy91z5LVppQ6r1pITlvtJGZRM5jCVsOvSoRxB6U_G8pcA9YG00IW8aVYPyk',
+                    token: 'fhP6_2yXS76J7r6pzgCEOD:APA91bH9-4XMS5JDLit1U4BTXVz0UQqd_uPFy71lsR1FsoHXB5dDBiCwbYY4jxj9JpV12pUZXrVYyHm45u9Po1tHajNt6c9sjDowVpo4g93H6ZjMbdysIHpGE5KHBjWRuywVMmwUtH4E',
                     data: {
                         id: data.id,
                         text: data.text,
