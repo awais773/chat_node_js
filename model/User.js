@@ -56,6 +56,10 @@ const User = sequelize.define('users', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  deviceToken: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   status: {
     type: DataTypes.STRING,
     allowNull: true

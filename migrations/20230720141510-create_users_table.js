@@ -54,6 +54,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
+      deviceToken: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       status: {
         type: Sequelize.STRING,
         allowNull: true
