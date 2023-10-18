@@ -8,19 +8,27 @@ exports.createUser = async (body) => {
     return data;
   } catch (error) {
     const errors = error.errors[0].message;
-     throw new Error(errors);
+    throw new Error(errors);
   }
 };
 
 exports.login = async (body) => {
   try {
-    const { phone, fireBaseId } = body;
+    const { phone, fireBaseId, deviceToken } = body;
     const user = await User.findOne({
       where: { phone: phone, fireBaseId: fireBaseId },
     });
     if (!user) {
       throw new Error("User not found");
     }
+    if (deviceToken) {
+      //update my deviceToken in database
+      user.deviceToken = deviceToken;
+      await user.save();
+
+    }
+
+
     // const isPasswordValid = await bcrypt.compare(password, user.password);
 
     // if (!isPasswordValid) {

@@ -17,6 +17,7 @@ const users = new Map();
 var webSockets = {}
 const admin = require('firebase-admin');
 const serviceAccount = require('./ab-chat-ca7a7-firebase-adminsdk-g0sp7-c3408c6a1d.json');
+const User = require('./model/User');
 
 
 
@@ -32,7 +33,7 @@ wss.on("connection", (ws, req) => {
     console.log(req.headers.user);
     var userID = req.headers.user //get userid from URL ip:6060/userid
     webSockets[userID] = ws //add new user to the connection list
-    ws.on('message', message => { //if there is any message
+    ws.on('message', async message => { //if there is any message
         var datastring = message.toString();
         console.log(datastring);
 
@@ -47,6 +48,7 @@ wss.on("connection", (ws, req) => {
                 boardws.send(datastring); //send message to reciever
                 ws.send("success");
             } else {
+                const user = await User.findByPk(data.remoteId);
                 const message = {
                     notification: {
                         title: 'Test notification',
@@ -59,7 +61,7 @@ wss.on("connection", (ws, req) => {
                             channel_id: "my_channel_id",
                         }
                     },
-                    token: 'fhP6_2yXS76J7r6pzgCEOD:APA91bH9-4XMS5JDLit1U4BTXVz0UQqd_uPFy71lsR1FsoHXB5dDBiCwbYY4jxj9JpV12pUZXrVYyHm45u9Po1tHajNt6c9sjDowVpo4g93H6ZjMbdysIHpGE5KHBjWRuywVMmwUtH4E',
+                    token: user.deviceToken,
                     data: {
                         id: data.id,
                         text: data.text,
@@ -79,7 +81,7 @@ wss.on("connection", (ws, req) => {
                         console.log('Error sending message:', error);
                     });
                 console.log("No reciever user found.");
-                ws.send(data.cmd + ":No reciever user found");
+                ws.send("No reciever user found");
             }
             // } else {
             //   console.log("No send command");
