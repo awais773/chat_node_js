@@ -27,11 +27,14 @@ admin.initializeApp({
 });
 
 const messaging = admin.messaging();
+const url = require('url');
 
 wss.on("connection", (ws, req) => {
-    console.log("User connected");
-    console.log(req.headers.user);
-    var userID = req.headers.user //get userid from URL ip:6060/userid
+    const reqUrl = url.parse(req.url, true);
+    const userID = reqUrl.query.userID; // Assuming the URL is in the format "/userid"
+    // webSockets[userID] = ws; 
+
+    // var userID = req.headers.user //get userid from URL ip:6060/userid
     webSockets[userID] = ws //add new user to the connection list
     ws.on('message', async message => { //if there is any message
         var datastring = message.toString();
@@ -48,10 +51,11 @@ wss.on("connection", (ws, req) => {
                 boardws.send(datastring); //send message to reciever
                 ws.send("success");
             } else {
-                const user = await User.findByPk(data.remoteId);
+                const reciever = await User.findByPk(data.remoteId);
+                const sender = await User.findByPk(data.author.id);
                 const message = {
                     notification: {
-                        title: 'Test notification',
+                        title: sender.name,
                         body: data?.text,
                         // how can i send ma json data to notification 
                     },
@@ -61,7 +65,7 @@ wss.on("connection", (ws, req) => {
                             channel_id: "my_channel_id",
                         }
                     },
-                    token: user.deviceToken,
+                    token: reciever.deviceToken,
                     data: {
                         id: data.id,
                         text: data.text,
