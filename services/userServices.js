@@ -138,6 +138,7 @@ exports.activeUserCount = async () => {
 };
 exports.addFriend = async (body) => {
   try {
+    
     const data = await Friends.create({ ...body });
     return data;
   } catch (error) {

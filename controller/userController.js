@@ -137,8 +137,7 @@ async function activeUserCount(req, res, next) {
 async function addFreind(req, res, next) {
   try {
     const { body } = req;
-    const { userId } = req;
-    const response = await userService.addFriend({ ...body, sender: userId });
+    const response = await userService.addFriend({ ...body });
     
     res.status(200).json({
       success: true,

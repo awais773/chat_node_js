@@ -13,7 +13,7 @@ router.get('/get/:Id', authentications, userController.userFind);
 router.put('/update/:userId', authentications, userController.update);
 router.delete('/delete', authentications, userController.Delete);
 router.get('/dashboard', userController.activeUserCount);
-router.post('/addFriend', authentications, userController.addFreind);
+router.post('/addFriend', userController.addFreind);
 
 
 module.exports = router;
