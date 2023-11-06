@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
+const Friends = require("../model/Friends");
 
 exports.createUser = async (body) => {
   try {
@@ -130,7 +131,17 @@ exports.activeUserCount = async () => {
       report,
       totalUsers
     };
+
   } catch (error) {
     throw new Error('Error counting active users: ' + error.message);
+  }
+};
+exports.addFriend = async (body) => {
+  try {
+    const data = await Friends.create({ ...body });
+    return data;
+  } catch (error) {
+    // const errors = error.errors.map((item) => ({ message: item.message }));
+    return error.message
   }
 };
