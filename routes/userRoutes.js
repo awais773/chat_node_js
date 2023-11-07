@@ -15,5 +15,4 @@ router.delete('/delete', authentications, userController.Delete);
 router.get('/dashboard', userController.activeUserCount);
 router.post('/addFriend', userController.addFreind);
 
-
 module.exports = router;

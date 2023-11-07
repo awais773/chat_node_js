@@ -22,6 +22,37 @@ exports.report = async (body) => {
     return error.message
   }
 };
+exports.reported = async () => {
+  try {
+    // const data = await ReportPosts.create({ ...body });
+     // get repoted post data with users and posts
+    const data = await ReportPosts.findAll({
+    
+      include: [
+        {
+          model: User,
+          attributes: ["name", "image"]
+        },
+
+        {
+          model: Community,
+          attributes: ["title"],
+          include: [
+            {
+              model: User,
+              attributes: ["name", "image"]
+            }
+          ]
+        }
+      ]
+    })
+    return data;
+  } catch (error) {
+    // const errors = error.errors.map((item) => ({ message: item.message }));
+    return error.message
+  }
+
+}
 
 
 exports.get = async (page, limit) => {

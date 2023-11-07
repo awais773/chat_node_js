@@ -33,7 +33,14 @@ async function report(req, res, next) {
     });
   }
 }
-
+async function getReportedPosts(req, res) {
+  try {
+    const community = await CommunityServices.reported();
+    res.json({ success: true, data: community });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+}
 
 async function update(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
@@ -106,5 +113,6 @@ module.exports = {
   update,
   find,
   communityDelete,
-  report
+  report,
+  getReportedPosts
 }
