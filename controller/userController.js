@@ -1,5 +1,5 @@
 const userService = require("../services/userServices");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const { generateToken, revokeToken } = require("../utils/helper");
 
 async function signup(req, res, next) {
@@ -15,7 +15,6 @@ async function signup(req, res, next) {
       data: user,
       jwt: user.id && token,
     });
-
   } catch (error) {
     res.status(400).json({
       success: false,
@@ -103,11 +102,11 @@ async function Delete(req, res, next) {
     const { userId } = req;
     const result = await userService.Delete(userId);
     if (result) {
-      revokeToken(req.headers.authorization)
-      debugger
+      revokeToken(req.headers.authorization);
+      debugger;
       res.status(200).json({
         success: true,
-        message: 'User deleted successfully'
+        message: "User deleted successfully",
       });
     } else {
       res.status(404).json({
@@ -138,10 +137,10 @@ async function addFreind(req, res, next) {
   try {
     const { body } = req;
     const response = await userService.addFriend({ ...body });
-    
+
     res.status(200).json({
       success: true,
-      data: response
+      data: response,
     });
   } catch (error) {
     res.json({
@@ -149,7 +148,127 @@ async function addFreind(req, res, next) {
     });
   }
 }
+async function isFriend(req, res, next) {
+  try {
+    const { body } = req;
 
+    const response = await userService.checkIfFriends({ ...body });
+
+    if (response) {
+      res.status(200).json({
+        success: true,
+        message: "Users are friends.",
+        data: response,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "Users are not friends.",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+async function addReportedUser (req,res) {
+try {
+  const { body } = req;
+  const response = await userService.addReportedUser({ ...body });
+  res.status(200).json({
+    success: true,
+    data: response,
+  });
+  
+} catch (error) {
+  res.json({
+    message: error.message,
+  });
+}
+}
+async function isReportedUser(req, res, next) {
+  try {
+    const { body } = req;
+
+    const response = await userService.isReportedUser({ ...body });
+
+    if (response) {
+      res.status(200).json({
+        success: true,
+        message: "User are reported",
+        data: response,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "User are not reported",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+async function addBlockedUser (req,res) {
+  try {
+    const { body } = req;
+    const response = await userService.addBlockedUser({ ...body });
+    res.status(200).json({
+      success: true,
+      data: response,
+    });
+    
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+  }
+  async function isBlockedUser(req, res, next) {
+    try {
+      const { body } = req;
+  
+      const response = await userService.isBlockedUser({ ...body });
+  
+      if (response) {
+        res.status(200).json({
+          success: true,
+          message: "User are blocked",
+          data: response,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: "User are not blocked",
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }
+
+  async function reportedAllUsers(req, res, next) {
+    try {
+      const reportedAllUsers = await userService.reportedAllUsers();
+      res.status(200).json({
+        success: true,
+        reportedAllUsers,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        error: error.message,
+      });
+    }
+  }
 module.exports = {
   signup,
   userlists,
@@ -158,5 +277,11 @@ module.exports = {
   userFind,
   Delete,
   activeUserCount,
-  addFreind
+  addFreind,
+  isFriend,
+  addReportedUser,
+  isReportedUser,
+  isBlockedUser,
+  addBlockedUser,
+  reportedAllUsers
 };

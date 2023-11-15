@@ -2,6 +2,8 @@ const { where } = require("sequelize");
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const Friends = require("../model/Friends");
+const reportUser = require("../model/reportUser");
+const blockUsers = require("../model/blockUsers");
 
 exports.createUser = async (body) => {
   try {
@@ -26,9 +28,7 @@ exports.login = async (body) => {
       //update my deviceToken in database
       user.deviceToken = deviceToken;
       await user.save();
-
     }
-
 
     // const isPasswordValid = await bcrypt.compare(password, user.password);
 
@@ -40,7 +40,7 @@ exports.login = async (body) => {
 
     return user;
   } catch (error) {
-    throw new Error('Login failed: ' + error.message);
+    throw new Error("Login failed: " + error.message);
   }
 };
 
@@ -48,7 +48,7 @@ exports.update = async (userId, updates) => {
   try {
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     Object.assign(user, updates);
     const userWithoutPassword = { ...user.toJSON() };
@@ -56,7 +56,7 @@ exports.update = async (userId, updates) => {
     await user.save();
     return userWithoutPassword;
   } catch (error) {
-    throw new Error('Error updating user: ' + error.message);
+    throw new Error("Error updating user: " + error.message);
   }
 };
 
@@ -64,11 +64,11 @@ exports.userFind = async (Id) => {
   try {
     const user = await User.findByPk(Id);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     return user;
   } catch (error) {
-    throw new Error('Error finding user: ' + error.message);
+    throw new Error("Error finding user: " + error.message);
   }
 };
 
@@ -81,7 +81,7 @@ exports.userlists = async (page, limit) => {
     });
     return users;
   } catch (error) {
-    throw new Error('Error fetching users: ' + error.message);
+    throw new Error("Error fetching users: " + error.message);
   }
 };
 
@@ -94,7 +94,7 @@ exports.Delete = async (id) => {
     });
     return result;
   } catch (error) {
-    throw new Error('Error deleting user: ' + error.message);
+    throw new Error("Error deleting user: " + error.message);
   }
 };
 
@@ -102,20 +102,20 @@ exports.activeUserCount = async () => {
   try {
     const activeUsers = await User.findAll({
       where: {
-        status: 'active'
-      }
+        status: "active",
+      },
     });
 
     const deactiveUsers = await User.findAll({
       where: {
-        status: 'deactive'
-      }
+        status: "deactive",
+      },
     });
 
     const reportUsers = await User.findAll({
       where: {
-        status: 'report'
-      }
+        status: "report",
+      },
     });
 
     const Users = await User.findAll();
@@ -129,20 +129,149 @@ exports.activeUserCount = async () => {
       active,
       deactive,
       report,
-      totalUsers
+      totalUsers,
     };
-
   } catch (error) {
-    throw new Error('Error counting active users: ' + error.message);
+    throw new Error("Error counting active users: " + error.message);
   }
 };
 exports.addFriend = async (body) => {
   try {
-    
     const data = await Friends.create({ ...body });
     return data;
   } catch (error) {
     // const errors = error.errors.map((item) => ({ message: item.message }));
-    return error.message
+    return error.message;
+  }
+};
+
+exports.checkIfFriends = async (body) => {
+  try {
+    const friendship = await Friends.findOne({
+      where: {
+        userId: body.userId,
+        reciver: body.receiverId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name", "image"],
+          as: "UserSender",
+        },
+        {
+          model: User,
+          attributes: ["id", "name", "image"],
+          as: "UserReceiver",
+        },
+      ],
+    });
+
+    return friendship
+      ? {
+          userData: friendship.UserSender,
+          receiverData: friendship.UserReceiver,
+        }
+      : false;
+  } catch (error) {
+    throw new Error("Error checking friendship: " + error.message);
+  }
+};
+exports.addReportedUser = async (body) => {
+  try {
+    const data = await reportUser.create({ ...body });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};
+exports.isReportedUser = async (body) => {
+  try {
+    const reportedUser = await reportUser.findOne({
+      where: {
+        userId: body.userId,
+        reciver: body.receiverId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name", "phone"],
+          as: "UserSender",
+        },
+        {
+          model: User,
+          attributes: ["id", "name", "phone"],
+          as: "UserReceiver",
+        },
+      ],
+    });
+
+    return reportedUser
+      ? {
+          reportedBy: reportedUser.UserSender,
+          reportUser: reportedUser.UserReceiver,
+        }
+      : false;
+  } catch (error) {
+    throw new Error("Error checking reportedUser: " + error.message);
+  }
+};
+exports.addBlockedUser = async (body) => {
+  try {
+    const data = await blockUsers.create({ ...body });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};
+exports.isBlockedUser = async (body) => {
+  try {
+    const blockUser = await blockUsers.findOne({
+      where: {
+        userId: body.userId,
+        reciver: body.receiverId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name", "phone"],
+          as: "UserSender",
+        },
+        {
+          model: User,
+          attributes: ["id", "name", "phone"],
+          as: "UserReceiver",
+        },
+      ],
+    });
+
+    return blockUser
+      ? {
+          BlockedBy: blockUser.UserSender,
+          BlockedUser: blockUser.UserReceiver,
+        }
+      : false;
+  } catch (error) {
+    throw new Error("Error checking blockUsers: " + error.message);
+  }
+};
+exports.reportedAllUsers = async () => {
+  try {
+    const reportedAllUsers = await reportUser.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name", "phone", "status", "blockedStatus"],
+          as: "UserSender",
+        },
+        {
+          model: User,
+          attributes: ["id", "name", "phone", "status", "blockedStatus"],
+          as: "UserReceiver",
+        },
+      ],
+    });
+    return reportedAllUsers;
+  } catch (error) {
+    throw new Error("Error fetching reportUser: " + error.message);
   }
 };

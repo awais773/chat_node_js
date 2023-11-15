@@ -14,5 +14,15 @@ router.put('/update/:userId', authentications, userController.update);
 router.delete('/delete', authentications, userController.Delete);
 router.get('/dashboard', userController.activeUserCount);
 router.post('/addFriend', userController.addFreind);
+router.post('/isFriend', authentications, userController.isFriend);
+router.post('/reportUser', authentications, userController.addReportedUser);
+router.post('/isReport', authentications, userController.isReportedUser);
+router.post('/blockUser', authentications, userController.addBlockedUser);
+router.post('/isBlock', authentications, userController.isBlockedUser);
+router.get('/reportUsersAll', authentications, userController.reportedAllUsers);
+
+
+
+
 
 module.exports = router;
