@@ -1,9 +1,9 @@
 const { where } = require("sequelize");
-const Invoice = require("../model/invoices");
+const defineAccount = require("../model/DefineAccount");
 
 exports.create = async (body) => {
   try {
-    const data = await Invoice.create({ ...body });
+    const data = await defineAccount.create({ ...body });
     return data;
   } catch (error) {
     // const errors = error.errors.map((item) => ({ message: item.message }));
@@ -13,16 +13,16 @@ exports.create = async (body) => {
 
 
 exports.get = async () => {
-  const data = await Invoice.findAll();
+  const data = await defineAccount.findAll();
   return data;
 };
 
 
 exports.find = async (Id,) => {
   try {
-    const data = await Invoice.findByPk(Id);
+    const data = await defineAccount.findByPk(Id);
     if (!data) {
-      throw new Error('Invoice not found');
+      throw new Error('Account not found');
     }
     return data;    
   } catch (error) {
@@ -33,9 +33,9 @@ exports.find = async (Id,) => {
 
 exports.update = async (Id, updates) => {
   try {
-    const data = await Invoice.findByPk(Id);
+    const data = await defineAccount.findByPk(Id);
     if (!data) {
-      throw new Error('Invoice not found');
+      throw new Error('Account not found');
     }
     Object.assign(data, updates);
     await data.save();
@@ -49,7 +49,7 @@ exports.update = async (Id, updates) => {
 
 
 exports.Delete = async (id,) => {
-  const result = await Invoice.destroy({
+  const result = await defineAccount.destroy({
     where: {
       id,
     },

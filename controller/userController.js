@@ -103,7 +103,6 @@ async function Delete(req, res, next) {
     const result = await userService.Delete(userId);
     if (result) {
       revokeToken(req.headers.authorization);
-      debugger;
       res.status(200).json({
         success: true,
         message: "User deleted successfully",
@@ -135,8 +134,8 @@ async function activeUserCount(req, res, next) {
 }
 async function addFreind(req, res, next) {
   try {
-    const { body } = req;
-    const response = await userService.addFriend({ ...body });
+    const { body, userId } = req;
+    const response = await userService.addFriend({ ...body, userId: userId });
 
     res.status(200).json({
       success: true,
@@ -150,9 +149,12 @@ async function addFreind(req, res, next) {
 }
 async function isFriend(req, res, next) {
   try {
-    const { body } = req;
+    const { body, userId } = req;
 
-    const response = await userService.checkIfFriends({ ...body });
+    const response = await userService.checkIfFriends({
+      ...body,
+      userId: userId,
+    });
 
     if (response) {
       res.status(200).json({
@@ -174,26 +176,30 @@ async function isFriend(req, res, next) {
   }
 }
 
-async function addReportedUser (req,res) {
-try {
-  const { body } = req;
-  const response = await userService.addReportedUser({ ...body });
-  res.status(200).json({
-    success: true,
-    data: response,
-  });
-  
-} catch (error) {
-  res.json({
-    message: error.message,
-  });
-}
+async function addReportedUser(req, res) {
+  try {
+    const { body, userId } = req;
+    const response = await userService.addReportedUser({
+      ...body,
+      userId: userId,
+    });
+    res.status(200).json({
+      success: true,
+      data: response,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
 }
 async function isReportedUser(req, res, next) {
   try {
-    const { body } = req;
-
-    const response = await userService.isReportedUser({ ...body });
+    const { body, userId } = req;
+    const response = await userService.isReportedUser({
+      ...body,
+      userId: userId,
+    });
 
     if (response) {
       res.status(200).json({
@@ -214,61 +220,99 @@ async function isReportedUser(req, res, next) {
     });
   }
 }
-async function addBlockedUser (req,res) {
+async function addBlockedUser(req, res) {
   try {
-    const { body } = req;
-    const response = await userService.addBlockedUser({ ...body });
+    const { body, userId } = req;
+    const response = await userService.addBlockedUser({
+      ...body,
+      userId: userId,
+    });
     res.status(200).json({
       success: true,
       data: response,
     });
-    
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
-  }
-  async function isBlockedUser(req, res, next) {
-    try {
-      const { body } = req;
-  
-      const response = await userService.isBlockedUser({ ...body });
-  
-      if (response) {
-        res.status(200).json({
-          success: true,
-          message: "User are blocked",
-          data: response,
-        });
-      } else {
-        res.status(200).json({
-          success: true,
-          message: "User are not blocked",
-        });
-      }
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        error: error.message,
-      });
-    }
-  }
+}
+async function isBlockedUser(req, res, next) {
+  try {
+    const { body, userId } = req;
 
-  async function reportedAllUsers(req, res, next) {
-    try {
-      const reportedAllUsers = await userService.reportedAllUsers();
+    const response = await userService.isBlockedUser({
+      ...body,
+      userId: userId,
+    });
+
+    if (response) {
       res.status(200).json({
         success: true,
-        reportedAllUsers,
+        message: "User are blocked",
+        data: response,
       });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        error: error.message,
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "User are not blocked",
       });
     }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
+}
+
+async function reportedAllUsers(req, res, next) {
+  try {
+    const reportedAllUsers = await userService.reportedAllUsers();
+    res.status(200).json({
+      success: true,
+      reportedAllUsers,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+async function getAllFriends(req, res, next) {
+  try {
+    const { userId } = req;
+    const getAllFriends = await userService.getAllFriends(userId);
+    res.status(200).json({
+      success: true,
+      getAllFriends,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+async function unfriend(req, res, next) {
+  try {
+    const { body, userId } = req;
+
+
+    const response = await userService.unfriend({ ...body, userId: userId });
+
+    res.status(200).json({
+      success: true,
+      data: response,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+}
+
 module.exports = {
   signup,
   userlists,
@@ -283,5 +327,7 @@ module.exports = {
   isReportedUser,
   isBlockedUser,
   addBlockedUser,
-  reportedAllUsers
+  reportedAllUsers,
+  getAllFriends,
+  unfriend,
 };

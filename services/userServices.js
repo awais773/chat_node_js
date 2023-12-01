@@ -275,3 +275,43 @@ exports.reportedAllUsers = async () => {
     throw new Error("Error fetching reportUser: " + error.message);
   }
 };
+exports.getAllFriends = async (userId) => {
+  try {
+    const getAllFriends = await Friends.findAll({
+      where: {
+        userId: userId,
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "name", "phone", "status", "blockedStatus"],
+          as: "UserReceiver",
+        },
+      ],
+    });
+    return getAllFriends;
+  } catch (error) {
+    throw new Error("Error fetching getAllFriends: " + error.message);
+  }
+};
+
+exports.unfriend = async (body) => {
+  try {
+    const result = await Friends.destroy({
+      where: {
+        userId: body.userId,
+        reciver: body.receiverId,
+      },
+    });
+
+    if (result === 1) {
+      return 'Unfriended successfully';
+    } else {
+      throw new Error('Unfriend operation failed. User may not be a friend.');
+    }
+  } catch (error) {
+    return error.message;
+  }
+};
+
+

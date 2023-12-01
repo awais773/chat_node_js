@@ -105,7 +105,20 @@ async function communityDelete(req, res, next) {
     next(error);
   }
 }
-
+async function reportedAllPosts(req, res, next) {
+  try {
+    const reportedAllPosts = await CommunityServices.reportedAllPosts();
+    res.status(200).json({
+      success: true,
+      reportedAllPosts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
 
 module.exports = {
   create,
@@ -114,5 +127,6 @@ module.exports = {
   find,
   communityDelete,
   report,
-  getReportedPosts
+  getReportedPosts,
+  reportedAllPosts
 }

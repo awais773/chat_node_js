@@ -112,4 +112,24 @@ exports.communityDelete = async (id,) => {
   return result;
 }
 
-
+exports.reportedAllPosts = async () => {
+  try {
+    const reportedAllPosts = await ReportPosts.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["name", "phone"],
+          as: "reportUser",
+        },
+        {
+          model: Community,
+          attributes: ["title","name", "details","contact_number", "status", "image"],
+          as: "Commmunity",
+        },
+      ],
+    });
+    return reportedAllPosts;
+  } catch (error) {
+    throw new Error("Error fetching reportUser: " + error.message);
+  }
+};

@@ -1,12 +1,12 @@
-const InvoiceListServices = require("../services/InvoiceListServices");
+const priceListServices = require("../services/PriceListServices");
 
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const Invoice = await InvoiceListServices.create({ ...body });
+    const priceList = await priceListServices.create({ ...body });
     res.status(200).json({
       success: true,
-      data: Invoice
+      data: priceList
     });
   } catch (error) {
     res.json({
@@ -21,8 +21,8 @@ async function update (req, res)  {
   const Id = req.params.Id; // Get the user ID from the route parameter
   const updates = req.body; // The updates will be sent in the request body as JSON
   try {
-    const Invoice = await InvoiceListServices.update(Id, updates);
-    res.json({ success: true, data: Invoice });
+    const priceList = await priceListServices.update(Id, updates);
+    res.json({ success: true, data: priceList });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
@@ -32,8 +32,8 @@ async function update (req, res)  {
 async function find (req, res)  {
   const Id = req.params.Id; // Get the user ID from the route parameter
   try {
-    const Invoice = await InvoiceListServices.find(Id);
-    res.json({ success: true, data: Invoice });
+    const priceList = await priceListServices.find(Id);
+    res.json({ success: true, data: priceList });
   } catch (error) {
     res.json({
       success: false,
@@ -45,10 +45,10 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const Invoice = await InvoiceListServices.get();
+    const priceList = await priceListServices.get();
     res.status(200).json({
       success: true,
-      data: Invoice
+      data: priceList
     });
   } catch (error) {
     res.json({
@@ -62,7 +62,7 @@ async function get(req, res, next) {
 async function Delete(req, res, next) {
   const { id } = req.params;
   try {
-    const result = await InvoiceListServices.Delete(id);
+    const result = await priceListServices.Delete(id);
     if (result) {
       res.status(200).json({
         success: true,
@@ -70,7 +70,7 @@ async function Delete(req, res, next) {
       });
     } else {
       res.json({
-        message: "Invoice not found",
+        message: "price not found",
       });
     }
   } catch (error) {

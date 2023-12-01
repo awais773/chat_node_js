@@ -24,6 +24,15 @@ const PackingList = require("./PackingListRoutes")
 
 const invoiceRoutes = require("./invoiceRoutes")
 
+const Legder = require("./LegderRoutes")
+
+const priceList = require("./PriceListRoutes")
+
+const cardBook = require("./CardBookRoutes")
+
+const defineAccount = require("./DefineAccountRoutes")
+
+const productVerification = require("./ProductVerificationRoutes")
 // import router
 const router = express.Router();
 
@@ -58,6 +67,14 @@ router.use(`/community`, CommunityRoutes);
 router.use(`/CompanyProfile`, CompanyProfile);
 router.use(`/PackingList`, PackingList);
 router.use(`/DefineItem`, DefineItem);
+router.use(`/ledger`, Legder);
+router.use(`/priceList`, priceList);
+router.use(`/cardBook`, cardBook);
+router.use(`/defineAccount`, defineAccount);
+router.use(`/productVerification`, productVerification);
+
+
+
 
 
 router.use(`/invoice`, invoiceRoutes);

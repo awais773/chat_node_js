@@ -43,9 +43,11 @@ const ReportPosts = sequelize.define('reportPosts', {
 
 ReportPosts.belongsTo(User, {
   foreignKey: 'reportedBy',
+  as: 'reportUser'
 });
 ReportPosts.belongsTo(Community, {
   foreignKey: 'communityID',
+  as: 'Commmunity'
 });
 
 
