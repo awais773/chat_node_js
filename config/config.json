@@ -2,21 +2,21 @@
   "development": {
     "username": "chand",
     "password": "Chand0800",
-    "database": "abChat",
+    "database": "abchat",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "chand",
     "password": "Chand0800",
-    "database": "abChat",
+    "database": "abchat",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "chand",
     "password": "Chand0800",
-    "database": "abChat",
+    "database": "abchat",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
