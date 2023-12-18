@@ -63,7 +63,7 @@ module.exports = {
         allowNull: true
       },
       blockedStatus: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true
       },
       createdAt: {
