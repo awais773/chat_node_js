@@ -57,4 +57,9 @@ exports.Delete = async (id,) => {
   return result;
 }
 
- 
+exports.getByUserId = async (userId) => {
+  const data = await LedgerModel.findAll({
+    where: { userId },
+  });
+  return data;
+};
