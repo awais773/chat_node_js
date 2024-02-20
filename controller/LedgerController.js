@@ -4,7 +4,6 @@ async function create(req, res, next) {
   try {
     const { body } = req;
     const { userId } = req;
-
     const ledgerResponse = await LedgerServices.create({
       ...body,
       user_id: userId,
@@ -80,6 +79,7 @@ async function Delete(req, res, next) {
 async function getByUserId(req, res, next) {
   try {
     const { userId } = req.body;
+    const { ledgerUserId } = req.body;
     if (!userId) {
       return res.status(400).json({
         success: false,
@@ -87,7 +87,7 @@ async function getByUserId(req, res, next) {
       });
     }
 
-    const ledgerResponse = await LedgerServices.getByUserId(userId);
+    const ledgerResponse = await LedgerServices.getByUserId(userId,ledgerUserId);
     res.status(200).json({
       success: true,
       data: ledgerResponse,
@@ -99,6 +99,7 @@ async function getByUserId(req, res, next) {
     });
   }
 }
+
 module.exports = {
   create,
   get,
