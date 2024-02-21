@@ -18,6 +18,10 @@ const Invoice = sequelize.define("invoices_Lists", {
     type: DataTypes.ARRAY(DataTypes.JSON), 
     allowNull: true,
   },
+  invoice_user_id: {
+    type: DataTypes.STRING, 
+    allowNull: false,
+  },
   
 });
 

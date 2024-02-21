@@ -10,6 +10,8 @@ router.get('/get', authentications, InvoiceController.get);
 router.get('/get/:Id', authentications, InvoiceController.find);
 router.put('/update/:Id', authentications, InvoiceController.update);
 router.delete('/delete/:id', authentications, InvoiceController.Delete);
+router.post('/getByUserId', authentications, InvoiceController.getByUserId);
+
 
 
 module.exports = router;

@@ -1,9 +1,13 @@
 const InvoiceListServices = require("../services/InvoiceListServices");
+const jwtUtils = require('../utils/helper'); // Adjust the path accordingly
 
 async function create(req, res, next) {
   try {
+    const invoiceUserId = jwtUtils.verifyToken(req.header('authorization'))?.userId;
     const { body } = req;
-    const Invoice = await InvoiceListServices.create({ ...body });
+    const Invoice = await InvoiceListServices.create({ ...body,
+      invoice_user_id: invoiceUserId,
+    });
     res.status(200).json({
       success: true,
       products: Invoice
@@ -78,6 +82,30 @@ async function Delete(req, res, next) {
   }
 }
 
+async function getByUserId(req, res, next) {
+  try {
+    const { userId } = req.body;
+    const invoiceUserId = jwtUtils.verifyToken(req.header('authorization'))?.userId;
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        error: 'userId is required in the request body.',
+      });
+    }
+
+    const Invoice = await InvoiceListServices.getByUserId(userId,invoiceUserId);
+    res.status(200).json({
+      success: true,
+      data: Invoice,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 
 module.exports = {
    create,
@@ -85,4 +113,5 @@ module.exports = {
     update,
     find,
     Delete,
+    getByUserId,
 }
