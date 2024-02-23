@@ -12,8 +12,14 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
-  const data = await priceList.findAll();
+exports.get = async (userId) => {
+  const data = await priceList.findAll(
+    {
+      where: {
+        userId: userId, // Filter portfolios based on the provided userId
+      },
+    }
+  );
   return data;
 };
 

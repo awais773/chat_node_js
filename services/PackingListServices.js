@@ -12,8 +12,12 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
-  const data = await PackingList.findAll();
+exports.get = async (userId) => {
+  const data = await PackingList.findAll({
+    where: {
+      user_id: userId, 
+    },
+  });
   return data;
 };
 

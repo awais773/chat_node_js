@@ -47,7 +47,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const packing = await PackingListServices.get();
+    const { userId } = req;    
+    const packing = await PackingListServices.get(userId);
     res.status(200).json({
       success: true,
       data: packing

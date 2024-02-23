@@ -3,7 +3,8 @@ const priceListServices = require("../services/PriceListServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const priceList = await priceListServices.create({ ...body });
+    const { userId } = req;
+    const priceList = await priceListServices.create({ ...body, userId: userId });
     res.status(200).json({
       success: true,
       data: priceList
@@ -45,7 +46,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const priceList = await priceListServices.get();
+    const { userId } = req;    
+    const priceList = await priceListServices.get(userId);
     res.status(200).json({
       success: true,
       data: priceList

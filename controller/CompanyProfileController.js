@@ -47,7 +47,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const CompanyProfile = await CompanyProfileServices.get();
+    const { userId } = req;
+    const CompanyProfile = await CompanyProfileServices.get(userId);
     res.status(200).json({
       success: true,
       data: CompanyProfile
