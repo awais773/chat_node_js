@@ -1,5 +1,6 @@
 const { where } = require("sequelize");
 const LedgerModel = require("../model/Ledgers");
+const UserModel = require("../model/user");
 
 exports.create = async (body) => {
   try {
@@ -19,8 +20,19 @@ exports.create = async (body) => {
   }
 };
 
-exports.get = async () => {
-  const data = await LedgerModel.findAll();
+exports.get = async (userId) => {
+  const data = await LedgerModel.findAll({
+    where: {
+      ledger_user_id:userId,
+    },
+    include: [
+      {
+        model: UserModel,
+        attributes: ['name', 'phone'], // Add other attributes you want to include
+        as: 'user',
+      },
+    ],
+  });
   return data;
 };
 

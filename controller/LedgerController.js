@@ -4,9 +4,11 @@ async function create(req, res, next) {
   try {
     const { body } = req;
     const { userId } = req;
+    const { ledgerUserId } = req.body;
     const ledgerResponse = await LedgerServices.create({
       ...body,
       user_id: userId,
+      ledger_user_id: ledgerUserId,
     });
     res.status(200).json({
       success: true,
@@ -45,7 +47,8 @@ async function find(req, res) {
 
 async function get(req, res, next) {
   try {
-    const ledgerResponse = await LedgerServices.get();
+    const { userId } = req;
+    const ledgerResponse = await LedgerServices.get(userId);
     res.status(200).json({
       success: true,
       data: ledgerResponse,

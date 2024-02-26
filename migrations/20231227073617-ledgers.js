@@ -26,7 +26,7 @@ module.exports = {
         allowNull: true,
       },
       userId: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         allowNull: true,
       },
       balance: {

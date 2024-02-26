@@ -2,6 +2,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const { UUIDV4 } = require("sequelize");
+const User = require("./user");
 
 const Ledger = sequelize.define("ledgers", {
   id: {
@@ -28,7 +29,7 @@ const Ledger = sequelize.define("ledgers", {
     allowNull: true,
   },
   userId: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     allowNull: true,
   },
   ledger_user_id: {
@@ -40,6 +41,10 @@ const Ledger = sequelize.define("ledgers", {
     allowNull: false,
     defaultValue: 0,
   },
+});
+
+Ledger.belongsTo(User, {
+  foreignKey: 'userId',
 });
 
 module.exports = Ledger;
