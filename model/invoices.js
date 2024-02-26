@@ -11,7 +11,7 @@ const Invoice = sequelize.define("invoices_Lists", {
     defaultValue: UUIDV4,
   },
   userId: {
-    type: DataTypes.STRING, 
+    type: DataTypes.UUID,
     allowNull: false,
   },
   products: {
