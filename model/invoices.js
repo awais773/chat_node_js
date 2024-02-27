@@ -2,6 +2,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const { UUIDV4 } = require("sequelize");
+const User = require("./user");
 
 const Invoice = sequelize.define("invoices_Lists", {
   id: {
@@ -25,4 +26,7 @@ const Invoice = sequelize.define("invoices_Lists", {
   
 });
 
+Invoice.belongsTo(User, {
+  foreignKey: 'userId',
+});
 module.exports = Invoice;

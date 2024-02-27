@@ -1,5 +1,6 @@
 const { where } = require("sequelize");
 const Invoice = require("../model/invoices");
+const UserModel = require("../model/user");
 
 exports.create = async (body) => {
   try {
@@ -12,11 +13,21 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
-  const data = await Invoice.findAll();
+exports.get = async (userId) => {
+  const data = await Invoice.findAll({
+    where: {
+      invoice_user_id:userId,
+    },
+    include: [
+      {
+        model: UserModel,
+        attributes: ['name', 'phone'], // Add other attributes you want to include
+        as: 'user',
+      },
+    ],
+  });
   return data;
 };
-
 
 exports.find = async (Id,) => {
   try {

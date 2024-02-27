@@ -49,7 +49,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const Invoice = await InvoiceListServices.get();
+    const { userId } = req;
+    const Invoice = await InvoiceListServices.get(userId);
     res.status(200).json({
       success: true,
       products: Invoice
