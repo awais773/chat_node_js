@@ -12,8 +12,12 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
-  const data = await DefineItem.findAll();
+exports.get = async (userId) => {
+  const data = await DefineItem.findAll({
+    where: {
+      user_id: userId,
+    }
+  });
   return data;
 };
 

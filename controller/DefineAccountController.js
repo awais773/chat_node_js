@@ -3,7 +3,8 @@ const defineAccountServices = require("../services/DefineAccountServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const defineAccount = await defineAccountServices.create({ ...body });
+    const { userId } = req;
+    const defineAccount = await defineAccountServices.create({ ...body, userId: userId });
     res.status(200).json({
       success: true,
       data: defineAccount
@@ -45,7 +46,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const defineAccount = await defineAccountServices.get();
+    const { userId } = req;
+    const defineAccount = await defineAccountServices.get(userId);
     res.status(200).json({
       success: true,
       data: defineAccount

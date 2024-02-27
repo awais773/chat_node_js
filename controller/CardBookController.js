@@ -46,7 +46,8 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const cardBook = await cardBookServices.get();
+    const { userId } = req;
+    const cardBook = await cardBookServices.get(userId);
     res.status(200).json({
       success: true,
       data: cardBook

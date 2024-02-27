@@ -12,8 +12,12 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
-  const data = await defineAccount.findAll();
+exports.get = async (userId) => {
+  const data = await defineAccount.findAll({
+    where: {
+      userId: userId,
+    }
+  });
   return data;
 };
 

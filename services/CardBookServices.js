@@ -12,8 +12,12 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async () => {
-  const data = await cardBook.findAll();
+exports.get = async (userId) => {
+  const data = await cardBook.findAll({
+    where: {
+      userId: userId,
+    }
+  });
   return data;
 };
 
