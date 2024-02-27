@@ -27,6 +27,10 @@ const cardBook = sequelize.define("cardbooks", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
 });
 
 module.exports = cardBook;

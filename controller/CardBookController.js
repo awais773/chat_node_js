@@ -3,7 +3,8 @@ const cardBookServices = require("../services/CardBookServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const cardBook = await cardBookServices.create({ ...body });
+    const { userId } = req;
+    const cardBook = await cardBookServices.create({ ...body , userId: userId });
     res.status(200).json({
       success: true,
       data: cardBook
