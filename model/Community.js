@@ -95,6 +95,11 @@ const Community = sequelize.define('communities', {
     allowNull: true,
   },
 
+  country: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
 });
 
 Community.belongsTo(User, {
