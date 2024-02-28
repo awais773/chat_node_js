@@ -17,6 +17,12 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.JSON),
         allowNull: true,
       },
+
+      invoice_user_id: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+  
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
