@@ -17,6 +17,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      AccountName: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      IBAN : {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      SwiftCode: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      AccountHolderName: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

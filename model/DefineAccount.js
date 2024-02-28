@@ -19,6 +19,26 @@ const defineAccount = sequelize.define("defineAccounts", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+
+  AccountName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
+  IBAN: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
+  SwiftCode: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
+  AccountHolderName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 module.exports = defineAccount;
