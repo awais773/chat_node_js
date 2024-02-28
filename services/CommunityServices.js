@@ -133,3 +133,32 @@ exports.reportedAllPosts = async () => {
     throw new Error("Error fetching reportUser: " + error.message);
   }
 };
+
+exports.filtersCommunity = async (body) => {
+  const whereClause = {};
+
+  if (body.category) {
+    whereClause.category = body.category;
+  }
+
+  if (body.subCategory) {
+    whereClause.subCategory = body.subCategory;
+  }
+
+  if (body.country) {
+    whereClause.country = body.country;
+  }
+  if (body.title) {
+    whereClause.title = body.title;
+  }
+  if (body.tags) {
+    whereClause.tags = body.tags;
+  }
+
+  const data = await Community.findAll({
+    where: whereClause,
+  });
+
+  return data;
+};
+

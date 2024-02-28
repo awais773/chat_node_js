@@ -120,6 +120,22 @@ async function reportedAllPosts(req, res, next) {
   }
 }
 
+async function filtersCommunity(req, res, next) {
+  try {
+    const { body } = req;
+    const CommmunityResponse = await CommunityServices.filtersCommunity(body);
+    res.status(200).json({
+      success: true,
+      data: CommmunityResponse,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   create,
   get,
@@ -128,5 +144,6 @@ module.exports = {
   communityDelete,
   report,
   getReportedPosts,
-  reportedAllPosts
+  reportedAllPosts,
+  filtersCommunity
 }
