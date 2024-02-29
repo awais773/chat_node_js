@@ -10,6 +10,7 @@ router.post('/create', authentications ,  PortfolioController.create);
  router.get('/get/:Id',authentications , PortfolioController.find);
 router.put('/update/:Id',authentications , PortfolioController.update);
 router.delete('/delete/:id',authentications , PortfolioController.portfolioDelete);
+router.post('/GetByUserId', authentications ,  PortfolioController.GetByUserId);
 
 
 module.exports = router;

@@ -81,10 +81,28 @@ async function Delete(req, res, next) {
 }
 
 
+async function GetByUserId(req, res, next) {
+  try {
+    const { userId } = req.body;    
+    const priceList = await priceListServices.GetByUserId(userId);
+    res.status(200).json({
+      success: true,
+      data: priceList
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
 module.exports = {
    create,
     get,
     update,
     find,
     Delete,
+    GetByUserId,
 }

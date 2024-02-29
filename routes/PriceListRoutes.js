@@ -10,6 +10,6 @@ router.get('/get', authentications, priceListController.get);
 router.get('/get/:Id', authentications, priceListController.find);
 router.put('/update/:Id', authentications, priceListController.update);
 router.delete('/delete/:id', authentications, priceListController.Delete);
-
+router.post('/GetByUserId', authentications, priceListController.GetByUserId);
 
 module.exports = router;

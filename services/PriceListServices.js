@@ -63,4 +63,15 @@ exports.Delete = async (id,) => {
   return result;
 }
 
+
+exports.GetByUserId = async (userId) => {
+  const data = await priceList.findAll(
+    {
+      where: {
+        userId: userId, // Filter portfolios based on the provided userId
+      },
+    }
+  );
+  return data;
+};
  

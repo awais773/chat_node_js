@@ -75,4 +75,15 @@ exports.portfolioDelete = async (id,) => {
   return result;
 }
 
+
+exports.GetByUserId = async (userId) => {
+  // Use Sequelize's findAll method to query the database for portfolios
+  const portfolio = await Portfolio.findAll({
+    where: {
+      user_id: userId, // Filter portfolios based on the provided userId
+    },
+  });
+  return portfolio; // Return the array of portfolio objects
+};
+
  

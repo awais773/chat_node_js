@@ -123,10 +123,39 @@ async function portfolioDelete(req, res, next) {
   }
 }
 
+
+async function GetByUserId(req, res, next) {
+  try {
+    const { userId } = req.body; // Extract the user ID from the request object
+    const portfolio = await PortfolioServices.GetByUserId(userId); // Call PortfolioServices to get the portfolio for the user
+
+    if (!portfolio) {
+      // If no portfolio is found for the user, return a 404 Not Found status.
+      return res.status(404).json({
+        success: false,
+        message: 'Portfolio not found for this user',
+      });
+    }
+
+    // If a portfolio is found, respond with a 200 OK status and the portfolio data.
+    return res.status(200).json({
+      success: true,
+      data: portfolio,
+    });
+  } catch (error) {
+    // Handle other errors with a 500 Internal Server Error status.
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   create,
   get,
   update,
   find,
   portfolioDelete,
+  GetByUserId,
 }
