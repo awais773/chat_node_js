@@ -2,7 +2,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const { UUIDV4 } = require("sequelize");
-const User = require("./user");
+const User = require("./User");
 
 const Invoice = sequelize.define("invoices_Lists", {
   id: {
