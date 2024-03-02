@@ -1,6 +1,6 @@
 const { where } = require("sequelize");
 const Invoice = require("../model/invoices");
-const UserModel = require("../model/user");
+const UserModel = require("../model/User");
 
 exports.create = async (body) => {
   try {
