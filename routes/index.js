@@ -28,6 +28,8 @@ const Legder = require("./LegderRoutes")
 
 const priceList = require("./PriceListRoutes")
 
+const Queries = require("./QuerieRoutes")
+
 const cardBook = require("./CardBookRoutes")
 
 const defineAccount = require("./DefineAccountRoutes")
@@ -69,6 +71,7 @@ router.use(`/PackingList`, PackingList);
 router.use(`/DefineItem`, DefineItem);
 router.use(`/ledger`, Legder);
 router.use(`/priceList`, priceList);
+router.use(`/querie`, Queries);
 router.use(`/cardBook`, cardBook);
 router.use(`/defineAccount`, defineAccount);
 router.use(`/productVerification`, productVerification);
