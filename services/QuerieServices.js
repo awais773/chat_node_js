@@ -68,7 +68,9 @@ exports.filtersQuerie = async (body) => {
   if (body.itemSubCatgory) {
     whereClause.itemSubCatgory = body.itemSubCatgory;
   }
-
+  if (body.itemName) {
+    whereClause.itemName = body.itemName;
+  }
   if (body.itemCatgory) {
     whereClause.itemCatgory = body.itemCatgory;
   }
