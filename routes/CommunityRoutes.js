@@ -18,6 +18,7 @@ router.put('/update/:Id', authentications, CommunityController.update);
 router.delete('/delete/:id', authentications, CommunityController.communityDelete);
 
 router.post('/filters', authentications, CommunityController.filtersCommunity);
+router.get('/myCommunity', authentications, CommunityController.myCommunity);
 
 
 

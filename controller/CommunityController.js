@@ -86,6 +86,24 @@ async function get(req, res, next) {
   }
 }
 
+async function myCommunity(req, res, next) {
+  try {
+    // const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+
+    const community = await CommunityServices.myCommunity(req.userId);
+    res.status(200).json({
+      success: true,
+      data: community
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
 
 async function communityDelete(req, res, next) {
   const { id } = req.params;
@@ -145,5 +163,6 @@ module.exports = {
   report,
   getReportedPosts,
   reportedAllPosts,
-  filtersCommunity
+  filtersCommunity,
+  myCommunity,
 }

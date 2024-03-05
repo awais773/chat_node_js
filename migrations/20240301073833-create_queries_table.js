@@ -39,6 +39,17 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      image: {
+        type: Sequelize.TEXT, // Using TEXT to store JSON data
+        allowNull: true,
+        get() {
+          const rawValue = this.getDataValue('image');
+          return rawValue ? JSON.parse(rawValue) : [];
+        },
+        set(value) {
+          this.setDataValue('image', JSON.stringify(value));
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -49,7 +60,6 @@ module.exports = {
       },
     });
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('queries');
   },

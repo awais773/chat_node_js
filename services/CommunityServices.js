@@ -73,6 +73,23 @@ exports.get = async (page, limit) => {
 };
 
 
+exports.myCommunity = async (userId ) => {
+
+  const data = await Community.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ["name", "image"]
+
+      }
+    ],
+    where:{
+      user_id:userId
+    }
+  });
+  return data;
+};
+
 exports.find = async (Id,) => {
   try {
     const data = await Community.findByPk(Id);
