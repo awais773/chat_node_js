@@ -1,6 +1,8 @@
 const { where } = require("sequelize");
 const Community = require("../model/Community");
 const Comment = require("../model/Comment");
+const { Sequelize } = require('sequelize');
+
 
 const User = require("../model/User");
 const ReportPosts = require("../model/ReportPosts");
@@ -63,13 +65,21 @@ exports.get = async (page, limit) => {
   const data = await Community.findAll({
     offset,
     limit,
+    attributes: {
+      include: [
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."communityId" = "communities"."id")'),
+          'commentCount'
+        ]
+      ]
+    },
     include: [
       {
         model: User,
         attributes: ["name", "image"]
 
-      }
-    ]
+      },
+    ],
   });
   return data;
 };
