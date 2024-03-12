@@ -154,6 +154,49 @@ async function filtersCommunity(req, res, next) {
   }
 }
 
+
+
+async function CommentCreate(req, res, next) {
+  try {
+    const { body } = req;
+    const { userId } = req;
+    const comments = await CommunityServices.CommentCreate({ ...body, userId: userId });
+    
+    res.status(200).json({
+      success: true,
+      data: comments
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+}
+
+
+async function getByPostIdComment(req, res, next) {
+  try {
+    const { communityId } = req.body;
+    if (!communityId) {
+      return res.status(400).json({
+        success: false,
+        error: 'communityId is required in the request body.',
+      });
+    }
+
+    const Response = await CommunityServices.getByPostIdComment(communityId);
+    res.status(200).json({
+      success: true,
+      data: Response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   create,
   get,
@@ -165,4 +208,6 @@ module.exports = {
   reportedAllPosts,
   filtersCommunity,
   myCommunity,
+  CommentCreate,
+  getByPostIdComment
 }

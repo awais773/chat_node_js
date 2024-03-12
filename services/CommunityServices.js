@@ -1,5 +1,7 @@
 const { where } = require("sequelize");
 const Community = require("../model/Community");
+const Comment = require("../model/Comment");
+
 const User = require("../model/User");
 const ReportPosts = require("../model/ReportPosts");
 
@@ -179,3 +181,22 @@ exports.filtersCommunity = async (body) => {
   return data;
 };
 
+exports.CommentCreate = async (body) => {
+  try {
+    const data = await Comment.create({ ...body });
+    return data;
+  } catch (error) {
+    // const errors = error.errors.map((item) => ({ message: item.message }));
+    return error.message
+  }
+};
+
+
+exports.getByPostIdComment = async (communityId) => {
+  const data = await Comment.findAll({
+    where: {
+      communityId: communityId,
+    },  
+  });
+  return data;
+};
