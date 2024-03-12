@@ -61,4 +61,13 @@ exports.CompanyProfileDelete = async (id,) => {
   return result;
 }
 
+exports.getByUserId = async (userId) => {
+  const data = await CompanyProfile.findAll({
+    where: {
+      user_id: userId,
+    },  
+  });
+  return data;
+};
+
  

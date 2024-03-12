@@ -10,6 +10,7 @@ router.get('/get', authentications, CompanyProfileController.get);
 router.get('/get/:Id', authentications, CompanyProfileController.find);
 router.put('/update/:Id', authentications, CompanyProfileController.update);
 router.delete('/delete/:id', authentications, CompanyProfileController.CompanyProfileDelete);
+router.post('/getByUserId', authentications, CompanyProfileController.getByUserId);
 
 
 module.exports = router;

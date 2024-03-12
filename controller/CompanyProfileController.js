@@ -81,6 +81,30 @@ async function CompanyProfileDelete(req, res, next) {
   }
 }
 
+async function getByUserId(req, res, next) {
+  try {
+    const { userId } = req.body;
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        error: 'userId is required in the request body.',
+      });
+    }
+
+    const Response = await CompanyProfileServices.getByUserId(userId);
+    res.status(200).json({
+      success: true,
+      data: Response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
 
 module.exports = {
    create,
@@ -88,4 +112,5 @@ module.exports = {
     update,
     find,
     CompanyProfileDelete,
+    getByUserId,
 }
