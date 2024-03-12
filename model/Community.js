@@ -106,8 +106,8 @@ const Community = sequelize.define('communities', {
 Community.belongsTo(User, {
   foreignKey: 'user_id',
 });
-Community.hasMany(Comment, {
-  foreignKey: 'communityId' // Specify the foreign key
-});
+// Community.hasMany(Comment, {
+//   foreignKey: 'communityId' // Specify the foreign key
+// });
 
 module.exports = Community;
