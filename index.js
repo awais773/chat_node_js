@@ -29,6 +29,8 @@ admin.initializeApp({
 const messaging = admin.messaging();
 const url = require('url');
 
+// Inside your WebSocket server setup
+
 const groups = {}; // Map to store group members
 
 // Function to add user to a group
