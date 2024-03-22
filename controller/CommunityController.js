@@ -1,4 +1,7 @@
 const CommunityServices = require("../services/CommunityServices");
+const Community = require("../model/Community");
+const Like = require("../model/Like");
+
 
 async function create(req, res, next) {
   try {
@@ -197,6 +200,50 @@ async function getByPostIdComment(req, res, next) {
   }
 }
 
+
+async function likeCommunityPost(req, res) {
+  const { communityId } = req.body;
+  const { userId } = req;
+
+  try {
+    // Check if the user already liked the post
+    const existingLike = await Like.findOne({
+      where: {
+        communityId,
+        userId,
+      },
+    });
+
+    if (existingLike) {
+      // If the like already exists, remove it
+      await existingLike.destroy();
+      return res.status(200).json({
+        success: true,
+        message: 'Post like removed successfully',
+      });
+    } else {
+      // If the like doesn't exist, add it
+      await Like.create({
+        communityId,
+        userId,
+      });
+
+      // Increment the likes count in the Community model
+      // await Community.increment('likes', { where: { id: communityId } });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Post liked successfully',
+      });
+    }
+  } catch (error) {
+    console.error('Error liking post:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+
+
 module.exports = {
   create,
   get,
@@ -209,5 +256,6 @@ module.exports = {
   filtersCommunity,
   myCommunity,
   CommentCreate,
-  getByPostIdComment
+  getByPostIdComment,
+  likeCommunityPost,
 }

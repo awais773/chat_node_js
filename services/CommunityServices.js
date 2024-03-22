@@ -70,6 +70,10 @@ exports.get = async (page, limit) => {
         [
           Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."communityId" = "communities"."id")'),
           'commentCount'
+        ],
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."communityId" = "communities"."id")'),
+          'LikeCount'
         ]
       ]
     },
