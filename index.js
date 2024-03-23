@@ -29,111 +29,82 @@ admin.initializeApp({
 const messaging = admin.messaging();
 const url = require('url');
 
-// Inside your WebSocket server setup
-
-const groups = {}; // Map to store group members
-
-// Function to add user to a group
-function addUserToGroup(groupId, userId) {
-    if (!groups[groupId]) {
-        groups[groupId] = [];
-    }
-    if (!groups[groupId].includes(userId)) {
-        groups[groupId].push(userId);
-    }
-}
-
-// Function to remove user from a group
-function removeUserFromGroup(groupId, userId) {
-    if (groups[groupId]) {
-        groups[groupId] = groups[groupId].filter(id => id !== userId);
-        if (groups[groupId].length === 0) {
-            delete groups[groupId];
-        }
-    }
-}
-
 wss.on("connection", (ws, req) => {
     const reqUrl = url.parse(req.url, true);
-    const userID = reqUrl.query.userID;
+    const userID = reqUrl.query.userID; // Assuming the URL is in the format "/userid"
+    // webSockets[userID] = ws; 
 
-    webSockets[userID] = ws;
-
-    ws.on('message', async message => {
+    // var userID = req.headers.user //get userid from URL ip:6060/userid
+    webSockets[userID] = ws //add new user to the connection list
+    ws.on('message', async message => { //if there is any message
         var datastring = message.toString();
         console.log(datastring);
 
         if (datastring.charAt(0) == "{") {
             datastring = datastring.replace(/\'/g, '"');
-            var data = JSON.parse(datastring);
-
-            // Check if it's a group message
-            if (data.groupId && groups[data.groupId]) {
-                // Broadcast message to all members of the group
-                groups[data.groupId].forEach(memberId => {
-                    const memberSocket = webSockets[memberId];
-                    if (memberSocket && memberId !== data.author.id) {
-                        memberSocket.send(datastring);
-                    }
-                });
-            } else if (data.remoteId) {
-                var boardws = webSockets[data.remoteId];
-                if (boardws) {
-                    boardws.send(datastring);
-                    ws.send("success");
-                } else {
-                    const reciever = await User.findByPk(data.remoteId);
-                    const sender = await User.findByPk(data.author.id);
-                    const message = {
-                        notification: {
-                            title: sender.name,
-                            body: data?.text,
-                            // how can i send ma json data to notification 
-                        },
-                        android: {
-                            notification: {
-                                channel_id: "my_channel_id",
-                            }
-                        },
-                        token: reciever.deviceToken,
-                        data: {
-                            id: data.id,
-                            text: data.text,
-                            remoteId: data.remoteId,
-                            status: data.status,
-                            type: data.type,
-                            author: data.author.id,
-                        }
-                    };
-                    messaging.send(message)
-                        .then((response) => {
-                            console.log('Successfully sent message:', response);
-                        })
-                        .catch((error) => {
-                            console.log('Error sending message:', error);
-                        });
-                    ws.send("No reciever user found");
-                }
+            var data = JSON.parse(datastring)
+            // if (data.auth == "chatapphdfgjd34534hjdfk") {
+            // if (data.cmd == 'send') {
+            console.log("data.remoteId", data.remoteId);
+            var boardws = webSockets[data.remoteId] //check if there is reciever connection
+            if (boardws) {
+                boardws.send(datastring); //send message to reciever
+                ws.send("success");
             } else {
-                console.log("Invalid message format.");
-                ws.send("Invalid message format.");
-            }
-        } else {
-            console.log("Non-JSON type data");
-            ws.send("Error: Non-JSON type data");
-        }
-    });
+                const reciever = await User.findByPk(data.remoteId);
+                const sender = await User.findByPk(data.author.id);
+                const message = {
+                    notification: {
+                        title: sender.name,
+                        body: data?.text,
+                        // how can i send ma json data to notification 
+                    },
+                    android: {
+                        notification: {
 
+                            channel_id: "my_channel_id",
+                        }
+                    },
+                    token: reciever.deviceToken,
+                    data: {
+                        id: data.id,
+                        text: data.text,
+                        remoteId: data.remoteId,
+                        status: data.status,
+                        type: data.type,
+                        author: data.author.id,
+
+
+                    }
+                };
+                messaging.send(message)
+                    .then((response) => {
+                        console.log('Successfully sent message:', response);
+                    })
+                    .catch((error) => {
+                        console.log('Error sending message:', error);
+                    });
+                console.log("No reciever user found.");
+                ws.send("No reciever user found");
+            }
+            // } else {
+            //   console.log("No send command");
+            //   ws.send(data.cmd + ":error");
+            // }
+            // } else {
+            //   console.log("App Authincation error");
+            //   ws.send(data.cmd + ":error");
+            // }
+        } else {
+            console.log("Non JSON type data");
+            ws.send(data.cmd + ":error");
+        }
+    })
     ws.on("close", () => {
         console.log("User disconnected", users);
-        // Remove user from all groups
-        for (let groupId in groups) {
-            removeUserFromGroup(groupId, userID);
-        }
-        delete webSockets[userID];
+        delete webSockets[userID] //remove user connection
     });
 });
-
 
 // Add CORS middleware
 app.use(cors());
