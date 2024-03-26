@@ -74,9 +74,10 @@ async function find(req, res) {
 
 async function get(req, res, next) {
   try {
+    const { userId } = req;
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
 
-    const community = await CommunityServices.get(page,limit);
+    const community = await CommunityServices.get(page,limit,userId);
     res.status(200).json({
       success: true,
       data: community
@@ -226,6 +227,7 @@ async function likeCommunityPost(req, res) {
       await Like.create({
         communityId,
         userId,
+        likes: true,
       });
 
       // Increment the likes count in the Community model

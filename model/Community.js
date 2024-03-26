@@ -4,6 +4,7 @@ const sequelize = require('../config/database');
 const User = require('./User'); // Adjust the path based on your project structure
 const Comment = require('./Comment'); // Adjust the path based on your project structure
 const { UUIDV4 } = require("sequelize");
+const Like = require('./Like');
 
 const Community = sequelize.define('communities', {
   id: {
@@ -106,6 +107,9 @@ const Community = sequelize.define('communities', {
 Community.belongsTo(User, {
   foreignKey: 'user_id',
 });
+Community.hasMany(Like, { foreignKey: 'communityId' });
+
+
 // Community.hasMany(Comment, {
 //   foreignKey: 'communityId' // Specify the foreign key
 // });

@@ -6,6 +6,7 @@ const { Sequelize } = require('sequelize');
 
 const User = require("../model/User");
 const ReportPosts = require("../model/ReportPosts");
+const Like = require("../model/Like");
 
 exports.create = async (body) => {
   try {
@@ -59,7 +60,7 @@ exports.reported = async () => {
 }
 
 
-exports.get = async (page, limit) => {
+exports.get = async (page, limit, userId) => {
   const offset = (page - 1) * limit;
 
   const data = await Community.findAll({
@@ -83,6 +84,14 @@ exports.get = async (page, limit) => {
         attributes: ["name", "image"]
 
       },
+      {
+        model: Like,
+        attributes: ["likes"],
+        where: {
+          userId: userId
+        },
+        required: false // Use `required: false` to perform LEFT JOIN instead of INNER JOIN
+      }
     ],
   });
   return data;
