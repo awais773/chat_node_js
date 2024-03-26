@@ -107,7 +107,7 @@ const Community = sequelize.define('communities', {
 Community.belongsTo(User, {
   foreignKey: 'user_id',
 });
-Community.hasMany(Like, { foreignKey: 'communityId' });
+Community.hasOne(Like, { foreignKey: 'communityId' });
 
 
 // Community.hasMany(Comment, {
