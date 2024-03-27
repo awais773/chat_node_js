@@ -10,6 +10,8 @@ router.get('/get', authentications, DefineItemController.get);
 router.get('/get/:Id', authentications, DefineItemController.find);
 router.put('/update/:Id', authentications, DefineItemController.update);
 router.delete('/delete/:id', authentications, DefineItemController.DefineItemDelete);
+router.post('/DefineItemSearch', authentications, DefineItemController.DefineItemSearch);
+
 
 
 module.exports = router;

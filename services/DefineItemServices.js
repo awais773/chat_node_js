@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const DefineItem = require("../model/DefineItem");
 
 exports.create = async (body) => {
@@ -24,6 +24,32 @@ exports.get = async (userId) => {
   });
   return data;
 };
+
+exports.DefineItemSearch = async (userId, search) => {
+  try {
+    const data = await DefineItem.findOne({
+      where: {
+        user_id: userId,
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            item_no: {
+              [Op.like]: `%${search}%`
+            },
+          },
+        ],
+      },
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 
 
 exports.find = async (Id,) => {

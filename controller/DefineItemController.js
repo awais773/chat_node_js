@@ -61,6 +61,22 @@ async function get(req, res, next) {
   }
 }
 
+async function DefineItemSearch(req, res, next) {
+  try {
+    const { userId } = req;
+    const {search} = req.body; // The updates will be sent in the request body as JSON
+    const DefineItem = await DefineItemServices.DefineItemSearch(userId,search);
+    res.status(200).json({
+      success: true,
+      data: DefineItem
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
 
 async function DefineItemDelete(req, res, next) {
   const { id } = req.params;
@@ -88,4 +104,5 @@ module.exports = {
     update,
     find,
     DefineItemDelete,
+    DefineItemSearch,
 }

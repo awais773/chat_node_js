@@ -108,6 +108,24 @@ async function getByUserId(req, res, next) {
 }
 
 
+async function invoicesSearch(req, res, next) {
+  try {
+    const { userId } = req;
+    const {search} = req.body; // The updates will be sent in the request body as JSON
+    const result = await InvoiceListServices.invoicesSearch(userId,search);
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
 module.exports = {
    create,
     get,
@@ -115,4 +133,5 @@ module.exports = {
     find,
     Delete,
     getByUserId,
+    invoicesSearch,
 }

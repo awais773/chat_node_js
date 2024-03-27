@@ -23,15 +23,11 @@ const Invoice = sequelize.define("invoices_Lists", {
     type: DataTypes.STRING, 
     allowNull: false,
   },
-  name: {
+  company_name: {
     type: DataTypes.STRING,
     allowNull: true
   },
-  unit_amount: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  discount: {
+  number: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -39,27 +35,19 @@ const Invoice = sequelize.define("invoices_Lists", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  discount_type: {
+  city: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  qty: {
+  address: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  item: {
+  email: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  item_no: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  total_amount: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  total: {
+  remarks: {
     type: DataTypes.STRING,
     allowNull: true,
   },
@@ -67,7 +55,6 @@ const Invoice = sequelize.define("invoices_Lists", {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  
   
 });
 

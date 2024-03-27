@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const Invoice = require("../model/invoices");
 const UserModel = require("../model/User");
 
@@ -77,5 +77,32 @@ exports.getByUserId = async (userId,ledgerUserId) => {
   });
   return data;
 };
+
+
+exports.invoicesSearch = async (userId, search) => {
+  try {
+    const data = await Invoice.findAll({
+      where: {
+        invoice_user_id: userId,
+        [Op.or]: [
+          {
+            company_name: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          // {
+          //   item_no: {
+          //     [Op.like]: `%${search}%`
+          //   },
+          // },
+        ],
+      },
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
 
  

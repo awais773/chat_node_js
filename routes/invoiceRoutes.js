@@ -11,6 +11,8 @@ router.get('/get/:Id', authentications, InvoiceController.find);
 router.put('/update/:Id', authentications, InvoiceController.update);
 router.delete('/delete/:id', authentications, InvoiceController.Delete);
 router.post('/getByUserId', authentications, InvoiceController.getByUserId);
+router.post('/invoicesSearch', authentications, InvoiceController.invoicesSearch);
+
 
 
 
