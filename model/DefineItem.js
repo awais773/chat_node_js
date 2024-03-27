@@ -71,4 +71,16 @@ DefineItem.belongsTo(User, {
 });
 
 
+DefineItem.generateItemNo = async function() {
+  // Fetch the maximum item_no from the database
+  const maxItem = await DefineItem.max('item_no');  
+  let newItemNo = '001';  
+  if (maxItem) {
+    const maxNumber = parseInt(maxItem, 10);
+    newItemNo = (maxNumber + 1).toString().padStart(3, '0'); 
+  }
+  
+  return newItemNo;
+};
+
 module.exports = DefineItem;

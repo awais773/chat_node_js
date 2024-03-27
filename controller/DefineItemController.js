@@ -4,7 +4,8 @@ async function create(req, res, next) {
   try {
     const { body } = req;
     const { userId } = req;
-    const DefineItem = await DefineItemServices.create({ ...body, user_id: userId });
+    // const itemNo = await DefineItem.generateItemNo();
+    const DefineItem = await DefineItemServices.create({ ...body, user_id: userId});
     res.status(200).json({
       success: true,
       data: DefineItem
