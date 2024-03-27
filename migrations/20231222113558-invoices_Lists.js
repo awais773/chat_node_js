@@ -50,7 +50,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-  
+      invoice_type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

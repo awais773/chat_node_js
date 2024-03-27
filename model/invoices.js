@@ -63,6 +63,11 @@ const Invoice = sequelize.define("invoices_Lists", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  invoice_type: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  
   
 });
 
