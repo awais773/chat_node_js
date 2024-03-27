@@ -61,6 +61,23 @@ async function get(req, res, next) {
 }
 
 
+async function defineAccountget(req, res, next) {
+  try {
+    const { userId } = req;
+    const {companyUserId} = req.body; // The updates will be sent in the request body as JSON
+    const defineAccount = await defineAccountServices.defineAccountget(userId,companyUserId);
+    res.status(200).json({
+      success: true,
+      data: defineAccount
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 async function Delete(req, res, next) {
   const { id } = req.params;
   try {
@@ -81,10 +98,12 @@ async function Delete(req, res, next) {
 }
 
 
+
 module.exports = {
    create,
     get,
     update,
     find,
     Delete,
+    defineAccountget,
 }

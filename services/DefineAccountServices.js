@@ -21,6 +21,16 @@ exports.get = async (userId) => {
   return data;
 };
 
+exports.defineAccountget = async (userId,companyUserId) => {
+  const data = await defineAccount.findOne({
+    where: {
+      userId: userId,
+      companyUserId:companyUserId
+    }
+  });
+  return data;
+};
+
 
 exports.find = async (Id,) => {
   try {

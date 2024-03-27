@@ -2,6 +2,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const { UUIDV4 } = require("sequelize");
+const User = require("./User");
 
 const defineAccount = sequelize.define("defineAccounts", {
   id: {
@@ -11,31 +12,57 @@ const defineAccount = sequelize.define("defineAccounts", {
     defaultValue: UUIDV4,
   },
 
-  name: {
+  company_name: {
     type: DataTypes.STRING,
     allowNull: true,
   },
   userId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: User, // Reference the User model
+      key: 'id', // Reference the primary key of the User model
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  },
+  companyUserId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+    references: {
+      model: User, // Reference the User model
+      key: 'id', // Reference the primary key of the User model
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  },
+
+  number: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 
-  AccountName: {
+  description: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 
-  IBAN: {
+  city: {
     type: DataTypes.STRING,
     allowNull: true,
   },
 
-  SwiftCode: {
+  address: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-
-  AccountHolderName: {
+  
+  email: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  
+  remarks: {
     type: DataTypes.STRING,
     allowNull: true,
   },

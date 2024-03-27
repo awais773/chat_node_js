@@ -10,6 +10,7 @@ router.get('/get', authentications, defineAccountController.get);
 router.get('/get/:Id', authentications, defineAccountController.find);
 router.put('/update/:Id', authentications, defineAccountController.update);
 router.delete('/delete/:id', authentications, defineAccountController.Delete);
+router.post('/defineAccountget', authentications, defineAccountController.defineAccountget);
 
 
 module.exports = router;

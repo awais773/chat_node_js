@@ -21,6 +21,31 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      discount_type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      qty: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      item: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      item_no: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+
+      total_amount: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      total: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       description: {
         type: Sequelize.STRING,
         allowNull: true,

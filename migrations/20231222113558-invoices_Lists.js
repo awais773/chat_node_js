@@ -22,6 +22,34 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      company_name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      number: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      description : {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      remarks: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
   
       createdAt: {
         allowNull: false,

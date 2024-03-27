@@ -9,27 +9,51 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      name: {
+      company_name: {
         type: Sequelize.STRING,
         allowNull: true,
       },
       userId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "users", // The name of the referenced table (users)
+          key: "id", // The name of the referenced column (id)
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      companyUserId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "users", // The name of the referenced table (users)
+          key: "id", // The name of the referenced column (id)
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+      number: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      AccountName: {
+      description : {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      IBAN : {
+      city: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      SwiftCode: {
+      address: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      AccountHolderName: {
+      email: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      remarks: {
         type: Sequelize.STRING,
         allowNull: true,
       },
