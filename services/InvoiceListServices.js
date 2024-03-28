@@ -1,6 +1,7 @@
 const { where, Op } = require("sequelize");
 const Invoice = require("../model/invoices");
 const UserModel = require("../model/User");
+const CompanyProfile = require("../model/CompanyProfile");
 
 exports.create = async (body) => {
   try {
@@ -19,10 +20,15 @@ exports.get = async (userId) => {
       invoice_user_id:userId,
     },
     include: [
+      // {
+      //   model: UserModel,
+      //   attributes: ['name', 'phone'],
+      //   as: 'user',
+      // },
       {
-        model: UserModel,
-        attributes: ['name', 'phone'], // Add other attributes you want to include
-        as: 'user',
+        model: CompanyProfile,
+        attributes: ['user_id', 'name', 'description'],
+        as: 'company_profile', // Change alias to match the association
       },
     ],
   });

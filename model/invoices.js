@@ -3,6 +3,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const { UUIDV4 } = require("sequelize");
 const User = require("./User");
+const CompanyProfile = require("./CompanyProfile");
 
 const Invoice = sequelize.define("invoices_Lists", {
   id: {
@@ -20,7 +21,7 @@ const Invoice = sequelize.define("invoices_Lists", {
     allowNull: true,
   },
   invoice_user_id: {
-    type: DataTypes.STRING, 
+    type: DataTypes.UUID,
     allowNull: false,
   },
   company_name: {
@@ -60,5 +61,9 @@ const Invoice = sequelize.define("invoices_Lists", {
 
 Invoice.belongsTo(User, {
   foreignKey: 'userId',
+});
+Invoice.belongsTo(CompanyProfile, {
+  foreignKey: 'userId',
+  targetKey: 'user_id'
 });
 module.exports = Invoice;

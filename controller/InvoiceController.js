@@ -1,5 +1,7 @@
 const InvoiceListServices = require("../services/InvoiceListServices");
 const jwtUtils = require('../utils/helper'); // Adjust the path accordingly
+const CompanyProfile = require("../model/CompanyProfile");
+
 
 async function create(req, res, next) {
   try {
@@ -7,6 +9,7 @@ async function create(req, res, next) {
     const { body } = req;
     const Invoice = await InvoiceListServices.create({ ...body,
       invoice_user_id: invoiceUserId,
+      userId: invoiceUserId,
     });
     res.status(200).json({
       success: true,
@@ -51,9 +54,15 @@ async function get(req, res, next) {
   try {
     const { userId } = req;
     const Invoice = await InvoiceListServices.get(userId);
+    // const data = await CompanyProfile.findOne({
+    //   where: {
+    //     user_id:userId,
+    //   },
+    // });   
     res.status(200).json({
       success: true,
-      products: Invoice
+      products: Invoice,
+      // profileData:data
     });
   } catch (error) {
     res.json({

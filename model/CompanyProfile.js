@@ -78,4 +78,5 @@ CompanyProfile.belongsTo(User, {
 });
 
 
+
 module.exports = CompanyProfile;
