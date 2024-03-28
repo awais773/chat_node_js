@@ -27,7 +27,7 @@ exports.get = async (userId) => {
       // },
       {
         model: CompanyProfile,
-        attributes: ['user_id', 'name', 'description'],
+        attributes: ['user_id', 'name', 'description','contact_number','image','email'],
         as: 'company_profile', // Change alias to match the association
       },
     ],
