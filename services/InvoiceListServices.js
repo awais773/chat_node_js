@@ -5,7 +5,13 @@ const CompanyProfile = require("../model/CompanyProfile");
 
 exports.create = async (body) => {
   try {
-    const data = await Invoice.create({ ...body });
+    const maxItem = await Invoice.max('invoice_no');    
+    let invoiceNo = '001';    
+    if (maxItem) {
+      const maxNumber = parseInt(maxItem, 10);
+      invoiceNo = (maxNumber + 1).toString().padStart(3, '0'); // Pad with zeros to make it 3 digits
+    }    
+    const data = await Invoice.create({ ...body, invoice_no: invoiceNo});
     return data;
   } catch (error) {
     // const errors = error.errors.map((item) => ({ message: item.message }));
@@ -74,7 +80,7 @@ exports.Delete = async (id,) => {
   return result;
 }
 
-exports.getByUserId = async (userId,ledgerUserId) => {
+exports.  getByUserId = async (userId,ledgerUserId) => {
   const data = await Invoice.findAll({
     where: {
       userId,
@@ -96,13 +102,20 @@ exports.invoicesSearch = async (userId, search) => {
               [Op.like]: `%${search}%`
             },
           },
-          // {
-          //   item_no: {
-          //     [Op.like]: `%${search}%`
-          //   },
-          // },
+          {
+            invoice_no: {
+              [Op.like]: `%${search}%`
+            },
+          },
         ],
       },
+      include: [
+        {
+          model: CompanyProfile,
+          attributes: ['user_id', 'name', 'description','contact_number','image','email'],
+          as: 'company_profile', // Change alias to match the association
+        },
+      ],
     });
     return data;
   } catch (error) {

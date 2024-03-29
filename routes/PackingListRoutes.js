@@ -10,6 +10,8 @@ router.post('/create', authentications ,PackingListController.create);
  router.get('/get/:Id',authentications,  PackingListController.find);
 router.put('/update/:Id',authentications,  PackingListController.update);
 router.delete('/delete/:id',authentications,  PackingListController.PackingListDelete);
+router.post('/PackingListSearch', authentications ,PackingListController.PackingListSearch);
+
 
 
 module.exports = router;

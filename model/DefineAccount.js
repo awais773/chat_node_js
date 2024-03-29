@@ -66,6 +66,11 @@ const defineAccount = sequelize.define("defineAccounts", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+
+  type: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  }
 });
 
 module.exports = defineAccount;

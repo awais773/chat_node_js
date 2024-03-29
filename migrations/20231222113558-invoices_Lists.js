@@ -54,6 +54,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      invoice_no: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      active: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

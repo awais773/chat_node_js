@@ -79,6 +79,42 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
+      packing_no: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      company_name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      number: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      description : {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      remarks: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
