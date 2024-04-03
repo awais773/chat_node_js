@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const PackingList = require("../model/PackingList");
 const CompanyProfile = require("../model/CompanyProfile");
 
