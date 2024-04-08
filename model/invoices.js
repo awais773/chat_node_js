@@ -75,7 +75,7 @@ Invoice.belongsTo(User, {
   foreignKey: 'userId',
 });
 Invoice.belongsTo(CompanyProfile, {
-  foreignKey: 'userId',
+  foreignKey: 'invoice_user_id',
   targetKey: 'user_id'
 });
 module.exports = Invoice;

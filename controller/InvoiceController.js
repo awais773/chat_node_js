@@ -7,9 +7,10 @@ async function create(req, res, next) {
   try {
     const invoiceUserId = jwtUtils.verifyToken(req.header('authorization'))?.userId;
     const { body } = req;
+    const { userId } = req.body;
     const Invoice = await InvoiceListServices.create({ ...body,
       invoice_user_id: invoiceUserId,
-      userId: invoiceUserId,
+      userId: userId,
     });
     res.status(200).json({
       success: true,

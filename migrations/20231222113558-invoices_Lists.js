@@ -19,7 +19,7 @@ module.exports = {
       },
 
       invoice_user_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         allowNull: true,
       },
       company_name: {

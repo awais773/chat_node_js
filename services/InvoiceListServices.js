@@ -83,7 +83,7 @@ exports.Delete = async (id,) => {
 exports.  getByUserId = async (userId,ledgerUserId) => {
   const data = await Invoice.findAll({
     where: {
-      userId,
+      userId:userId,
       invoice_user_id: ledgerUserId,
     },  
   });
