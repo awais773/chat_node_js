@@ -20,7 +20,7 @@ router.delete('/delete/:id', authentications, CommunityController.communityDelet
 router.post('/filters', authentications, CommunityController.filtersCommunity);
 router.get('/myCommunity', authentications, CommunityController.myCommunity);
 router.post('/CommentCreate', authentications, CommunityController.CommentCreate);
-router.get('/getByPostIdComment', authentications, CommunityController.getByPostIdComment);
+router.post('/getByPostIdComment', authentications, CommunityController.getByPostIdComment);
 router.post('/likeCommunityPost', authentications, CommunityController.likeCommunityPost);
 
 
