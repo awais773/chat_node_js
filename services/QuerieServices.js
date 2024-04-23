@@ -1,5 +1,9 @@
 const { where } = require("sequelize");
 const Querie = require("../model/Querie");
+const User = require("../model/User");
+const Comment = require("../model/Comment");
+const { Sequelize } = require('sequelize');
+const Like = require("../model/Like");
 
 exports.create = async (body) => {
   try {
@@ -14,6 +18,29 @@ exports.create = async (body) => {
 
 exports.get = async (userId) => {
   const data = await Querie.findAll({
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
+    attributes: {
+      include: [
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."querieId" = "queries"."id")'),
+          'commentCount'
+        ],
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."querieId" = "queries"."id")'),
+          'LikeCount'
+        ]
+      ]
+    },
+    include: [
+      {
+        model: Like,
+        attributes: ["likes"],
+        where: {
+          userId: userId
+        },
+        required: false // Use `required: false` to perform LEFT JOIN instead of INNER JOIN
+      }
+    ],
     where: {
       userId: userId, 
     },
@@ -84,6 +111,35 @@ exports.filtersQuerie = async (body) => {
     where: whereClause,
   });
 
+  return data;
+};
+
+
+exports.CommentCreate = async (body) => {
+  try {
+    const data = await Comment.create({ ...body });
+    return data;
+  } catch (error) {
+    // const errors = error.errors.map((item) => ({ message: item.message }));
+    return error.message
+  }
+};
+
+
+exports.getByPostIdComment = async (querieId) => {
+  const data = await Comment.findAll({
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
+    include: [
+      {
+        model: User,
+        attributes: ["name", "image"]
+
+      }
+    ],
+    where: {
+      querieId: querieId,
+    },  
+  });
   return data;
 };
 

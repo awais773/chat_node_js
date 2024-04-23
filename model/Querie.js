@@ -3,6 +3,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const User = require('./User'); // Adjust the path based on your project structure
 const { UUIDV4 } = require("sequelize");
+const Like = require("./Like");
 
 const Querie = sequelize.define("queries", {
   id: {
@@ -61,5 +62,6 @@ const Querie = sequelize.define("queries", {
 // Ledger.belongsTo(User, {
 //   foreignKey: 'userId',
 // });
+Querie.hasOne(Like, { foreignKey: 'querieId' });
 
 module.exports = Querie;

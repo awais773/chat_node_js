@@ -1,3 +1,4 @@
+const Like = require("../model/Like");
 const QuerieServices = require("../services/QuerieServices");
 
 async function create(req, res, next) {
@@ -97,6 +98,90 @@ async function filtersQuerie(req, res, next) {
 }
 
 
+async function CommentCreate(req, res, next) {
+  try {
+    const { body } = req;
+    const { userId } = req;
+    const Querie = await QuerieServices.CommentCreate({ ...body, userId: userId });
+    
+    res.status(200).json({
+      success: true,
+      data: Querie
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+}
+async function getByPostIdComment(req, res, next) {
+  try {
+    const { querieId } = req.body;
+    if (!querieId) {
+      return res.status(400).json({
+        success: false,
+        error: 'querieId is required in the request body.',
+      });
+    }
+
+    const Response = await QuerieServices.getByPostIdComment(querieId);
+    res.status(200).json({
+      success: true,
+      data: Response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
+async function likeQueryPost(req, res) {
+  const { querieId } = req.body;
+  const { userId } = req;
+
+  try {
+    // Check if the user already liked the post
+    const existingLike = await Like.findOne({
+      where: {
+        querieId,
+        userId,
+      },
+    });
+
+    if (existingLike) {
+      // If the like already exists, remove it
+      await existingLike.destroy();
+      return res.status(200).json({
+        success: true,
+        message: 'Post like removed successfully',
+      });
+    } else {
+      // If the like doesn't exist, add it
+      await Like.create({
+        querieId,
+        userId,
+        likes: true,
+      });
+
+      // Increment the likes count in the Community model
+      // await Community.increment('likes', { where: { id: communityId } });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Post liked successfully',
+      });
+    }
+  } catch (error) {
+    console.error('Error liking post:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+}
+
+
+
 module.exports = {
    create,
     get,
@@ -104,4 +189,7 @@ module.exports = {
     find,
     QuerieDelete,
     filtersQuerie,
+    CommentCreate,
+    getByPostIdComment,
+    likeQueryPost
 }

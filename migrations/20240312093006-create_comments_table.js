@@ -26,9 +26,20 @@ module.exports = {
 
       communityId: {
         type: Sequelize.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "communities", // The name of the referenced table (communities)
+          key: "id", // The name of the referenced column (id)
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
+
+      querieId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: "queries", // The name of the referenced table (communities)
           key: "id", // The name of the referenced column (id)
         },
         onUpdate: "CASCADE",
