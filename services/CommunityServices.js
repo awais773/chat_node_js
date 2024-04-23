@@ -217,6 +217,13 @@ exports.CommentCreate = async (body) => {
 
 exports.getByPostIdComment = async (communityId) => {
   const data = await Comment.findAll({
+    include: [
+      {
+        model: User,
+        attributes: ["name", "image"]
+
+      }
+    ],
     where: {
       communityId: communityId,
     },  
