@@ -66,6 +66,7 @@ exports.get = async (page, limit, userId) => {
   const data = await Community.findAll({
     offset,
     limit,
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
     attributes: {
       include: [
         [
@@ -217,6 +218,7 @@ exports.CommentCreate = async (body) => {
 
 exports.getByPostIdComment = async (communityId) => {
   const data = await Comment.findAll({
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
     include: [
       {
         model: User,
