@@ -108,6 +108,18 @@ exports.filtersQuerie = async (body) => {
     whereClause.quanity = body.quanity;
   }
   const data = await Querie.findAll({
+    attributes: {
+      include: [
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."querieId" = "queries"."id")'),
+          'commentCount'
+        ],
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."querieId" = "queries"."id")'),
+          'LikeCount'
+        ]
+      ]
+    },
     where: whereClause,
   });
 
