@@ -3,7 +3,7 @@ const fs = require('fs');
 exports.Upload = async function (req, res) {
     try {
         // Check if any file uploaded exceeds the maximum size
-        const maxSize = 10 * 1024 * 1024; // 3 MB
+        const maxSize = 4 * 1024 * 1024; // 3 MB
         const files = req.files;
         const oversizedFiles = files.filter(file => file.size > maxSize);
 
