@@ -48,7 +48,7 @@ const { v4 } = require('uuid');
 const documentController = require("../controller/documentController")
 
 // define storage
-const maxSize = 10 * 1024 * 1024; // 10 MB
+const maxSize = 10 * 1024 * 1024; // 3 MB
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './downloads');
