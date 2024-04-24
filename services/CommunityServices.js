@@ -177,7 +177,7 @@ exports.reportedAllPosts = async () => {
   }
 };
 
-exports.filtersCommunity = async (body) => {
+exports.filtersCommunity = async (body,userId) => {
   const whereClause = {};
 
   if (body.category) {
@@ -199,6 +199,34 @@ exports.filtersCommunity = async (body) => {
   }
 
   const data = await Community.findAll({
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
+    attributes: {
+      include: [
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."communityId" = "communities"."id")'),
+          'commentCount'
+        ],
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."communityId" = "communities"."id")'),
+          'LikeCount'
+        ]
+      ]
+    },
+    include: [
+      {
+        model: User,
+        attributes: ["name", "image"]
+
+      },
+      {
+        model: Like,
+        attributes: ["likes"],
+        where: {
+          userId: userId
+        },
+        required: false // Use `required: false` to perform LEFT JOIN instead of INNER JOIN
+      }
+    ],
     where: whereClause,
   });
 

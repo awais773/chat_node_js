@@ -89,7 +89,7 @@ exports.QuerieDelete = async (id,) => {
 }
 
 
-exports.filtersQuerie = async (body) => {
+exports.filtersQuerie = async (body ,userId) => {
   const whereClause = {};
 
   if (body.itemSubCatgory) {
@@ -120,6 +120,16 @@ exports.filtersQuerie = async (body) => {
         ]
       ]
     },
+    include: [
+      {
+        model: Like,
+        attributes: ["likes"],
+        where: {
+          userId: userId
+        },
+        required: false // Use `required: false` to perform LEFT JOIN instead of INNER JOIN
+      }
+    ],
     where: whereClause,
   });
 

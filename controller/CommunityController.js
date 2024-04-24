@@ -145,7 +145,8 @@ async function reportedAllPosts(req, res, next) {
 async function filtersCommunity(req, res, next) {
   try {
     const { body } = req;
-    const CommmunityResponse = await CommunityServices.filtersCommunity(body);
+    const { userId } = req;
+    const CommmunityResponse = await CommunityServices.filtersCommunity(body,userId);
     res.status(200).json({
       success: true,
       data: CommmunityResponse,

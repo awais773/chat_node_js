@@ -83,8 +83,9 @@ async function QuerieDelete(req, res, next) {
 
 async function filtersQuerie(req, res, next) {
   try {
+    const { userId } = req;
     const { body } = req;
-    const Querie = await QuerieServices.filtersQuerie(body);
+    const Querie = await QuerieServices.filtersQuerie(body, userId);
     res.status(200).json({
       success: true,
       data: Querie,
