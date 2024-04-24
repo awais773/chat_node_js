@@ -33,6 +33,11 @@ exports.get = async (userId) => {
     },
     include: [
       {
+        model: User,
+        attributes: ["name", "image"]
+
+      },
+      {
         model: Like,
         attributes: ["likes"],
         where: {
@@ -41,9 +46,6 @@ exports.get = async (userId) => {
         required: false // Use `required: false` to perform LEFT JOIN instead of INNER JOIN
       }
     ],
-    where: {
-      userId: userId, 
-    },
   });
   return data;
 };
@@ -121,6 +123,11 @@ exports.filtersQuerie = async (body ,userId) => {
       ]
     },
     include: [
+      {
+        model: User,
+        attributes: ["name", "image"]
+
+      },
       {
         model: Like,
         attributes: ["likes"],

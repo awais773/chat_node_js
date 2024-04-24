@@ -59,9 +59,9 @@ const Querie = sequelize.define("queries", {
   },
 });
 
-// Ledger.belongsTo(User, {
-//   foreignKey: 'userId',
-// });
+Querie.belongsTo(User, {
+  foreignKey: 'userId',
+});
 Querie.hasOne(Like, { foreignKey: 'querieId' });
 
 module.exports = Querie;
