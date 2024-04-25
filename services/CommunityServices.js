@@ -102,6 +102,19 @@ exports.get = async (page, limit, userId) => {
 exports.myCommunity = async (userId ) => {
 
   const data = await Community.findAll({
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
+    attributes: {
+      include: [
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."communityId" = "communities"."id")'),
+          'commentCount'
+        ],
+        [
+          Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."communityId" = "communities"."id")'),
+          'LikeCount'
+        ]
+      ]
+    },
     include: [
       {
         model: User,
