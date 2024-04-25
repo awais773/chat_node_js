@@ -110,8 +110,4 @@ Community.belongsTo(User, {
 Community.hasOne(Like, { foreignKey: 'communityId' });
 
 
-// Community.hasMany(Comment, {
-//   foreignKey: 'communityId' // Specify the foreign key
-// });
-
 module.exports = Community;
