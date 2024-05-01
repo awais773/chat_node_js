@@ -67,6 +67,9 @@ exports.get = async (page, limit, userId) => {
     offset,
     limit,
     order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
+    where: {
+      status: "publish",
+    },
     attributes: {
       include: [
         [
