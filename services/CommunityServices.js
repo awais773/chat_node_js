@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const Community = require("../model/Community");
 const Comment = require("../model/Comment");
+const { Op } = require('sequelize');
 const { Sequelize } = require('sequelize');
 
 
@@ -68,7 +69,9 @@ exports.get = async (page, limit, userId) => {
     limit,
     order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
     where: {
-      status: "publish",
+      status: {
+        [Op.or]: ['publish', 'private'] // Retrieve communities with status "publish" or "private"
+      }
     },
     attributes: {
       include: [
