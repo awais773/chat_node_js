@@ -35,6 +35,10 @@ const cardBook = require("./CardBookRoutes")
 const defineAccount = require("./DefineAccountRoutes")
 
 const productVerification = require("./ProductVerificationRoutes")
+
+const bankDetails = require("./BankDetailRoutes")
+
+
 // import router
 const router = express.Router();
 
@@ -80,6 +84,8 @@ router.use(`/querie`, Queries);
 router.use(`/cardBook`, cardBook);
 router.use(`/defineAccount`, defineAccount);
 router.use(`/productVerification`, productVerification);
+router.use(`/bankDetails`, bankDetails);
+
 
 
 
