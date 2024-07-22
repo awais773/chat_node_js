@@ -32,6 +32,7 @@ const BankDetail = sequelize.define("bank_details", {
     type: DataTypes.STRING,
     allowNull: true
   },
+  
  
   userId: {
     type: DataTypes.UUID,
