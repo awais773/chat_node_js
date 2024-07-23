@@ -17,6 +17,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+
       contact_number: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -49,6 +50,22 @@ module.exports = {
         allowNull: true,
       },
       other_url: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      pdf: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      about: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      cover_photo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      desination: {
         type: Sequelize.STRING,
         allowNull: true,
       },

@@ -26,6 +26,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+
+      back_image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       userId: {
         type: Sequelize.UUID,
         allowNull: true,

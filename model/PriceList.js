@@ -18,6 +18,14 @@ const priceList = sequelize.define("pricelists", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  pdf: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   userId: {
     type: DataTypes.STRING,
     allowNull: true,

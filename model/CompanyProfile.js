@@ -25,6 +25,22 @@ const CompanyProfile = sequelize.define('company_profiles', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  pdf: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  about: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  cover_photo: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  desination: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   email: {
     type: DataTypes.STRING,
     allowNull: true,
