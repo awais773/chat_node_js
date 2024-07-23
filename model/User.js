@@ -70,7 +70,10 @@ const User = sequelize.define('users', {
   }
 }, {
   // Enable timestamps
-  timestamps: true
+  timestamps: true,
+  defaultScope: {
+    attributes: { exclude: ['fireBaseId',] }
+  },
 });
 
 module.exports = User;
