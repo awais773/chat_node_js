@@ -73,11 +73,11 @@ const CompanyProfile = sequelize.define('company_profiles', {
     type: DataTypes.TEXT, // Storing JSON array
     allowNull: true,
     get() {
-      const rawValue = this.getDataValue('image');
+      const rawValue = this.getDataValue('gallery_image');
       return rawValue ? JSON.parse(rawValue) : [];
     },
     set(value) {
-      this.setDataValue('image', JSON.stringify(value));
+      this.setDataValue('gallery_image', JSON.stringify(value));
     },
   },
   facebook_url: {

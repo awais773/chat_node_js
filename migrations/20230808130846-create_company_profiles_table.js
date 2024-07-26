@@ -41,11 +41,11 @@ module.exports = {
         type: Sequelize.TEXT, // Using TEXT to store JSON data
         allowNull: true,
         get() {
-          const rawValue = this.getDataValue('image');
+          const rawValue = this.getDataValue('gallery_image');
           return rawValue ? JSON.parse(rawValue) : [];
         },
         set(value) {
-          this.setDataValue('image', JSON.stringify(value));
+          this.setDataValue('gallery_image', JSON.stringify(value));
         },
       },
       facebook_url: { // Corrected column name
