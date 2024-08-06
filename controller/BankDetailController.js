@@ -17,7 +17,6 @@ async function create(req, res, next) {
 }
 
 
-
 async function update (req, res)  {
   const Id = req.params.Id; // Get the user ID from the route parameter
   const updates = req.body; // The updates will be sent in the request body as JSON
