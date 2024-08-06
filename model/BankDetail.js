@@ -32,8 +32,14 @@ const BankDetail = sequelize.define("bank_details", {
     type: DataTypes.STRING,
     allowNull: true
   },
-  
- 
+  check_image: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  card_image: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   userId: {
     type: DataTypes.UUID,
     allowNull: true,

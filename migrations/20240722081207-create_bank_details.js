@@ -30,6 +30,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      check_image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      card_image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       userId: {
         type: Sequelize.UUID,
         allowNull: false,
