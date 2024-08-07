@@ -125,6 +125,10 @@ const PackingList = sequelize.define('packing_lists', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  grand_total: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 
 });
 
