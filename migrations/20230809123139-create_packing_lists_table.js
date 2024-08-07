@@ -9,66 +9,66 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      // item_name: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // item_qty_per_carton: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // qty_of_carton: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // net_weight_carton: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // gross_weight_carton: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // net_total_weight_carton: { 
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // gross_total_weight_carton: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // height: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // width: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // length: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // per_carton_cbm: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // total_carton_cbm: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // net_weight: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // gross_weight: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
-      // totalItemsQty: {
-      //   type: Sequelize.STRING,
-      //   allowNull: true,
-      // },
+      item_name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      item_qty_per_carton: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      qty_of_carton: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      net_weight_carton: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      gross_weight_carton: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      net_total_weight_carton: { 
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      gross_total_weight_carton: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      height: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      width: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      length: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      per_carton_cbm: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      total_carton_cbm: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      net_weight: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      gross_weight: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      totalItemsQty: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       items: {
         type: Sequelize.ARRAY(Sequelize.JSON),
         allowNull: true,
