@@ -42,6 +42,10 @@ const User = sequelize.define('users', {
     type: DataTypes.STRING,
     allowNull: true
   },
+  about: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   image: {
     type: DataTypes.STRING,
     allowNull: true
