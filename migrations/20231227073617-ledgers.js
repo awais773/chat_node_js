@@ -36,7 +36,7 @@ module.exports = {
       },
 
       ledger_user_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         allowNull: true,
       },
   

@@ -33,7 +33,7 @@ const Ledger = sequelize.define("ledgers", {
     allowNull: true,
   },
   ledger_user_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     allowNull: true,
   },
   balance: {

@@ -13,7 +13,6 @@ exports.create = async (body) => {
     }
 
     await data.save();
-
     return data;
   } catch (error) {
     return error.message;
