@@ -39,7 +39,10 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: true,
       },
-  
+      ledger_no: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

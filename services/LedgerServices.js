@@ -4,6 +4,13 @@ const UserModel = require("../model/User");
 
 exports.create = async (body) => {
   try {
+
+    const maxLadger = await LedgerModel.max('ledger_no');    
+    let LedgerNo = '01';    
+    if (maxLadger) {
+      const maxNumber = parseInt(maxLadger, 10);
+      LedgerNo = (maxNumber + 1).toString().padStart(3, '0'); // Pad with zeros to make it 3 digits
+    }  
     const data = await LedgerModel.create({ ...body });
 
     if (body.type === "cash receive") {
@@ -13,6 +20,7 @@ exports.create = async (body) => {
     }
 
     await data.save();
+
     return data;
   } catch (error) {
     return error.message;

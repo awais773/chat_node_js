@@ -28,6 +28,10 @@ const Ledger = sequelize.define("ledgers", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  ledger_no: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   userId: {
     type: DataTypes.UUID,
     allowNull: true,
