@@ -88,7 +88,7 @@ exports.get = async (page, limit, userId) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image","about"]
 
       },
       {
@@ -124,7 +124,7 @@ exports.myCommunity = async (userId ) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image","about"]
 
       }
     ],
@@ -234,7 +234,7 @@ exports.filtersCommunity = async (body,userId) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image","about"]
 
       },
       {
@@ -269,7 +269,7 @@ exports.getByPostIdComment = async (communityId) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image","about"]
 
       }
     ],
