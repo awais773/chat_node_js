@@ -40,6 +40,9 @@ const bankDetails = require("./BankDetailRoutes")
 
 const CompanyRoutes = require("./CompanyRoutes")
 
+const ProductRoutes = require("./ProductRoutes")
+
+
 
 
 // import router
@@ -89,6 +92,7 @@ router.use(`/defineAccount`, defineAccount);
 router.use(`/productVerification`, productVerification);
 router.use(`/bankDetails`, bankDetails);
 router.use(`/CompanyUser`, CompanyRoutes);
+router.use(`/Product`, ProductRoutes);
 
 
 
