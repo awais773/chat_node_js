@@ -5,6 +5,13 @@ const bcrypt = require('bcrypt');
 const { UUIDV4 } = require("sequelize");
 
 const Company = sequelize.define('companies', {
+  id: {
+    allowNull: false,
+    primaryKey: true,
+    type: DataTypes.UUID,
+    defaultValue: UUIDV4,
+  },
+
   name: {
     type: DataTypes.STRING,
     allowNull: true

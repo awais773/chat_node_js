@@ -3,6 +3,7 @@ const Community = require("../model/Community");
 const Like = require("../model/Like");
 
 
+
 async function create(req, res, next) {
   try {
     const { body } = req;
@@ -245,6 +246,22 @@ async function likeCommunityPost(req, res) {
   }
 }
 
+async function CommmunitySearch(req, res, next) {
+  try {
+    const {search} = req.body; // The updates will be sent in the request body as JSON
+    const result = await CommunityServices.CommmunitySearch(search);
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 
 
 module.exports = {
@@ -261,4 +278,5 @@ module.exports = {
   CommentCreate,
   getByPostIdComment,
   likeCommunityPost,
+  CommmunitySearch,
 }

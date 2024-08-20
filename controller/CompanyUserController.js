@@ -14,7 +14,7 @@ async function signup(req, res, next) {
     res.status(201).json({
       success: true,
       data: user,
-      jwt: user.id && tokken
+      // jwt: user.id && tokken
     });
 
   } catch (error) {

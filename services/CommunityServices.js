@@ -279,3 +279,51 @@ exports.getByPostIdComment = async (communityId) => {
   });
   return data;
 };
+
+exports.CommmunitySearch = async (search) => {
+  try {
+    const data = await Community.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            title: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            tags: {
+              [Op.like]: `%${search}%`
+            },
+          },
+        ],
+      },
+      attributes: {
+        include: [
+          [
+            Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."communityId" = "communities"."id")'),
+            'commentCount'
+          ],
+          [
+            Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."communityId" = "communities"."id")'),
+            'LikeCount'
+          ]
+        ]
+      },
+      include: [
+        {
+          model: User,
+          attributes: ["name", "image","about"]
+  
+        }
+      ],
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};

@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("companies", {
+    await queryInterface.createTable("products", {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -13,23 +13,29 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      phone_number: {
+      barcode: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      status: {
+      type: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: "Pending",
+        defaultValue: "UnScan",
+      },
+      print: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        defaultValue: "unprint",
+      },
+      companyId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "companies", // The name of the referenced table (users)
+          key: "id", // The name of the referenced column (id)
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -45,6 +51,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("companies");
+    await queryInterface.dropTable("products");
   },
 };
