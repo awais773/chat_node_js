@@ -22,7 +22,7 @@ router.get('/myCommunity', authentications, CommunityController.myCommunity);
 router.post('/CommentCreate', authentications, CommunityController.CommentCreate);
 router.post('/getByPostIdComment', authentications, CommunityController.getByPostIdComment);
 router.post('/likeCommunityPost', authentications, CommunityController.likeCommunityPost);
-router.post('/CommmunitySearch', authentications, CommunityController.CommmunitySearch);
+router.post('/CommunitySearch', authentications, CommunityController.CommmunitySearch);
 
 
 
