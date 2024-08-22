@@ -125,6 +125,48 @@ async function getUnPrint(req, res, next) {
   }
 }
 
+async function scan(req, res) {
+  const barcode = req.body.barcode;
+
+  try {
+    const product = await Products.findOne({ where: { barcode } });
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: 'Product not found',
+      });
+    }
+
+    if (product.type === 'UnScan') {
+      product.type = 'Scan';
+      await product.save();
+
+      return res.status(200).json({
+        success: true,
+        message: 'Product updated to scan',
+        data: product,
+      });
+    } else if (product.type === 'Scan') {
+      return res.status(400).json({
+        success: false,
+        message: 'This product has already been scanned',
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid product type',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred',
+      error: error.message,
+    });
+  }
+};
+
+
 module.exports = {
    create,
     get,
@@ -132,5 +174,6 @@ module.exports = {
     find,
     Delete,
     updatePrintStatus,
-    getUnPrint
+    getUnPrint,
+    scan
 }
