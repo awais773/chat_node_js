@@ -138,6 +138,18 @@ exports.myCommunity = async (userId ) => {
 exports.find = async (Id,) => {
   try {
     const data = await Community.findByPk(Id,{
+      attributes: {
+        include: [
+          [
+            Sequelize.literal('(SELECT COUNT(*) FROM "comments" WHERE "comments"."communityId" = "communities"."id")'),
+            'commentCount'
+          ],
+          [
+            Sequelize.literal('(SELECT COUNT(*) FROM "likes" WHERE "likes"."communityId" = "communities"."id")'),
+            'LikeCount'
+          ]
+        ]
+      },
       include: [
         {
           model: User,
