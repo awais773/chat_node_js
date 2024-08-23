@@ -60,8 +60,9 @@ async function update(req, res) {
 
 async function find(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
+  const { userId } = req;
   try {
-    const community = await CommunityServices.find(Id);
+    const community = await CommunityServices.find(Id, userId);
     res.json({ success: true, data: community });
   } catch (error) {
     res.json({

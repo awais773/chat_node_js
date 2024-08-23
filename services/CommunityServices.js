@@ -135,7 +135,7 @@ exports.myCommunity = async (userId ) => {
   return data;
 };
 
-exports.find = async (Id,) => {
+exports.find = async (Id,userId) => {
   try {
     const data = await Community.findByPk(Id,{
       attributes: {
@@ -155,8 +155,17 @@ exports.find = async (Id,) => {
           model: User,
           attributes: ["name", "image","about"]
   
-        }
+        },
+        {
+          model: Like,
+          attributes: ["likes"],
+          where: {
+            userId: userId
+          },
+          required: false // Use `required: false` to perform LEFT JOIN instead of INNER JOIN
+        },
       ],
+      
     });
     
     if (!data) {
