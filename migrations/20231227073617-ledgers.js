@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: true,
       },
+      items: {
+        type: Sequelize.ARRAY(Sequelize.JSON),
+        allowNull: true,
+      },
       ledger_no: {
         type: Sequelize.STRING,
         allowNull: true,

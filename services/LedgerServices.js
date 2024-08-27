@@ -6,18 +6,18 @@ exports.create = async (body) => {
   try {
 
     const maxLadger = await LedgerModel.max('ledger_no');    
-    let LedgerNo = '01';    
+    let LedgerNo = '001';    
     if (maxLadger) {
       const maxNumber = parseInt(maxLadger, 10);
       LedgerNo = (maxNumber + 1).toString().padStart(3, '0'); // Pad with zeros to make it 3 digits
     }  
-    const data = await LedgerModel.create({ ...body });
+    const data = await LedgerModel.create({ ...body, ledger_no: LedgerNo, });
 
-    if (body.type === "cash receive") {
-      data.balance += parseInt(body.amount, 10);
-    } else if (body.type === "cash payment") {
-      data.balance -= parseInt(body.amount, 10);
-    }
+    // if (body.type === "cash receive") {
+    //   data.balance += parseInt(body.amount, 10);
+    // } else if (body.type === "cash payment") {
+    //   data.balance -= parseInt(body.amount, 10);
+    // }
 
     await data.save();
 

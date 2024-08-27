@@ -45,6 +45,10 @@ const Ledger = sequelize.define("ledgers", {
     allowNull: false,
     defaultValue: 0,
   },
+  items: {
+    type: DataTypes.ARRAY(DataTypes.JSON), 
+    allowNull: true,
+  },
 });
 
 Ledger.belongsTo(User, {
