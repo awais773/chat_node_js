@@ -29,12 +29,21 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: true,
       },
-      balance: {
+      grandTotal: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
       },
-
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
+      goods: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: 0,
+      },
       ledger_user_id: {
         type: Sequelize.UUID,
         allowNull: true,

@@ -40,9 +40,19 @@ const Ledger = sequelize.define("ledgers", {
     type: DataTypes.UUID,
     allowNull: true,
   },
-  balance: {
+  grandTotal: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
+    defaultValue: 0,
+  },
+  amount: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    defaultValue: 0,
+  },
+  goods: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
     defaultValue: 0,
   },
   items: {
