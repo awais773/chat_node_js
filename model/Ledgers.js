@@ -3,6 +3,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 const { UUIDV4 } = require("sequelize");
 const User = require("./User");
+const CompanyProfile = require("./CompanyProfile");
 
 const Ledger = sequelize.define("ledgers", {
   id: {
@@ -65,4 +66,8 @@ Ledger.belongsTo(User, {
   foreignKey: 'userId',
 });
 
+Ledger.belongsTo(CompanyProfile, {
+  foreignKey: 'ledger_user_id',
+  targetKey: 'user_id'
+});
 module.exports = Ledger;
