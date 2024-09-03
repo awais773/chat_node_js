@@ -54,7 +54,7 @@ exports.update = async (userId, updates) => {
   }
 };;
 
-exports.Approved = async (userId, email) => {
+exports.Approved = async (userId,) => {
   try {
     const user = await Company.findByPk(userId);
     if (!user) {

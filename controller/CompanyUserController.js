@@ -59,9 +59,8 @@ async function update(req, res) {
 
 async function Approved(req, res) {
   const userId = req.params.userId; // Get the user ID from the route parameter
-  const email = req.body; // The updates will be sent in the request body as JSON
   try {
-    const updatedUser = await companyService.Approved(userId, email);
+    const updatedUser = await companyService.Approved(userId);
     res.json({ success: true, 
       'message': "User Approved successfully" 
     });
