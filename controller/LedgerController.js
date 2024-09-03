@@ -48,7 +48,8 @@ async function find(req, res) {
 async function get(req, res, next) {
   try {
     const { userId } = req;
-    const ledgerResponse = await LedgerServices.get(userId);
+    const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+    const ledgerResponse = await LedgerServices.get(userId, page, limit);
     res.status(200).json({
       success: true,
       data: ledgerResponse,

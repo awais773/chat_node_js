@@ -28,8 +28,11 @@ exports.create = async (body) => {
   }
 };
 
-exports.get = async (userId) => {
+exports.get = async (userId,page,limit) => {
+  const offset = (page - 1) * limit;
   const data = await LedgerModel.findAll({
+    offset,
+    limit,
     where: {
       ledger_user_id:userId,
     },
