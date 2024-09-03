@@ -4,15 +4,16 @@ const UserModel = require("../model/User");
 const CompanyProfile = require("../model/CompanyProfile");
 
 exports.create = async (body) => {
+  
   try {
-
     const maxLadger = await LedgerModel.max('ledger_no');    
     let LedgerNo = '001';    
     if (maxLadger) {
       const maxNumber = parseInt(maxLadger, 10);
       LedgerNo = (maxNumber + 1).toString().padStart(3, '0'); // Pad with zeros to make it 3 digits
     }  
-    const data = await LedgerModel.create({ ...body, ledger_no: LedgerNo, });
+    
+    const ledger  = await LedgerModel.create({ ...body, ledger_no: LedgerNo, });
 
     // if (body.type === "cash receive") {
     //   data.balance += parseInt(body.amount, 10);
@@ -20,7 +21,23 @@ exports.create = async (body) => {
     //   data.balance -= parseInt(body.amount, 10);
     // }
 
-    await data.save();
+    // await data.save();
+
+    const data = await LedgerModel.findOne({
+      where: { id: ledger.id }, // Assuming 'id' is the primary key of LedgerModel
+      include: [
+        {
+          model: UserModel,
+          attributes: ['name', 'phone', 'about', 'email'], // Add other attributes you want to include
+          as: 'user',
+        },
+        {
+          model: CompanyProfile,
+          attributes: ['user_id', 'name', 'description', 'contact_number', 'image', 'email'],
+          as: 'company_profile', // Ensure the alias matches your association
+        },
+      ],
+    });
 
     return data;
   } catch (error) {
