@@ -12,6 +12,8 @@ router.get('/get/:Id', authentications, CompanyController.userFind);
 router.put('/update/:userId', authentications, CompanyController.update);
 router.delete('/delete/:id', authentications, CompanyController.Delete);
 router.get('/dashboard', CompanyController.activeUserCount);
+router.post('/Approved/:userId', authentications, CompanyController.Approved);
+
 
 
 module.exports = router;

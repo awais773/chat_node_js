@@ -57,6 +57,19 @@ async function update(req, res) {
   }
 }
 
+async function Approved(req, res) {
+  const userId = req.params.userId; // Get the user ID from the route parameter
+  const email = req.body; // The updates will be sent in the request body as JSON
+  try {
+    const updatedUser = await companyService.Approved(userId, email);
+    res.json({ success: true, 
+      'message': "User Approved successfully" 
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+}
+
 
 async function userFind(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
@@ -134,4 +147,5 @@ module.exports = {
   userFind,
   Delete,
   activeUserCount,
+  Approved
 }

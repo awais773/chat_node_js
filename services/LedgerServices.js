@@ -20,7 +20,6 @@ exports.create = async (body) => {
     // } else if (body.type === "cash payment") {
     //   data.balance -= parseInt(body.amount, 10);
     // }
-
     // await data.save();
 
     const data = await LedgerModel.findOne({

@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const Company = require("../model/Company");
 const bcrypt = require("bcrypt");
+const { sendApprovalEmail } = require('../emailService');
 
 exports.createUser = async (body) => {
   try {
@@ -45,10 +46,24 @@ exports.update = async (userId, updates) => {
       throw new Error('Company not found');
     }
     Object.assign(user, updates);
-    const userWithoutPassword = { ...user.toJSON() };
-    delete userWithoutPassword.password;
+    const data = { ...user.toJSON() };
     await user.save();
-    return userWithoutPassword;
+    return data;
+  } catch (error) {
+    return error.message
+  }
+};;
+
+exports.Approved = async (userId, email) => {
+  try {
+    const user = await Company.findByPk(userId);
+    if (!user) {
+      throw new Error('Company not found');
+    }
+    user.status = 'Approved';
+    await user.save();
+    await sendApprovalEmail(user.email, user.name);
+    return data;
   } catch (error) {
     return error.message
   }
