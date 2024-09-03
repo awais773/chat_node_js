@@ -3,12 +3,12 @@ const LedgerServices = require("../services/LedgerServices");
 async function create(req, res, next) {
   try {
     const { body } = req;
-    const { userId } = req;
+    const { userId } = req.body;
     const { ledgerUserId } = req.body;
     const ledgerResponse = await LedgerServices.create({
       ...body,
-      user_id: userId,
       ledger_user_id: ledgerUserId,
+      userId: userId,
     });
     res.status(200).json({
       success: true,
