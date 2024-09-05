@@ -34,7 +34,7 @@ exports.get = async (userId) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image",'about']
 
       },
       {
@@ -125,7 +125,7 @@ exports.filtersQuerie = async (body ,userId) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image",'about']
 
       },
       {
@@ -161,7 +161,7 @@ exports.getByPostIdComment = async (querieId) => {
     include: [
       {
         model: User,
-        attributes: ["name", "image"]
+        attributes: ["name", "image","about"]
 
       }
     ],
