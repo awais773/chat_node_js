@@ -42,17 +42,17 @@ const Ledger = sequelize.define("ledgers", {
     allowNull: true,
   },
   grandTotal: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: true,
     defaultValue: 0,
   },
   amount: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: true,
     defaultValue: 0,
   },
   goods: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: true,
     defaultValue: 0,
   },

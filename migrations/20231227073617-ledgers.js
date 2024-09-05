@@ -30,17 +30,17 @@ module.exports = {
         allowNull: true,
       },
       grandTotal: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
         defaultValue: 0,
       },
       amount: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
         defaultValue: 0,
       },
       goods: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: true,
         defaultValue: 0,
       },
