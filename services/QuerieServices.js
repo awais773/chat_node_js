@@ -16,8 +16,11 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async (userId) => {
+exports.get = async (userId,page,limit) => {
+  const offset = (page - 1) * limit;
   const data = await Querie.findAll({
+    offset,
+    limit,
     order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
     attributes: {
       include: [

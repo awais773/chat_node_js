@@ -13,8 +13,8 @@ exports.create = async (body) => {
 
 
 exports.get = async (userId) => {
-  const data = await priceList.findAll(
-    {
+  const data = await priceList.findAll({
+    order: [['createdAt', 'DESC']], 
       where: {
         userId: userId, // Filter portfolios based on the provided userId
       },

@@ -78,6 +78,7 @@ exports.userlists = async (page, limit) => {
     const users = await User.findAll({
       offset,
       limit,
+      order: [['createdAt', 'DESC']], 
     });
     return users;
   } catch (error) {

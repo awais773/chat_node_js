@@ -14,6 +14,7 @@ exports.create = async (body) => {
 
 exports.get = async (userId) => {
   const data = await cardBook.findAll({
+    order: [['createdAt', 'DESC']], // Order by createdAt column in descending order
     where: {
       userId: userId,
     }

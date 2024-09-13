@@ -49,6 +49,7 @@ exports.get = async (userId,page,limit) => {
   const data = await LedgerModel.findAll({
     offset,
     limit,
+    order: [['createdAt', 'DESC']], 
     where: {
       ledger_user_id:userId,
     },

@@ -48,7 +48,8 @@ async function find (req, res)  {
 async function get(req, res, next) {
   try {
     const { userId } = req;    
-    const Querie = await QuerieServices.get(userId);
+    const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+    const Querie = await QuerieServices.get(userId,page, limit);
     res.status(200).json({
       success: true,
       data: Querie

@@ -14,6 +14,7 @@ exports.create = async (body) => {
 
 exports.get = async (userId) => {
   const data = await BankDetail.findAll({
+    order: [['createdAt', 'DESC']], 
     where: {
       userId: userId,
     }

@@ -18,6 +18,7 @@ exports.create = async (body) => {
 
 exports.get = async (userId) => {
   const data = await DefineItem.findAll({
+    order: [['createdAt', 'DESC']], 
     where: {
       user_id: userId,
     }

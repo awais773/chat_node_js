@@ -47,8 +47,9 @@ async function find (req, res)  {
 
 async function get(req, res, next) {
   try {
-    const { userId } = req;    
-    const packing = await PackingListServices.get(userId);
+    const { userId } = req;
+    const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+    const packing = await PackingListServices.get(userId,page, limit);
     res.status(200).json({
       success: true,
       data: packing

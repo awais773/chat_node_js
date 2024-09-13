@@ -54,7 +54,8 @@ async function find (req, res)  {
 async function get(req, res, next) {
   try {
     const { userId } = req;
-    const Invoice = await InvoiceListServices.get(userId);
+    const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+    const Invoice = await InvoiceListServices.get(page,limit,userId);
     // const data = await CompanyProfile.findOne({
     //   where: {
     //     user_id:userId,

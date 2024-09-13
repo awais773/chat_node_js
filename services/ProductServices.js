@@ -16,6 +16,7 @@ exports.get = async (page,limit,userId) => {
   const data = await Product.findAll({
     offset,
     limit,
+    order: [['createdAt', 'DESC']], 
     where: {
       companyId: userId,
     },
