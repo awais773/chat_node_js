@@ -126,6 +126,27 @@ async function activeUserCount(req, res, next) {
   }
 }
 
+
+async function UserDelete(req, res, next) {
+  const { id } = req.params;
+  try {
+    const result = await userService.UserDelete(id);
+    if (result) {
+      res.status(200).json({
+        success: true,
+        message: 'delete Sucessfully'
+      });
+    } else {
+      res.json({
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
+
 module.exports = {
   signup,
   userlists,
@@ -134,4 +155,5 @@ module.exports = {
   userFind,
   Delete,
   activeUserCount,
+  UserDelete,
 }

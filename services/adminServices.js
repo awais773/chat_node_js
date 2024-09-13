@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const Admin = require("../model/Admin");
 const bcrypt = require("bcrypt");
+const User = require("../model/User");
 
 exports.createUser = async (body) => {
   try {
@@ -73,6 +74,16 @@ exports.userlists = async () => {
 
 exports.Delete = async (id,) => {
   const result = await Admin.destroy({
+    where: {
+      id,
+    },
+  });
+  return result;
+};
+
+
+exports.UserDelete = async (id,) => {
+  const result = await User.UserDelete({
     where: {
       id,
     },
