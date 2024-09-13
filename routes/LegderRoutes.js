@@ -12,6 +12,7 @@ router.post('/getByUserId', authentications, LedgerController.getByUserId);
 router.get('/get/:Id', authentications, LedgerController.find);
 router.put('/update/:Id', authentications, LedgerController.update);
 router.delete('/delete/:id', authentications, LedgerController.Delete);
+router.post('/LedgerSearch', authentications, LedgerController.LedgerSearch);
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const LedgerModel = require("../model/Ledgers");
 const UserModel = require("../model/User");
 const CompanyProfile = require("../model/CompanyProfile");
@@ -112,4 +112,46 @@ exports.getByUserId = async (userId,ledgerUserId) => {
     },  
   });
   return data;
+};
+
+exports.LedgerSearch = async (userId, search) => {
+  try {
+    const data = await LedgerModel.findAll({
+      where: {
+        ledger_user_id: userId,
+        [Op.or]: [
+          {
+            ledger_no: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            '$user.name$': {
+              [Op.like]: `%${search}%`,
+            },
+          },
+          {
+            '$user.email$': {
+              [Op.like]: `%${search}%`,
+            },
+          },
+        ],
+      },
+      include: [
+        {
+          model: UserModel,
+          attributes: ['name', 'phone', 'about', 'email'], // Add other attributes you want to include
+          as: 'user',
+        },
+        {
+          model: CompanyProfile,
+          attributes: ['user_id', 'name', 'description','contact_number','image','email'],
+          as: 'company_profile', // Change alias to match the association
+        },
+      ],
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
 };
