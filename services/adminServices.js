@@ -83,7 +83,7 @@ exports.Delete = async (id,) => {
 
 
 exports.UserDelete = async (id,) => {
-  const result = await User.UserDelete({
+  const result = await User.destroy({
     where: {
       id,
     },
