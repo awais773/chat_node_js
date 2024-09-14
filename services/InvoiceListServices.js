@@ -20,7 +20,7 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async (userId,page, limit) => {
+exports.get = async (userId,page,limit) => {
   const offset = (page - 1) * limit;
   const data = await Invoice.findAll({
     offset,
