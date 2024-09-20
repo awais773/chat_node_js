@@ -20,7 +20,7 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async (userId,page, limit) => {
+exports.get = async (userId,active,invoice_type, page, limit) => {
   const offset = (page - 1) * limit;
   const data = await Invoice.findAll({
     offset,
@@ -28,6 +28,8 @@ exports.get = async (userId,page, limit) => {
     order: [['createdAt', 'DESC']], 
     where: {
       invoice_user_id:userId,
+      invoice_type:invoice_type,
+      active:active
     },
     include: [
       // {
