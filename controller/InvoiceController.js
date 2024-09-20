@@ -55,7 +55,7 @@ async function get(req, res, next) {
   try {
     const { userId } = req;
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const Invoice = await InvoiceListServices.get(page,limit,userId);
+    const Invoice = await InvoiceListServices.get(userId,page,limit);
     res.status(200).json({
       success: true,
       products: Invoice,
