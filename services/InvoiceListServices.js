@@ -28,8 +28,12 @@ exports.get = async (userId,active,invoice_type, page, limit) => {
     order: [['createdAt', 'DESC']], 
     where: {
       invoice_user_id:userId,
+    },
+    where: {
+      active:active,
+    },
+    where: {
       invoice_type:invoice_type,
-      active:active
     },
     include: [
       // {
