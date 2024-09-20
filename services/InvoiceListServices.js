@@ -26,6 +26,7 @@ exports.get = async (userId,page, limit) => {
     offset,
     limit,
     order: [['createdAt', 'DESC']], 
+    
     where: {
       invoice_user_id:userId,
     },
