@@ -55,8 +55,7 @@ async function get(req, res, next) {
   try {
     const { userId } = req;
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const { active,invoice_type } = req.params;
-    const Invoice = await InvoiceListServices.get(page,limit,userId,active,invoice_type);
+    const Invoice = await InvoiceListServices.get(page,limit,userId);
     // const data = await CompanyProfile.findOne({
     //   where: {
     //     user_id:userId,
