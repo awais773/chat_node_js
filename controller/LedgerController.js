@@ -49,7 +49,8 @@ async function get(req, res, next) {
   try {
     const { userId } = req;
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const ledgerResponse = await LedgerServices.get(userId, page, limit);
+    const { customerType } = req.query;
+    const ledgerResponse = await LedgerServices.get(userId, page, limit, customerType);
     res.status(200).json({
       success: true,
       data: ledgerResponse,

@@ -44,15 +44,22 @@ exports.create = async (body) => {
   }
 };
 
-exports.get = async (userId,page,limit) => {
+exports.get = async (userId,page,limit,customerType) => {
   const offset = (page - 1) * limit;
+
+  const whereClause = {
+    ledger_user_id: userId,
+  }; 
+
+  // Add 'customerType' condition if provided
+  if (customerType) {
+    whereClause.customerType = customerType;
+  }
   const data = await LedgerModel.findAll({
     offset,
     limit,
     order: [['createdAt', 'DESC']], 
-    where: {
-      ledger_user_id:userId,
-    },
+    where: whereClause,
     include: [
       {
         model: UserModel,
