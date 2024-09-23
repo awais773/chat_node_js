@@ -83,10 +83,22 @@ exports.userFind = async (Id,) => {
   }
 };;
 
-exports.userlists = async () => {
-  const user = await Company.findAll();
+exports.userlists = async (status,page, limit) => {
+  const offset = (page - 1) * limit;
+   
+  const whereClause = {
+    status:status,
+  };
+
+  const user = await Company.findAll({
+    offset,
+    limit,
+    where: whereClause,
+    order: [['createdAt', 'DESC']],
+  });
   return user;
 };
+
 
 
 exports.Delete = async (id,) => {

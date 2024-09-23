@@ -87,7 +87,9 @@ async function userFind(req, res) {
 
 async function userlists(req, res, next) {
   try {
-    const user = await companyService.userlists();
+    const { status } = req.query
+    const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
+    const user = await companyService.userlists(status, page, limit);
     res.status(200).json({
       success: true,
       user,
