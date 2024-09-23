@@ -14,6 +14,8 @@ router.delete('/delete/:id', authentications, ProductController.Delete);
 router.post('/updatePrintStatus', authentications, ProductController.updatePrintStatus);
 router.get('/getUnPrint', authentications, ProductController.getUnPrint);
 router.post('/scan', ProductController.scan);
+router.post('/Search', authentications, ProductController.ProductSearch);
+
 
 
 

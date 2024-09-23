@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const Product = require("../model/Product");
 
 exports.create = async (body) => {
@@ -90,4 +90,35 @@ exports.getUnPrint = async (userId) => {
     },
   });
   return data;
+};
+
+exports.ProductSearch = async (userId, search) => {
+  try {
+    const data = await Product.findAll({
+      where: {
+        companyId: userId,
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            barcode: {
+              [Op.like]: `%${search}%`
+            },
+          },
+
+          {
+            print: {
+              [Op.like]: `%${search}%`
+            },
+          },
+        ],
+      },
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
 };
