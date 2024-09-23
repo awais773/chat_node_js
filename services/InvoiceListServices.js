@@ -20,16 +20,55 @@ exports.create = async (body) => {
 };
 
 
-exports.get = async (userId,page,limit) => {
+// exports.get = async (userId,page,limit) => {
+//   const offset = (page - 1) * limit;
+//   const data = await Invoice.findAll({
+//     offset,
+//     limit,
+//     order: [['createdAt', 'DESC']], 
+//     where: {
+//       invoice_user_id:userId,
+//     },
+//     include: [
+//       // {
+//       //   model: UserModel,
+//       //   attributes: ['name', 'phone'],
+//       //   as: 'user',
+//       // },
+//       {
+//         model: CompanyProfile,
+//         attributes: ['user_id', 'name', 'description','contact_number','image','email'],
+//         as: 'company_profile', // Change alias to match the association
+//       },
+//     ],
+//   });
+//   return data;
+// };
+
+exports.get = async (userId, page, limit, active, invoice_type) => {
   const offset = (page - 1) * limit;
+
+  const whereClause = {
+    invoice_user_id: userId,
+  };
+
+  // Add 'active' condition if provided
+  if (typeof active !== 'undefined' && active !== null) {
+    whereClause.active = active;
+  }
+
+  // Add 'invoice_type' condition if provided
+  if (invoice_type) {
+    whereClause.invoice_type = invoice_type;
+  }
+
   const data = await Invoice.findAll({
     offset,
     limit,
-    order: [['createdAt', 'DESC']], 
-    where: {
-      invoice_user_id:userId,
-    },
+    order: [['createdAt', 'DESC']],
+    where: whereClause,
     include: [
+      // Uncomment and modify as needed
       // {
       //   model: UserModel,
       //   attributes: ['name', 'phone'],
@@ -37,14 +76,14 @@ exports.get = async (userId,page,limit) => {
       // },
       {
         model: CompanyProfile,
-        attributes: ['user_id', 'name', 'description','contact_number','image','email'],
-        as: 'company_profile', // Change alias to match the association
+        attributes: ['user_id', 'name', 'description', 'contact_number', 'image', 'email'],
+        as: 'company_profile', // Ensure this matches your association alias
       },
     ],
   });
+
   return data;
 };
-
 exports.find = async (Id,) => {
   try {
     const data = await Invoice.findByPk(Id);
