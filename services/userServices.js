@@ -315,44 +315,45 @@ exports.unfriend = async (body) => {
   }
 };
 
+
 exports.UserSearch = async (search) => {
   try {
+    const lowerCaseSearch = search.toLowerCase(); // Convert the search term to lowercase
     const data = await User.findAll({
       where: {
         [Op.or]: [
           {
-            name: {
-              [Op.like]: `%${search}%`
-            },
+            name: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('name')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
           },
           {
-            email: {
-              [Op.like]: `%${search}%`
-            },
+            email: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('email')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ), 
+          },
+          {
+            status: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('status')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
+          },
+          {
+            phone: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('phone')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
           },
 
           {
-            status: {
-              [Op.like]: `%${search}%`
-            },
+            designation: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('designation')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
           },
-          {
-            gender: {
-              [Op.like]: `%${search}%`
-            },
-          },
-          {
-            phone: {
-              [Op.like]: `%${search}%`
-            },
-          },
-
-          {
-            designation: {
-              [Op.like]: `%${search}%`
-            },
-          },
-
+          
         ],
       },
     });
