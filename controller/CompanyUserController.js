@@ -140,6 +140,23 @@ async function activeUserCount(req, res, next) {
   }
 }
 
+async function CompanySearch(req, res, next) {
+  try {
+    const {search} = req.body; // The updates will be sent in the request body as JSON
+    const result = await companyService.CompanySearch(search);
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+
 module.exports = {
   signup,
   userlists,
@@ -148,5 +165,6 @@ module.exports = {
   userFind,
   Delete,
   activeUserCount,
-  Approved
+  Approved,
+  CompanySearch
 }

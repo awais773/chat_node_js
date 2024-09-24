@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op, Sequelize } = require("sequelize");
 const Company = require("../model/Company");
 const bcrypt = require("bcrypt");
 const { sendApprovalEmail } = require('../emailService');
@@ -143,6 +143,46 @@ exports.activeUserCount = async () => {
     report,
     totalUsers
   };
+};
+
+
+exports.CompanySearch = async (search) => {
+  try {
+    const lowerCaseSearch = search.toLowerCase(); // Convert the search term to lowercase
+    const data = await Company.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('name')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
+          },
+          {
+            email: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('email')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
+          },
+          {
+            status: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('status')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
+          },
+          {
+            phone_number: Sequelize.where(
+              Sequelize.fn('LOWER', Sequelize.col('phone_number')),
+              { [Op.like]: `%${lowerCaseSearch}%` }
+            ),
+          },
+        ],
+      },
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
 };
 
 
