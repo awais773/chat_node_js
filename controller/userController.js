@@ -313,6 +313,22 @@ async function unfriend(req, res, next) {
   }
 }
 
+async function UserSearch(req, res, next) {
+  try {
+    const {search} = req.body; // The updates will be sent in the request body as JSON
+    const result = await userService.UserSearch(search);
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   signup,
   userlists,
@@ -330,4 +346,5 @@ module.exports = {
   reportedAllUsers,
   getAllFriends,
   unfriend,
+  UserSearch,
 };

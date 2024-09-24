@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { where, Op } = require("sequelize");
 const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const Friends = require("../model/Friends");
@@ -310,6 +310,53 @@ exports.unfriend = async (body) => {
     } else {
       throw new Error('Unfriend operation failed. User may not be a friend.');
     }
+  } catch (error) {
+    return error.message;
+  }
+};
+
+exports.UserSearch = async (search) => {
+  try {
+    const data = await User.findAll({
+      where: {
+        [Op.or]: [
+          {
+            name: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            email: {
+              [Op.like]: `%${search}%`
+            },
+          },
+
+          {
+            status: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            gender: {
+              [Op.like]: `%${search}%`
+            },
+          },
+          {
+            phone: {
+              [Op.like]: `%${search}%`
+            },
+          },
+
+          {
+            designation: {
+              [Op.like]: `%${search}%`
+            },
+          },
+
+        ],
+      },
+    });
+    return data;
   } catch (error) {
     return error.message;
   }

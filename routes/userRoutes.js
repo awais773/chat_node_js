@@ -22,6 +22,7 @@ router.post('/isBlock', authentications, userController.isBlockedUser);
 router.get('/reportUsersAll', authentications, userController.reportedAllUsers);
 router.get('/getAllFriends', authentications, userController.getAllFriends);
 router.post('/unfriend', authentications, userController.unfriend);
+router.post('/UserSearch', authentications, userController.UserSearch);
 
 
 
