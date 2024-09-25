@@ -65,10 +65,16 @@ async function get(req, res, next) {
   try {
     const { userId } = req;
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const Product = await ProductServices.get(page,limit,userId);
+    const {data, totalProducts} = await ProductServices.get(page,limit,userId);
+    const totalPages = Math.ceil(totalProducts / limit);
+
     res.status(200).json({
       success: true,
-      data: Product
+      data: data,
+      pagination: {
+        currentPage: page,
+        totalPages,
+      },
     });
   } catch (error) {
     res.json({

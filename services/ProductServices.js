@@ -21,7 +21,9 @@ exports.get = async (page,limit,userId) => {
       companyId: userId,
     },
   });
-  return data;
+
+  const totalProducts = await Product.count();
+  return { data, totalProducts };
 };
 
 exports.find = async (Id) => {
