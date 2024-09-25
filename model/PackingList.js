@@ -129,6 +129,14 @@ const PackingList = sequelize.define('packing_lists', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  hs_code: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 
 });
 

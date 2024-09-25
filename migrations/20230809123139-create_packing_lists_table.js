@@ -123,6 +123,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      hs_code: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
