@@ -80,7 +80,8 @@ exports.userlists = async (page, limit) => {
       limit,
       order: [['createdAt', 'DESC']], 
     });
-    return users;
+    const totalUsers = await User.count(); 
+    return { users, totalUsers }; // Return both users and total count
   } catch (error) {
     throw new Error("Error fetching users: " + error.message);
   }

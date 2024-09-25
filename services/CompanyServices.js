@@ -96,7 +96,8 @@ exports.userlists = async (status,page, limit) => {
     where: whereClause,
     order: [['createdAt', 'DESC']],
   });
-  return user;
+  const totalCompanies = await Company.count(); 
+  return { user, totalCompanies }; // Return both Company and total count
 };
 
 

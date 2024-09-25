@@ -84,10 +84,15 @@ async function userFind(req, res) {
 async function userlists(req, res, next) {
   try {
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const users = await userService.userlists(page, limit);
+    const { users, totalUsers } = await userService.userlists(page, limit);
+    const totalPages = Math.ceil(totalUsers / limit);
     res.status(200).json({
       success: true,
       users,
+      pagination: {
+        currentPage: page,
+        totalPages,
+      },
     });
   } catch (error) {
     res.status(500).json({

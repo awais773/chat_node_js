@@ -89,10 +89,16 @@ async function userlists(req, res, next) {
   try {
     const { status } = req.query
     const { page, limit } = req.pagination; // Get pagination parameters from req.pagination
-    const user = await companyService.userlists(status, page, limit);
+    const { user, totalCompanies }= await companyService.userlists(status, page, limit);
+    const totalPages = Math.ceil(totalCompanies / limit);
+
     res.status(200).json({
       success: true,
       user,
+      pagination: {
+        currentPage: page,
+        totalPages,
+      },
     });
   } catch (error) {
     res.json({
@@ -143,7 +149,8 @@ async function activeUserCount(req, res, next) {
 async function CompanySearch(req, res, next) {
   try {
     const {search} = req.body; // The updates will be sent in the request body as JSON
-    const result = await companyService.CompanySearch(search);
+    const result  = await companyService.CompanySearch(search);
+
     res.status(200).json({
       success: true,
       data: result
