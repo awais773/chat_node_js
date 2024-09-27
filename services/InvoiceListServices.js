@@ -45,6 +45,42 @@ exports.create = async (body) => {
 //   return data;
 // };
 
+
+exports.get = async (userId, page, limit, active, invoice_type) => {
+  const offset = (page - 1) * limit;
+
+  const whereClause = {
+    invoice_user_id: userId,
+  };
+
+  // Add 'active' condition if provided
+  if (typeof active !== 'undefined' && active !== null) {
+    whereClause.active = active;
+  }
+
+  // Add 'invoice_type' condition if provided
+  if (invoice_type) {
+    whereClause.invoice_type = invoice_type;
+  }
+
+  const data = await Invoice.findAll({
+    offset,
+    limit,
+    order: [['createdAt', 'DESC']],
+    where: whereClause,
+    include: [
+      {
+        model: CompanyProfile,
+        attributes: ['user_id', 'name', 'description', 'contact_number', 'image', 'email'],
+        as: 'company_profile', // Ensure this matches your association alias
+      },
+    ],
+    distinct: true, // Ensure unique results from the Invoice table
+  });
+
+  return data;
+};
+
 exports.get = async (userId, page, limit, active, invoice_type) => {
   const offset = (page - 1) * limit;
 
