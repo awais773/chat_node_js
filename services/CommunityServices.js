@@ -37,16 +37,19 @@ exports.reported = async () => {
       include: [
         {
           model: User,
-          attributes: ["name", "image"]
+          attributes: ["name", "image"],
+          as: "reportUser",
+
         },
 
         {
           model: Community,
           attributes: ["title"],
+          as: 'Commmunity',
           include: [
             {
               model: User,
-              attributes: ["name", "image"]
+              attributes: ["name", "image"],
             }
           ]
         }
