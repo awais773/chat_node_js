@@ -21,30 +21,7 @@ async function create(req, res, next) {
   }
 }
 
-async function report(req, res, next) {
-  try {
-    const { body } = req;
-    const { userId } = req;
-    const community = await CommunityServices.report({ ...body, reportedBy: userId });
-    
-    res.status(200).json({
-      success: true,
-      data: community
-    });
-  } catch (error) {
-    res.json({
-      message: error.message,
-    });
-  }
-}
-async function getReportedPosts(req, res) {
-  try {
-    const community = await CommunityServices.reported();
-    res.json({ success: true, data: community });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-}
+
 
 async function update(req, res) {
   const Id = req.params.Id; // Get the user ID from the route parameter
@@ -127,20 +104,6 @@ async function communityDelete(req, res, next) {
     }
   } catch (error) {
     next(error);
-  }
-}
-async function reportedAllPosts(req, res, next) {
-  try {
-    const reportedAllPosts = await CommunityServices.reportedAllPosts();
-    res.status(200).json({
-      success: true,
-      reportedAllPosts,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
   }
 }
 
@@ -271,9 +234,6 @@ module.exports = {
   update,
   find,
   communityDelete,
-  report,
-  getReportedPosts,
-  reportedAllPosts,
   filtersCommunity,
   myCommunity,
   CommentCreate,

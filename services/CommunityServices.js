@@ -3,10 +3,7 @@ const Community = require("../model/Community");
 const Comment = require("../model/Comment");
 const { Op } = require('sequelize');
 const { Sequelize } = require('sequelize');
-
-
 const User = require("../model/User");
-const ReportPosts = require("../model/ReportPosts");
 const Like = require("../model/Like");
  
 exports.create = async (body) => {
@@ -19,49 +16,6 @@ exports.create = async (body) => {
   }
 };
 
-exports.report = async (body) => {
-  try {
-    const data = await ReportPosts.create({ ...body });
-    return data;
-  } catch (error) {
-    // const errors = error.errors.map((item) => ({ message: item.message }));
-    return error.message
-  }
-};
-exports.reported = async () => {
-  try {
-    // const data = await ReportPosts.create({ ...body });
-     // get repoted post data with users and posts
-    const data = await ReportPosts.findAll({
-    
-      include: [
-        {
-          model: User,
-          attributes: ["name", "image"],
-          as: "reportUser",
-
-        },
-
-        {
-          model: Community,
-          attributes: ["title"],
-          as: 'Commmunity',
-          include: [
-            {
-              model: User,
-              attributes: ["name", "image"],
-            }
-          ]
-        }
-      ]
-    })
-    return data;
-  } catch (error) {
-    // const errors = error.errors.map((item) => ({ message: item.message }));
-    return error.message
-  }
-
-}
 
 
 exports.get = async (page, limit, userId) => {
@@ -206,28 +160,6 @@ exports.communityDelete = async (id,) => {
   });
   return result;
 }
-
-exports.reportedAllPosts = async () => {
-  try {
-    const reportedAllPosts = await ReportPosts.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ["name", "phone"],
-          as: "reportUser",
-        },
-        {
-          model: Community,
-          attributes: ["title","name", "details","contact_number", "status", "image"],
-          as: "Commmunity",
-        },
-      ],
-    });
-    return reportedAllPosts;
-  } catch (error) {
-    throw new Error("Error fetching reportUser: " + error.message);
-  }
-};
 
 exports.filtersCommunity = async (body,userId) => {
   const whereClause = {};

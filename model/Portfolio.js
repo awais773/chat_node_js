@@ -49,7 +49,7 @@ const Portfolio = sequelize.define('portfolios', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  status: {
+  status: { 
     type: DataTypes.STRING,
     allowNull: true,
   },

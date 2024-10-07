@@ -42,6 +42,8 @@ const CompanyRoutes = require("./CompanyRoutes")
 
 const ProductRoutes = require("./ProductRoutes")
 
+const ReportRoutes = require("./ReportRoutes")
+
 
 
 
@@ -93,6 +95,7 @@ router.use(`/productVerification`, productVerification);
 router.use(`/bankDetails`, bankDetails);
 router.use(`/CompanyUser`, CompanyRoutes);
 router.use(`/Product`, ProductRoutes);
+router.use(`/Report`, ReportRoutes);
 
 
 
