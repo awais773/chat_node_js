@@ -39,6 +39,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       image: {
         type: Sequelize.TEXT, // Using TEXT to store JSON data
         allowNull: true,

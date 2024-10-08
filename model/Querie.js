@@ -45,6 +45,11 @@ const Querie = sequelize.define("queries", {
     allowNull: true,
   },
 
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+
   
   image: {
     type: DataTypes.TEXT, // Storing JSON array
