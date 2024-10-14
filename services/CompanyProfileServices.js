@@ -70,4 +70,12 @@ exports.getByUserId = async (userId) => {
   return data;
 };
 
+exports.getUserId = async (userId) => {
+  try {
+    const profile = await CompanyProfile.findOne({ where: { user_id: userId } });
+    return profile; // Returns null if no profile exists
+  } catch (error) {
+    throw new Error('Error fetching profile');
+  }
+};
  

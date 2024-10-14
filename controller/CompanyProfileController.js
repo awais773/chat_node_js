@@ -4,6 +4,13 @@ async function create(req, res, next) {
   try {
     const { body } = req;
     const { userId } = req;
+    const existingProfile = await CompanyProfileServices.getUserId(userId);
+    if (existingProfile) {
+      return res.status(400).json({
+        success: false,
+        message: "User already has a company profile.",
+      });
+    }
 
     const CompanyProfile = await CompanyProfileServices.create({  ...body, user_id: userId });
     res.status(200).json({
@@ -12,6 +19,7 @@ async function create(req, res, next) {
     });
   } catch (error) {
     res.json({
+      success: false,
       message: error.message,
     });
   }
