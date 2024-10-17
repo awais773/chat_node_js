@@ -63,6 +63,11 @@ const DefineItem = sequelize.define('define_items', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
  
 });
 
